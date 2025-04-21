@@ -93,54 +93,6 @@ segments:
     bss_size: 0xfa074 # .bss + .sbss size
     subalign: 4
     subsegments:
-      - [auto, asm, include/act-mode-def]
-      - [auto, asm, include/adpcmfile]
-      - [auto, asm, include/attack-def]
-      - [auto, asm, include/auto-escort]
-      - [auto, asm, include/exit-data]
-      - [auto, asm, include/generator-sub-position]
-      - [auto, asm, include/girl-warp-list]
-      - [auto, asm, include/iconfile]
-      - [auto, asm, include/idle-mot-def]
-      - [auto, asm, include/init-func]
-      - [auto, asm, include/jimakufile]
-      - [auto, asm, include/look-target-data]
-      - [auto, asm, include/motion-def]
-      - [auto, asm, include/motion-ik-eff-def]
-      - [auto, asm, include/motion-orient-def]
-      - [auto, asm, include/motion-random-def]
-      - [auto, asm, include/moviefile]
-      - [auto, asm, include/obj-light]
-      - [auto, asm, include/pair-motion]
-      - [auto, asm, include/param-escape-run]
-      - [auto, asm, include/se-env]
-      - [auto, asm, include/sedef]
-      - [auto, asm, include/sefile]
-      - [auto, asm, include/selist]
-      - [auto, asm, include/shocklist]
-      - [auto, asm, include/stage-all]
-      - [auto, asm, include/stage-anim-model]
-      - [auto, asm, include/stage-anim]
-      - [auto, asm, include/stream-motion-def]
-      - [auto, asm, include/blend-motion-def]
-      - [auto, asm, include/enemy-def]
-      - [auto, asm, include/enemy-model-grp]
-      - [auto, asm, include/enemy-model-tbl]
-      - [auto, asm, include/enemy-random-def]
-      - [auto, asm, include/enemy-random-variation-def]
-      - [auto, asm, include/layout-cloth-def]
-      - [auto, asm, include/motion-eff-condition-def]
-      - [auto, asm, include/motion-eff-def]
-      - [auto, asm, include/motion-eff-random-def]
-      - [auto, asm, include/motion-limit-def]
-      - [auto, asm, include/motion-se-condition-def]
-      - [auto, asm, include/motion-se-random-def]
-      - [auto, asm, include/obj-trigger-def]
-      - [auto, asm, include/obj-trigger]
-      - [auto, asm, include/parallel-motion-orient]
-      - [auto, asm, include/particle-effect]
-      - [auto, asm, include/spider-def]
-      - [auto, asm, include/way-group]
       - [0x1000, asm, lib/crt0]
       - [0x1100, asm, lib/klib]
       #################
@@ -161,7 +113,7 @@ segments:
       - [0x5f38, asm, src/matrixDrive]
       - [0x70d8, asm, src/motionManager2]
       - [0xbdc0, asm, src/pool]
-      - [0xe3a8, asm, src/quaternion]
+      - [0xe3a8, asm, src/sugipon/src/quaternion]
       - [0xf918, asm, src/tableSin]
       - [0xfc18, asm, src/DisplayP20]
       - [0xfca8, asm, src/FileManager]
@@ -584,7 +536,7 @@ segments:
       - [0x190EF0, data, src/matrixDrive]
       - [0x191080, data, src/motionManager2]
       - [0x1916E0, data, src/pool]
-      - [0x1917E0, data, src/quaternion]
+      - [0x1917E0, data, src/sugipon/src/quaternion]
       - [0x191810, data, src/GsBase]
       - [0x1918B8, data, src/Light]
       - [0x1918E0, data, src/Matrix]
@@ -622,7 +574,7 @@ segments:
       - [0x1A8E08, data, src/act-intrlist]
       - [0x1AE010, data, src/camera-set]
       - [0x1AEAF0, data, src/game-param]
-      - [0x1AEBA0, data, src/lws_kyomi]
+      - [0x1AEBA0, data, src/lws_kyomi-tmp]
       - [0x1AED60, data, src/motion-orient]
       - [0x1BD4C0, data, src/node-fix-ofs]
       - [0x1BD6E0, data, src/obj-action]
@@ -777,7 +729,7 @@ segments:
       - [0x44E7F8, rodata, src/keyInput]
       - [0x44E850, rodata, src/motionManager2]
       - [0x44EA50, rodata, src/pool]
-      - [0x44EA80, rodata, src/quaternion]
+      - [0x44EA80, rodata, src/sugipon/src/quaternion]
       - [0x44EB10, rodata, src/DisplayP20]
       - [0x44EB30, rodata, src/FileManager]
       - [0x44f0b0, rodata, src/GifPacket]
@@ -1348,10 +1300,8 @@ segments:
 
 
 
-
-
       # .sbss
-      - {name: lib/crt0, type: sbss, vram: 0x0063c100}
+      - {start: 0x53d100, name: lib/crt0, type: sbss, vram: 0x0063c100}
       - {name: src/motionManager2, type: sbss, vram: 0x0063c10c}
       - {name: src/GsBase, type: sbss, vram: 0x0063c118}
       - {name: src/Light, type: sbss, vram: 0x0063c12c}
@@ -1448,7 +1398,7 @@ segments:
       - {name: src/main, type: bss, vram: 0x0063d010}
       - {name: src/delayFreeManager, type: bss, vram: 0x00667340}
       - {name: src/geometryManager, type: bss, vram: 0x00668540}
-      - {name: src/quaternion, type: bss, vram: 0x00668640}
+      - {name: src/sugipon/src/quaternion, type: bss, vram: 0x00668640}
       - {name: src/tableSin, type: bss, vram: 0x00669a40}
       - {name: src/GsBase, type: bss, vram: 0x0067ba60}
       - {name: src/Light, type: bss, vram: 0x0067bce0}
@@ -1547,8 +1497,8 @@ segments:
       #- [0x53d100, sbss, os/sbss]
       #- [0x53d124, bss, os/bss]
       #- [0x53d124, bss, os/vubss]
-  - [0x53d124, bin, elf/reginfo] # .reginfo
-  - [0x53d13c, bin, elf/dvp] # .DVP sections
-  - [0x54235a, bin, elf/shstrtab] # .shstrtab
-  - [0x542568, bin, elf/sectionheaders] # ELF section headers
+  - [0x53d124, databin, elf/reginfo] # .reginfo
+  - [0x53d13c, databin, elf/dvp] # .DVP sections
+  - [0x54235a, databin, elf/shstrtab] # .shstrtab
+  - [0x542568, databin, elf/sectionheaders] # ELF section headers
   - [0x5429a0] # end of file
