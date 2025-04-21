@@ -1,0 +1,14 @@
+.ninja_log
+.splache
+
+iso/*
+
+asm/*
+assets/*
+build/*
+
+config/undefined_funcs_auto.txt
+config/undefined_syms_auto.txt
+build.ninja
+
+*.ld
