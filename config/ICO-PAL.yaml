@@ -1,0 +1,1554 @@
+# QUESTIONS:
+# 1) should .bss and .sbss sections have a starting address, even though they technically don't exist in the .elf?
+# 2) do I need to include all of these .DVP.overlay sections in my .yaml? I don't even know what their purpose is.
+
+
+
+
+# Section Headers:
+#  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al
+#  [ 0]                   NULL            00000000 000000 000000 00      0   0  0
+#  [ 1] .text             PROGBITS        00100000 001000 189bc4 00  AX  0   0 64
+#  [ 2] .vutext           PROGBITS        00289bd0 18abd0 0050e0 00  AX  0   0 16
+#  [ 3] .reginfo          MIPS_REGINFO    0028ecb0 53d124 000018 01      0   0  4
+#  [ 4] .data             PROGBITS        0028ed00 18fd00 2be620 00  WA  0   0 64
+#  [ 5] .vudata           PROGBITS        0054d320 44e320 000000 00  WA  0   0  1
+#  [ 6] .rodata           PROGBITS        0054d380 44e380 0eb718 00   A  0   0 16
+#  [ 7] .lit4             PROGBITS        00638b00 539b00 001154 00 WAp  0   0  4
+#  [ 8] .sdata            PROGBITS        00639c80 53ac80 002476 00 WAp  0   0 16
+#  [ 9] .sbss             NOBITS          0063c100 53d100 0004dc 00 WAp  0   0  8
+#  [10] .bss              NOBITS          0063c600 53d124 0f9b98 00  WA  0   0 128
+#  [11] .vubss            NOBITS          00736198 53d124 000000 00  WA  0   0  1
+#  [12] .DVP.ovlytab      LOPROC+0xffff42 00736198 53d13c 000090 0c   W 13   0  4
+#  [13] .DVP.ovlystrtab   STRTAB          00736198 53d1cc 00018e 00   W  0   0  1
+#  [14] .DVP.overlay[...] LOPROC+0xffff42 00000000 53d35a 000800 00  WX  0   0  1
+#  [15] .DVP.overlay[...] LOPROC+0xffff42 00000000 53db5a 000598 00  WX  0   0  1
+#  [16] .DVP.overlay[...] LOPROC+0xffff42 00000000 53e0f2 000800 00  WX  0   0  1
+#  [17] .DVP.overlay[...] LOPROC+0xffff42 00000000 53e8f2 0001c0 00  WX  0   0  1
+#  [18] .DVP.overlay[...] LOPROC+0xffff42 00000000 53eab2 000800 00  WX  0   0  1
+#  [19] .DVP.overlay[...] LOPROC+0xffff42 00000000 53f2b2 000800 00  WX  0   0  1
+#  [20] .DVP.overlay[...] LOPROC+0xffff42 00000000 53fab2 0006b0 00  WX  0   0  1
+#  [21] .DVP.overlay[...] LOPROC+0xffff42 00000000 540162 000800 00  WX  0   0  1
+#  [22] .DVP.overlay[...] LOPROC+0xffff42 00000000 540962 000800 00  WX  0   0  1
+#  [23] .DVP.overlay[...] LOPROC+0xffff42 00000000 541162 000800 00  WX  0   0  1
+#  [24] .DVP.overlay[...] LOPROC+0xffff42 00000000 541962 000468 00  WX  0   0  1
+#  [25] .DVP.overlay[...] LOPROC+0xffff42 00000000 541dca 000590 00  WX  0   0  1
+#  [26] .shstrtab         STRTAB          00000000 54235a 00020d 00      0   0  1
+
+
+
+
+name: ICO (PAL)
+sha1: da3644c54c26fe760f3b6a591a5fc2eab396ed2b
+options:
+  # paths
+  basename: SCES_507.60
+  target_path: iso/SCES_507.60
+  base_path: ..
+  #cache_path: cache/cache
+
+  asm_path: asm
+  src_path: src
+  build_path: build
+
+  extensions_path: tools/splat_ext
+  symbol_addrs_path: config/symbol_addrs.txt
+
+  create_undefined_funcs_auto: True
+  undefined_funcs_auto_path: config/undefined_funcs_auto.txt
+  create_undefined_syms_auto: True
+  undefined_syms_auto_path:  config/undefined_syms_auto.txt
+
+  # compiler
+  compiler: EEGCC
+  platform: ps2
+
+  #ld_bss_contains_common: True
+  ld_bss_is_noload: true
+
+  migrate_rodata_to_functions: False
+  #migrate_rodata_to_functions: True      #Uncomment this when done with .rodata
+  #use_gp_rel_macro_nonmatching: False
+
+  #include_macro_inc: False
+
+  data_string_encoding: EUC-JP
+  string_encoding: EUC-JP
+  data_string_guesser_level: 2
+  rodata_string_guesser_level: 2 # improve string detection
+  disasm_unknown: True
+  named_regs_for_c_funcs: False
+  gp_value: 0x640af0
+  find_file_boundaries: False
+  section_order: [".text", ".vutext", ".data", ".vudata", ".rodata", ".lit4", ".sdata", ".sbss", ".bss", ".vubss"]
+
+segments:
+  - name: elf/elfheader
+    type: databin
+    start: 0x0
+  - name: main
+    type: code
+    start: 0x1000
+    vram: 0x100000
+    bss_size: 0xfa074 # .bss + .sbss size
+    subalign: 4
+    subsegments:
+      - [auto, asm, include/act-mode-def]
+      - [auto, asm, include/adpcmfile]
+      - [auto, asm, include/attack-def]
+      - [auto, asm, include/auto-escort]
+      - [auto, asm, include/exit-data]
+      - [auto, asm, include/generator-sub-position]
+      - [auto, asm, include/girl-warp-list]
+      - [auto, asm, include/iconfile]
+      - [auto, asm, include/idle-mot-def]
+      - [auto, asm, include/init-func]
+      - [auto, asm, include/jimakufile]
+      - [auto, asm, include/look-target-data]
+      - [auto, asm, include/motion-def]
+      - [auto, asm, include/motion-ik-eff-def]
+      - [auto, asm, include/motion-orient-def]
+      - [auto, asm, include/motion-random-def]
+      - [auto, asm, include/moviefile]
+      - [auto, asm, include/obj-light]
+      - [auto, asm, include/pair-motion]
+      - [auto, asm, include/param-escape-run]
+      - [auto, asm, include/se-env]
+      - [auto, asm, include/sedef]
+      - [auto, asm, include/sefile]
+      - [auto, asm, include/selist]
+      - [auto, asm, include/shocklist]
+      - [auto, asm, include/stage-all]
+      - [auto, asm, include/stage-anim-model]
+      - [auto, asm, include/stage-anim]
+      - [auto, asm, include/stream-motion-def]
+      - [auto, asm, include/blend-motion-def]
+      - [auto, asm, include/enemy-def]
+      - [auto, asm, include/enemy-model-grp]
+      - [auto, asm, include/enemy-model-tbl]
+      - [auto, asm, include/enemy-random-def]
+      - [auto, asm, include/enemy-random-variation-def]
+      - [auto, asm, include/layout-cloth-def]
+      - [auto, asm, include/motion-eff-condition-def]
+      - [auto, asm, include/motion-eff-def]
+      - [auto, asm, include/motion-eff-random-def]
+      - [auto, asm, include/motion-limit-def]
+      - [auto, asm, include/motion-se-condition-def]
+      - [auto, asm, include/motion-se-random-def]
+      - [auto, asm, include/obj-trigger-def]
+      - [auto, asm, include/obj-trigger]
+      - [auto, asm, include/parallel-motion-orient]
+      - [auto, asm, include/particle-effect]
+      - [auto, asm, include/spider-def]
+      - [auto, asm, include/way-group]
+      - [0x1000, asm, lib/crt0]
+      - [0x1100, asm, lib/klib]
+      #################
+      # SDK Libraries #
+      #################
+      # libkernl.a
+      - [0x1990, asm, libkernl/initsys]
+      - [0x1a08, asm, libkernl/intr]
+      - [0x1d68, asm, libkernl/thread]
+      - [0x20c8, asm, libkernl/kprintf]
+      - [0x2a40, asm, libkernl/diei]
+      - [0x2aa0, asm, libkernl/deci2]
+      #################
+      - [0x2c80, asm, src/main]
+      - [0x35a8, asm, src/delayFreeManager]
+      - [0x37d8, asm, src/geometryManager]
+      - [0x5be0, asm, src/keyInput]
+      - [0x5f38, asm, src/matrixDrive]
+      - [0x70d8, asm, src/motionManager2]
+      - [0xbdc0, asm, src/pool]
+      - [0xe3a8, asm, src/quaternion]
+      - [0xf918, asm, src/tableSin]
+      - [0xfc18, asm, src/DisplayP20]
+      - [0xfca8, asm, src/FileManager]
+      - [0x10650, asm, src/GifPacket]
+      - [0x13558, asm, src/GsBase]
+      - [0x17690, asm, src/Light]
+      - [0x1a018, asm, src/Matrix]
+      - [0x1b2e0, asm, src/MicroCode]
+      - [0x1b7a0, asm, src/Packet]
+      - [0x1e7f0, asm, src/Primitive]
+      - [0x20ef0, asm, src/RegistPacket]
+      - [0x254d8, asm, src/Shadow]
+      - [0x2af50, asm, src/StageAnimation]
+      - [0x2d8f0, asm, src/Texture]
+      - [0x330f0, asm, src/ZFog]
+      - [0x34250, asm, ios/cdvd]
+      - [0x368b0, asm, ios/inflate]
+      - [0x38de8, asm, ios/ios]
+      - [0x39158, asm, ios/mblock]
+      - [0x39478, asm, ios/mcard]
+      - [0x3b778, asm, ios/mcdata]
+      - [0x3ba78, asm, ios/memory]
+      - [0x3d4a8, asm, ios/message]
+      - [0x3daf0, asm, ios/pad]
+      - [0x3ef68, asm, ios/shockdriver]
+      - [0x40528, asm, ios/thread]
+      - [0x41170, asm, isys/gobj]
+      - [0x42198, asm, isys/gobj_dl]
+      - [0x427d0, asm, isys/gobj_process]
+      - [0x42d80, asm, isys/isys]
+      - [0x42d88, asm, isys/obj_manager]
+      - [0x43518, asm, sound/adpcm_init]
+      - [0x44550, asm, sound/s_init]
+      - [0x47b68, asm, sound/soundManager]
+      - [0x47cc0, asm, src/act-game]
+      - [0x4f8a0, asm, src/act-parallel-control]
+      - [0x4fa68, asm, src/act-wish]
+      - [0x50d50, asm, src/boyact]
+      - [0x59c88, asm, src/commonact]
+      - [0x64f98, asm, src/enemy_act]
+      - [0x6c038, asm, src/fieldCollision]
+      - [0x701e8, asm, src/fuzio]
+      - [0x70600, asm, src/girl_act]
+      - [0x7d988, asm, src/jimaku]
+      - [0x7e5d0, asm, src/way_sys]
+      - [0x80180, asm, src/way_util]
+      - [0x82900, asm, src/gflag]
+      - [0x82ad0, asm, src/script]
+      - [0x86cd0, asm, src/st25a]
+      - [0x88f00, asm, src/warpGirl]
+      - [0x89280, asm, src/attackhit]
+      - [0x8a738, asm, src/brain]
+      - [0x8b478, asm, src/camera-editor]
+      - [0x90980, asm, src/camera-ico2]
+      - [0x941c8, asm, src/camera-root]
+      - [0x95f68, asm, src/camera-set-manager]
+      - [0x95f70, asm, src/chain]
+      - [0x99f70, asm, src/ebrain]
+      - [0x9b0c0, asm, src/enemy-control]
+      - [0x9b1b0, asm, src/fightSound]
+      - [0x9b4e8, asm, src/generator]
+      - [0x9d560, asm, src/gv]
+      - [0x9df48, asm, src/hand-camera]
+      - [0x9e628, asm, src/lws_kyomi]
+      - [0x9eda0, asm, src/mail-add-data]
+      - [0x9efc0, asm, src/poly-flat]
+      - [0x9f340, asm, src/act_bird]
+      - [0xa1160, asm, src/gather_effect]
+      - [0xa15d0, asm, src/itou_boss]
+      - [0xa21e8, asm, src/itou_gflag]
+      - [0xa2200, asm, src/itou_sub]
+      - [0xa2520, asm, src/lightning]
+      - [0xa3770, asm, src/queen]
+      - [0xa5b68, asm, src/queen_barrier_disp]
+      - [0xa6618, asm, src/stage_orient]
+      - [0xa6db8, asm, mpeg/mv_main]
+      - [0xa7810, asm, mpeg/mv_readbuf]
+      - [0xa79a0, asm, mpeg/mv_strfile]
+      - [0xa7a18, asm, mpeg/mv_videodec]
+      - [0xa8180, asm, mpeg/mv_vobuf]
+      - [0xa8478, asm, src/DObj]
+      - [0xa93a0, asm, src/StageManager]
+      - [0xa9ed0, asm, src/backStage]
+      - [0xaae60, asm, src/charFileManager]
+      - [0xacc40, asm, src/debug]
+      - [0xb4e20, asm, src/debug_exception]
+      - [0xb74f0, asm, src/debug_menu]
+      - [0xb76a8, asm, src/gamesys]
+      - [0xb85e8, asm, src/haveParentSimpleObj]
+      - [0xb8600, asm, src/icoMisc]
+      - [0xb9738, asm, src/kanban]
+      - [0xba2d0, asm, src/kanbanBoot]
+      - [0xbaaa8, asm, src/layout_action]
+      - [0xbfea8, asm, src/layout_texture]
+      - [0xc1fa8, asm, src/sceneManager]
+      - [0xc2f58, asm, src/staffroll]
+      - [0xc3510, asm, src/a_p_1]
+      - [0xc5788, asm, src/act_a_p_1]
+      - [0xc6780, asm, src/actressLight]
+      - [0xc6848, asm, src/attackCheckBoundary]
+      - [0xc6f58, asm, src/switch]
+      - [0xc7850, asm, src/box]
+      - [0xcc2e0, asm, src/boy]
+      - [0xcd740, asm, src/cage]
+      - [0xce4a8, asm, src/cageFix]
+      - [0xce578, asm, src/candle]
+      - [0xce9a8, asm, src/chandelier]
+      - [0xcea90, asm, src/clipCollisionManager]
+      - [0xced48, asm, src/clothAnimation]
+      - [0xd5458, asm, src/clothTest]
+      - [0xd54b8, asm, src/darkVolume]
+      - [0xd8088, asm, src/effectTool]
+      - [0xd97c0, asm, src/enemy]
+      - [0xdb0a8, asm, src/enemyParts]
+      - [0xdbe80, asm, src/flag]
+      - [0xdcbe0, asm, src/flyManager]
+      - [0xdcde8, asm, src/frameDependSequence]
+      - [0xde128, asm, src/girl]
+      - [0xded50, asm, src/girlForceField]
+      - [0xdef20, asm, src/handManager]
+      - [0xdf7e8, asm, src/item]
+      - [0xe1840, asm, src/lineManager]
+      - [0xe2158, asm, src/lodManager]
+      - [0xe2218, asm, src/motionFileManager]
+      - [0xe24d0, asm, src/motionManager]
+      - [0xee758, asm, src/motionOrientManager]
+      - [0xf27f0, asm, src/motionViewer]
+      - [0xf4668, asm, src/moveColTest]
+      - [0xf48b8, asm, src/multiBgaManager]
+      - [0xf4c48, asm, src/particleEffect]
+      - [0xf67a0, asm, src/particleLayout]
+      - [0xf68a0, asm, src/puddle]
+      - [0xf76e8, asm, src/rope]
+      - [0xf8038, asm, src/ropeFix]
+      - [0xf80c8, asm, src/rotObject]
+      - [0xf8a98, asm, src/spider]
+      - [0xf9ca8, asm, src/spiderGroupManager]
+      - [0xfa390, asm, src/stageMultiBgaManager]
+      - [0xfa890, asm, src/staticBlur]
+      - [0xfe5f8, asm, src/stormTest]
+      - [0xff1a0, asm, src/streamMotionManager]
+      - [0x1002b8, asm, src/sugiTree]
+      - [0x1007c0, asm, src/torch]
+      - [0x1013a8, asm, src/waterDot]
+      - [0x101ad0, asm, src/waySystemManager]
+      - [0x101bb8, asm, src/weapon]
+      - [0x1044f0, asm, src/windField]
+      - [0x104ff8, asm, src/windManager]
+      - [0x105388, asm, src/windmill]
+      - [0x105500, asm, src/wireLetter]
+      - [0x105888, asm, src/worm]
+      - [0x106da8, asm, src/Basic]
+      - [0x106fb0, asm, src/BgAnimation]
+      - [0x10ba90, asm, src/DisplayFont]
+      - [0x10c458, asm, src/DisplayList]
+      - [0x10cad8, asm, src/DmaPacket]
+      - [0x10cbd8, asm, src/EnemyInit]
+      - [0x10cf58, asm, isys/gobj_cam_dl]
+      - [0x10d4b0, asm, src/act-env]
+      - [0x112428, asm, src/act-way]
+      - [0x1139a8, asm, src/act]
+      - [0x1159b0, asm, src/act2]
+      - [0x115b38, asm, src/seMail]
+      - [0x115d80, asm, src/way_kidnap]
+      - [0x116ca0, asm, src/way_llf]
+      - [0x117790, asm, src/way_tool]
+      - [0x118e08, asm, src/deja]
+      - [0x1196d8, asm, src/e3]
+      - [0x11c8a0, asm, src/end]
+      - [0x120060, asm, src/op]
+      - [0x122238, asm, src/st00a]
+      - [0x123710, asm, src/st01b]
+      - [0x124318, asm, src/st02a]
+      - [0x125ea8, asm, src/st03t]
+      - [0x1273d8, asm, src/st04a]
+      - [0x12c088, asm, src/st04b]
+      - [0x12ca00, asm, src/st04c]
+      - [0x12d4a8, asm, src/st04d]
+      - [0x12dfb8, asm, src/st04e]
+      - [0x12eb38, asm, src/st04l]
+      - [0x1349b8, asm, src/st04r]
+      - [0x139740, asm, src/st05b]
+      - [0x139e60, asm, src/st05c]
+      - [0x13ab30, asm, src/st05d]
+      - [0x13b480, asm, src/st05e]
+      - [0x13bb10, asm, src/st06a]
+      - [0x13edd0, asm, src/st07a]
+      - [0x140e40, asm, src/st08a]
+      - [0x142220, asm, src/st08b]
+      - [0x1430d8, asm, src/st09a]
+      - [0x143b58, asm, src/st10l]
+      - [0x145620, asm, src/st10r]
+      - [0x147718, asm, src/st13a]
+      - [0x1483e8, asm, src/st13b]
+      - [0x14af88, asm, src/st13b2]
+      - [0x14afb8, asm, src/st13c]
+      - [0x14e3d0, asm, src/st13d]
+      - [0x14e658, asm, src/st17a]
+      - [0x14f928, asm, src/st17b]
+      - [0x14fa30, asm, src/st18a]
+      - [0x150e38, asm, src/st19a]
+      - [0x151d80, asm, src/st20a]
+      - [0x153418, asm, src/st22a]
+      - [0x153ac0, asm, src/st24a]
+      - [0x154090, asm, src/st47a]
+      - [0x155d40, asm, src/st99a]
+      - [0x156520, asm, src/stageSEProc]
+      - [0x158218, asm, src/access]
+      - [0x158310, asm, src/objact]
+      - [0x158550, asm, mpeg/mv_audiodec]
+      - [0x159090, asm, mpeg/mv_disp]
+      - [0x15a338, asm, mpeg/mv_sub]
+      - [0x15a480, asm, mpeg/mv_vibuf]
+      - [0x15b6b8, asm, src/GobjProc]
+      - [0x15bb20, asm, src/PObj]
+      - [0x15c578, asm, src/vobj]
+      #################
+      # more SDK libs #                   # good up to here
+      #################
+      - [0x15c680, asm, libgraph/graph001]
+      - [0x15c7a0, asm, libgraph/graph002]
+      - [0x15c808, asm, libgraph/graph003]
+      - [0x15ca78, asm, libgraph/graph004]
+      - [0x15cb38, asm, libgraph/graph006]
+      - [0x15cd20, asm, libgraph/graph008]
+      - [0x15ce08, asm, libgraph/graph009]
+      - [0x15d0a0, asm, libgraph/graph010]
+      - [0x15d100, asm, libgraph/graph011]
+      - [0x15d198, asm, libgraph/graph012]
+      - [0x15d4b0, asm, libgraph/graph013]
+      - [0x15d5c0, asm, libgraph/graph014]
+      - [0x15d620, asm, libgraph/graph015]
+      - [0x15d808, asm, libgraph/graph016]
+      - [0x15d948, asm, libgraph/graph017]
+      - [0x15dac8, asm, libgraph/graph018]
+      - [0x15e158, asm, libgraph/graph019]
+      - [0x15e198, asm, libgraph/graph021]
+      - [0x15e220, asm, libgraph/graph029]
+      - [0x15e240, asm, libgraph/graph005]
+      - [0x15e308, asm, libgraph/graph007]
+      - [0x15e410, asm, libvu0/libvu0]
+      - [0x15f150, asm, libdma/libdma]
+      - [0x15fc00, asm, libpkt/vifpk025]
+      - [0x15fc10, asm, libpkt/vifpk026]
+      - [0x15fc20, asm, libpkt/vifpk027]
+      - [0x15fc78, asm, libpkt/vifpk030]
+      - [0x15fcd0, asm, libpkt/vifpk036]
+      - [0x15fd28, asm, libpkt/vifpk039]
+      - [0x15fd80, asm, libpkt/vifpk040]
+      - [0x15fdb0, asm, libpkt/vifpk041]
+      - [0x15fdc8, asm, libpkt/vifpk042]
+      - [0x15fe70, asm, libpkt/vifpk044]
+      - [0x15fef0, asm, libpkt/vifpk053]
+      - [0x15ff18, asm, libkernl/glue]
+      - [0x160250, asm, libkernl/tty]
+      - [0x160770, asm, libkernl/sifrpc]
+      - [0x1616d0, asm, libkernl/filestub]
+      - [0x164c40, asm, libkernl/iopheap]
+      - [0x164ea0, asm, libkernl/eeloadfile]
+      - [0x165838, asm, libkernl/iopreset]
+      - [0x165AE8, asm, libkernl/tlbfunc]
+      - [0x166040, asm, libkernl/tlbtrap]
+      - [0x1663A0, asm, libkernl/sifcmd]
+      - [0x166AE8, asm, libkernl/cdvd000]
+      - [0x167E58, asm, libkernl/cdvd036]
+      - [0x167F20, asm, libkernl/cdvd005]
+      - [0x168100, asm, libkernl/cdvd006]
+      - [0x168258, asm, libkernl/cdvd014]
+      - [0x1682F0, asm, libkernl/cdvd015]
+      - [0x168388, asm, libkernl/cdvd017]
+      - [0x168440, asm, libkernl/cdvd018]
+      - [0x1684F8, asm, libkernl/cdvd039]
+      - [0x1685F0, asm, libkernl/cdvd047]
+      - [0x168AD0, asm, libpad/libpad]
+      - [0x169E78, asm, libmc/libmc]
+      - [0x16B630, asm, libmpeg/pack]
+      - [0x16c408, asm, libmpeg/mpeg]
+      - [0x16cfd8, asm, libmpeg/init]
+      - [0x16dba8, asm, libmpeg/defhandler]
+      - [0x16dbd0, asm, libmpeg/mpc]
+      - [0x172938, asm, libmpeg/csc]
+      - [0x173058, asm, libmpeg/bit]
+      - [0x173268, asm, libipu/libipu]
+      - [0x1735D8, asm, libipu/ipuinit]
+      - [0x173878, asm, libscf/libscf]
+      - [0x174228, asm, libsndn2/sound]
+      - [0x1798D8, asm, libm/sf_sin]
+      - [0x1799C8, asm, libm/wf_acos] 
+      - [0x179AC8, asm, libm/wf_asin]
+      - [0x179BC8, asm, libm/wf_atan2]
+      - [0x179CF0, asm, libm/wf_fmod]
+      - [0x179E30, asm, libm/ef_acos]
+      - [0x17A260, asm, libm/ef_asin]
+      - [0x17A600, asm, libm/ef_atan2]
+      - [0x17A8E8, asm, libm/ef_fmod]
+      - [0x17AB38, asm, libm/ef_rem_pio2]
+      - [0x17AF18, asm, libm/ef_sqrt]
+      - [0x17B050, asm, libm/kf_cos]
+      - [0x17B1A8, asm, libm/kf_rem_pio2]
+      - [0x17BAF8, asm, libm/kf_sin]
+      - [0x17BC00, asm, libm/s_matherr]
+      - [0x17BC28, asm, libm/sf_atan]
+      - [0x17BED0, asm, libm/sf_fabs]
+      - [0x17BEF0, asm, libm/sf_floor]
+      - [0x17BFD8, asm, libm/sf_isnan]
+      - [0x17C000, asm, libm/sf_scalbn]
+      - [0x17C160, asm, libm/sf_copysign]
+      - [0x17C190, asm, libgcc/__main]
+      - [0x17C2B8, asm, libgcc/_divdi3]
+      - [0x17C9A8, asm, libgcc/_fixunsdfdi]
+      - [0x17CA98, asm, libgcc/_floatdidf]
+      - [0x17CB30, asm, libgcc/_moddi3]
+      - [0x17D198, asm, libgcc/_muldi3]
+      - [0x17D1F8, asm, libgcc/_udivdi3]
+      - [0x17D7C8, asm, libgcc/_umoddi3]
+      - [0x17DD08, asm, libgcc/_pack_df]
+      - [0x17DE38, asm, libgcc/_unpack_df]
+      - [0x17DED8, asm, libgcc/_addsub_df]
+      - [0x17E1D8, asm, libgcc/_mul_df]
+      - [0x17E480, asm, libgcc/_div_df]
+      - [0x17E5E8, asm, libgcc/_fpcmp_parts_d]
+      - [0x17E700, asm, libgcc/_compare_df]
+      - [0x17E750, asm, libgcc/_si_to_df]
+      - [0x17E808, asm, libgcc/_df_to_si]
+      - [0x17E8A0, asm, libgcc/_df_to_usi]
+      - [0x17E940, asm, libgcc/_negate_df]
+      - [0x17E978, asm, libgcc/_make_df]
+      - [0x17E9A8, asm, libgcc/_df_to_sf]
+      - [0x17EA00, asm, libgcc/_pack_sf]
+      - [0x17EB10, asm, libgcc/_unpack_sf]
+      - [0x17EBA0, asm, libgcc/_addsub_sf]
+      - [0x17EE98, asm, libgcc/_mul_sf]
+      - [0x17F090, asm, libgcc/_div_sf]
+      - [0x17F1F0, asm, libgcc/_fpcmp_parts_sf]
+      - [0x17F308, asm, libgcc/_compare_sf]
+      - [0x17F358, asm, libgcc/_si_to_sf]
+      - [0x17F410, asm, libgcc/_sf_to_si]
+      - [0x17F4A0, asm, libgcc/_sf_to_usi]
+      - [0x17F538, asm, libgcc/_negate_sf]
+      - [0x17F570, asm, libgcc/_make_sf]
+      - [0x17F5A0, asm, libgcc/_sf_to_df]
+      - [0x17F5E0, asm, libc/assert]
+      - [0x17F618, asm, libc/atoi]
+      - [0x17F640, asm, libc/errno]
+      - [0x17F650, asm, libc/fiprintf]
+      - [0x17F684, asm, libc/memcmp]
+      - [0x17F718, asm, libc/memcpy]
+      - [0x17F7C8, asm, libc/memset]
+      - [0x17F888, asm, libc/printf]
+      - [0x17F918, asm, libc/qsort]
+      - [0x180340, asm, libc/rand]
+      - [0x180380, asm, libc/sprintf]
+      - [0x180458, asm, libc/sscanf]
+      - [0x1804E8, asm, libc/strcat]
+      - [0x180614, asm, libc/strcmp]
+      - [0x180758, asm, libc/strcpy]
+      - [0x18086C, asm, libc/strlen]
+      - [0x1809A8, asm, libc/strncmp]
+      - [0x180B60, asm, libc/strncpy]
+      - [0x180D20, asm, libc/strrchr]
+      - [0x180D70, asm, libc/strstr]
+      - [0x180DE0, asm, libc/strtok]
+      - [0x180E08, asm, libc/strtok_r]
+      - [0x180EA8, asm, libc/strtol]
+      - [0x181118, asm, libc/vfprintf]
+      - [0x183780, asm, libc/vfscanf]
+      - [0x184390, asm, libc/vsprintf]
+      - [0x1843E8, asm, libc/wsetup]
+      - [0x1844F8, asm, libc/abort]
+      - [0x184518, asm, libc/atof]
+      - [0x184538, asm, libc/dtoa]
+      - [0x185920, asm, libc/fflush]
+      - [0x185A28, asm, libc/findfp]
+      - [0x185C80, asm, libc/fread]
+      - [0x185DA0, asm, libc/mallocr_1] # _free_r(), _malloc_trim_r()
+      - [0x186230, asm, libc/fvwrite]
+      - [0x186608, asm, libc/fwalk]
+      - [0x1866A0, asm, libc/locale]
+      - [0x186790, asm, libc/makebuf]
+      - [0x1868E0, asm, libc/mallocr_2] # malloc_extend_top(), _malloc_r()
+      - [0x1872B0, asm, libc/mbtowc_r]
+      - [0x1872EC, asm, libc/memchr]
+      - [0x1873CC, asm, libc/memmove]
+      - [0x1874D0, asm, libc/mlock]
+      - [0x1874E0, asm, libc/mprec]
+      - [0x188500, asm, libc/refill]
+      - [0x188698, asm, libc/s_isinf]
+      - [0x1886E0, asm, libc/s_isnan]
+      - [0x188718, asm, libc/sbrkr]
+      - [0x188778, asm, libc/signal]
+      - [0x188AC8, asm, libc/signalr]
+      - [0x188B48, asm, libc/stdio]
+      - [0x188CB8, asm, libc/strtod]
+      - [0x189C10, asm, libc/strtoul]
+      - [0x189E68, asm, libc/ungetc]
+      - [0x18A0E0, asm, libc/writer]
+      - [0x18A140, asm, libc/mallocr_3] # _calloc_r()
+      - [0x18A200, asm, libc/closer]
+      - [0x18A258, asm, libc/fstatr]
+      - [0x18A2B8, asm, libc/lseekr]
+      - [0x18A318, asm, libc/readr]
+      - [0x18A378, asm, libc/mallocr_4] # _realloc_r()
+      - [0x18a8e8, asm, libkernl/cache]
+      - [0x18ab68, asm, libgcc/__fixdfdi]
+
+      #################
+      # .vutext
+      - [0x18abd0, data, vutext]  # .vutext, keep as a data type to avoid incorrect decomp
+      
+      
+      
+      # - [0x18fd00, data, data]    # .data
+      - [0x18FD00, data, libkernl/klib]
+      - [0x18FD10, data, libkernl/intr]
+      - [0x1904B0, data, libkernl/thread]
+      - [0x1904B4, data, libkernl/kprintf]
+      - [0x1904C0, data, src/main]
+      - [0x190EB8, data, src/geometryManager]
+      - [0x190ED0, data, src/keyinput]
+      - [0x190EF0, data, src/matrixDrive]
+      - [0x191080, data, src/motionManager2]
+      - [0x1916E0, data, src/pool]
+      - [0x1917E0, data, src/quaternion]
+      - [0x191810, data, src/GsBase]
+      - [0x1918B8, data, src/Light]
+      - [0x1918E0, data, src/Matrix]
+      - [0x191B20, data, src/MicroCode]
+      - [0x191B40, data, src/Shadow]
+      - [0x191B58, data, src/Texture]
+      - [0x191C40, data, src/cdvd]
+      - [0x19C430, data, src/inflate]
+      - [0x19C580, data, ios/mcard]
+      - [0x19CA40, data, ios/pad]
+      - [0x19D0E0, data, ios/shockdriver]
+      - [0x19D4F0, data, isys/isys]
+      - [0x19D570, data, isys/obj_manager]
+      - [0x19D5D0, data, src/act-game]
+      - [0x19D610, data, src/boyact]
+      - [0x19D840, data, src/commonact]
+      - [0x19DF70, data, src/enemy_act]
+      - [0x19E1D0, data, src/fieldCollision]
+      - [0x19E420, data, src/girl_act]
+      - [0x1A3FD0, data, src/jimaku]
+      - [0x1A60C0, data, src/gflag]
+      - [0x1A6100, data, src/script]
+      - [0x1A6440, data, src/st25a]
+      - [0x1A6580, data, src/brain]
+      - [0x1A6A10, data, src/camera-editor]
+      - [0x1A6E70, data, src/camera-root]
+      - [0x1A6ED0, data, src/chain]
+      - [0x1A7020, data, src/lws_kyomi]
+      - [0x1A7030, data, src/poly-flat]
+      - [0x1A7070, data, src/lightning]
+      - [0x1A70B0, data, src/queen]
+      - [0x1A8920, data, mpeg/mv_main]
+      - [0x1A89B8, data, src/accessary]
+      - [0x1A8DC8, data, src/act-data-tbl]
+      - [0x1A8E08, data, src/act-intrlist]
+      - [0x1AE010, data, src/camera-set]
+      - [0x1AEAF0, data, src/game-param]
+      - [0x1AEBA0, data, src/lws_kyomi]
+      - [0x1AED60, data, src/motion-orient]
+      - [0x1BD4C0, data, src/node-fix-ofs]
+      - [0x1BD6E0, data, src/obj-action]
+      - [0x1C2270, data, src/obj-kind-data]
+      - [0x1C3DC8, data, src/obj-layout]
+      - [0x2099C0, data, src/parallel-motion-tbl]
+      - [0x20D4E0, data, src/sekind]
+      - [0x20DFF8, data, src/tex-property]
+      - [0x219EB8, data, src/weapon-def]
+      - [0x21A020, data, src/DObj]
+      - [0x21AA00, data, src/StageManager]
+      - [0x3DAC10, data, src/charFileManager]
+      - [0x3DAC30, data, src/debug]
+      - [0x3DAF70, data, src/debug_exception]
+      - [0x3DB770, data, src/gamesys]
+      - [0x3E4B00, data, src/icoMisc]
+      - [0x3E4B40, data, src/layout_action]
+      - [0x3E55C0, data, src/sceneManager]
+      - [0x3E5600, data, src/staffroll]
+      - [0x3E5610, data, src/staffroll_dat]
+      - [0x3E6520, data, src/a_p_1]
+      - [0x3E6A30, data, src/act_a_p_1]
+      - [0x3E6A90, data, src/attackCheckBoundary]
+      - [0x3E6AA0, data, src/box]
+      - [0x3E72B0, data, src/boy]
+      - [0x3E7E20, data, src/cage]
+      - [0x3E7ED0, data, src/clothAnimation]
+      - [0x3E8060, data, src/clothTest]
+      - [0x3E8460, data, src/darkVolume]
+      - [0x3E8480, data, src/effectTool]
+      - [0x3E88A0, data, src/enemy]
+      - [0x3E88E0, data, src/enemyParts]
+      - [0x3E8A20, data, src/flag]
+      - [0x3E8AC0, data, src/girl]
+      - [0x3EC420, data, src/girlForceField]
+      - [0x3EC430, data, src/handManager]
+      - [0x3EC440, data, src/item]
+      - [0x3EC5E0, data, src/lodManager]
+      - [0x3EC758, data, src/motionFileManager]
+      - [0x3ED950, data, src/motionManager]
+      - [0x3EDBE0, data, src/motionOrientManager]
+      - [0x3EDC70, data, src/motionViewer]
+      - [0x3EDCA0, data, src/multiBgaManager]
+      - [0x3EDCF0, data, src/particleEffect]
+      - [0x3EDEA0, data, src/puddle]
+      - [0x3EDEE0, data, src/rope]
+      - [0x3EDF90, data, src/rotObject]
+      - [0x3EDFA0, data, src/spider]
+      - [0x3EDFB0, data, src/spiderGroupManager]
+      - [0x3EE020, data, src/staticBlur]
+      - [0x3EE0F0, data, src/stormTest]
+      - [0x3EE100, data, src/streamMotionManager]
+      - [0x3EE120, data, src/torch]
+      - [0x3EE170, data, src/waterDot]
+      - [0x3EE1F0, data, src/weapon]
+      - [0x3EE350, data, src/windField]
+      - [0x3EE760, data, src/wireLetter]
+      - [0x3EF5B0, data, src/BgAnimation]
+      - [0x3EF5F0, data, src/DisplayFont]
+      - [0x3EF6F0, data, src/DmaPacket]
+      - [0x3EF710, data, src/EnemyInit]
+      - [0x3F2D60, data, src/act-env]
+      - [0x3F2E10, data, src/act-way]
+      - [0x3F2EC0, data, src/way_llf]
+      - [0x3F86A0, data, src/way_tool]
+      - [0x3F8988, data, src/deja]
+      - [0x3F89D0, data, src/e3]
+      - [0x3F8BD0, data, src/end]
+      - [0x3F8E10, data, src/op]
+      - [0x3F8E50, data, src/st00a]
+      - [0x3F8FB0, data, src/st01b]
+      - [0x3F9050, data, src/st02a]
+      - [0x3F9330, data, src/st03t]
+      - [0x3F95D0, data, src/st04a]
+      - [0x3F97B0, data, src/st04b]
+      - [0x3F97F0, data, src/st04c]
+      - [0x3F9870, data, src/st04d]
+      - [0x3F9970, data, src/st04e]
+      - [0x3F9AA0, data, src/st04l]
+      - [0x3FA160, data, src/st04r]
+      - [0x3FA720, data, src/st05b]
+      - [0x3FA740, data, src/st05c]
+      - [0x3FA7E0, data, src/st05d]
+      - [0x3FA8A0, data, src/st05e]
+      - [0x3FA920, data, src/st06a]
+      - [0x3FAF20, data, src/st07a]
+      - [0x3FB020, data, src/st08a]
+      - [0x3FB1F0, data, src/st08b]
+      - [0x3FB2F0, data, src/st09a]
+      - [0x3FB740, data, src/st10r]
+      - [0x3FB9A0, data, src/st13a]
+      - [0x3FBAE0, data, src/st13b]
+      - [0x3FBD10, data, src/st13c]
+      - [0x3FBF10, data, src/st17a]
+      - [0x3FC050, data, src/st17b]
+      - [0x3FC070, data, src/st18a]
+      - [0x3FC250, data, src/st19a]
+      - [0x3FC370, data, src/st20a]
+      - [0x3FC5D0, data, src/st22a]
+      - [0x3FC5F0, data, src/st24a]
+      - [0x3FC630, data, src/st47a]
+      - [0x3FC890, data, src/st99a]
+      - [0x3FC970, data, src/item-kind-def]
+      - [0x3FCA50, data, src/mirror-motion-def]
+      - [0x3FCA80, data, src/model-path]
+      - [0x4349C0, data, src/prog-se-link]
+      - [0x434FC0, data, src/mot-origin]
+      - [0x434FE8, data, src/texture-layout]
+      - [0x437070, data, src/way-point]
+      - [0x44B040, data, src/weapon-fumble-def]
+      - [0x44B240, data, src/vobj]
+      - [0x44B2A0, data, libgraph/graph001]
+      - [0x44B2C0, data, libgraph/graph002]
+      - [0x44B2E0, data, libgraph/graph018]
+      - [0x44B2F0, data, libvu0/libvu0]
+      - [0x44B320, data, libdma/libdma]
+      - [0x44B3D0, data, libpkt/vifpk025]
+      - [0x44B3E0, data, libkernl/glue]
+      - [0x44B3E8, data, libkernl/sifrpc]
+      - [0x44B3F0, data, libkernl/filestub]
+      - [0x44B484, data, libkernl/iopheap]
+      - [0x44B488, data, libkernl/eeloadfile]
+      - [0x44B490, data, libkernl/tlbfunc]
+      - [0x44B508, data, libkernl/sifcmd]
+      - [0x44B540, data, libcdvd/cdvd000]
+      - [0x44CFB0, data, libcdvd/cdvd047]
+      - [0x44CFB8, data, libpad/libpad]
+      - [0x44D000, data, libmc/libmc]
+      - [0x44D018, data, libmpeg/pack]
+      - [0x44D0C8, data, libmpeg/mpeg]
+      - [0x44D0D8, data, libmpeg/init]
+      - [0x44D100, data, libmpeg/var]
+      - [0x44DA30, data, libmpeg/mpc]
+      - [0x44DAB8, data, libmpeg/csc]
+      - [0x44DAD0, data, libipu/ipuinit]
+      - [0x44DB50, data, libscf/libscf]
+      - [0x44DB78, data, libsndn2/sound]
+      - [0x44DBB8, data, libgcc/__main]
+      - [0x44DBC0, data, libc/impure]
+      - [0x44DEB0, data, libc/locale]
+      - [0x44DEB8, data, libc/mallocr_1]
+
+      # .vudata
+      - [0x44e320, data, vudata]  # .vudata
+
+      # .rodata starts here
+      - [0x44E380, rodata, libkernl/thread]
+      - [0x44E3B0, rodata, libkernl/kprintf]
+      - [0x44E508, rodata, src/main]
+      - [0x44E6F8, rodata, src/delayFreeManager]
+      - [0x44E750, rodata, src/geometryManager]
+      - [0x44E7F8, rodata, src/keyInput]
+      - [0x44E850, rodata, src/motionManager2]
+      - [0x44EA50, rodata, src/pool]
+      - [0x44EA80, rodata, src/quaternion]
+      - [0x44EB10, rodata, src/DisplayP20]
+      - [0x44EB30, rodata, src/FileManager]
+      - [0x44f0b0, rodata, src/GifPacket]
+      - [0x44F170, rodata, src/GsBase]
+      - [0x4500B0, rodata, src/Light]
+      - [0x4501C8, rodata, src/Matrix]
+      - [0x4501E0, rodata, src/MicroCode]
+      - [0x450200, rodata, src/Packet]
+      - [0x4508C0, rodata, src/Primitive]
+      - [0x450A50, rodata, src/RegistPacket]
+      - [0x450D50, rodata, src/Shadow]
+      - [0x450FA0, rodata, src/StageAnimation]
+      - [0x4512C0, rodata, src/Texture]
+      - [0x451AE8, rodata, src/ZFog]
+      - [0x451C40, rodata, ios/cdvd]
+      - [0x451FF0, rodata, ios/inflate]
+      - [0x452058, rodata, ios/ios]
+      - [0x4520F8, rodata, ios/mblock]
+      - [0x452110, rodata, ios/mcard]
+      - [0x452470, rodata, ios/memory]
+      - [0x452A60, rodata, ios/message]
+      - [0x452af0, rodata, ios/pad]
+      - [0x452D98, rodata, ios/shockdriver]
+      - [0x452db0, rodata, ios/thread]
+      - [0x452f30, rodata, isys/gobj]
+      - [0x452F78, rodata, isys/gobj_dl]
+      - [0x452FF0, rodata, isys/gobj_process]
+      - [0x453080, rodata, isys/obj_manager]
+      - [0x453098, rodata, sound/adpcm_init]
+      - [0x453170, rodata, sound/s_init]
+      - [0x4533A8, rodata, sound/soundManager]
+      - [0x4533F0, rodata, src/act-game]
+      - [0x4536f0, rodata, src/act-parallel-control]
+      - [0x453710, rodata, src/act-wish]
+      - [0x453730, rodata, src/boyact]
+      - [0x453CB8, rodata, src/commonact]
+      - [0x454320, rodata, src/enemy_act]
+      - [0x454750, rodata, src/fieldCollision]
+      - [0x454990, rodata, src/girl_act]
+      - [0x4550B0, rodata, src/jimaku]
+      - [0x455120, rodata, src/way_sys]
+      - [0x455300, rodata, src/way_util]
+      - [0x4553C0, rodata, src/script]
+      - [0x4558f0, rodata, src/st25a]
+      - [0x4559E8, rodata, src/warpGirl]
+      - [0x455a40, rodata, src/attackhit]
+      - [0x455C88, rodata, src/brain]
+      - [0x455Ce0, rodata, src/camera-editor]
+      - [0x456050, rodata, src/camera-ico2]
+      - [0x456170, rodata, src/camera-root]
+      - [0x4561c0, rodata, src/chain]
+      - [0x456580, rodata, src/ebrain]
+      - [0x456628, rodata, src/fightSound]
+      - [0x456640, rodata, src/generator]
+      - [0x4566A8, rodata, src/lws_kyomi]
+      - [0x4566b8, rodata, src/mail-add-data]
+      - [0x456710, rodata, src/act_bird]
+      - [0x456798, rodata, src/gather_effect]
+      - [0x4567b0, rodata, src/itou_boss]
+      - [0x457890, rodata, src/itou_sub]
+      - [0x4578A0, rodata, src/lightning]
+      - [0x457900, rodata, src/queen]
+      - [0x457E00, rodata, src/queen_barrier_disp]
+      - [0x457e50, rodata, src/stage_orient]
+      - [0x458560, rodata, mpeg/mv_main]
+      - [0x4586A8, rodata, mpeg/mv_readbuf]
+      - [0x4586d8, rodata, mpeg/mv_strfile]
+      - [0x458708, rodata, mpeg/mv_videodec]
+      - [0x4587A0, rodata, mpeg/mv_vobuf]
+      - [0x4587d0, rodata, include/act-mode-def]
+      - [0x45ad50, rodata, include/adpcmfile]
+      - [0x45c790, rodata, include/attack-def]
+      - [0x45ca60, rodata, include/auto-escort]
+      - [0x45d518, rodata, include/exit-data]
+      - [0x45fde0, rodata, include/generator-sub-position]
+      - [0x45fe50, rodata, include/girl-warp-list]
+      - [0x4606e8, rodata, include/iconfile]
+      - [0x4607a0, rodata, include/idle-mot-def]
+      - [0x460828, rodata, include/init-func]
+      - [0x460bd0, rodata, include/jimakufile]
+      - [0x460d10, rodata, include/look-target-data]
+      - [0x460e58, rodata, include/motion-def]
+      - [0x4d2208, rodata, include/motion-ik-eff-def]
+      - [0x4d2278, rodata, include/motion-orient-def]
+      - [0x4d4b58, rodata, include/motion-random-def]
+      - [0x4d4ce8, rodata, include/moviefile]
+      - [0x4d4dc8, rodata, include/obj-light]
+      - [0x4d4df8, rodata, include/pair-motion]
+      - [0x4d4ef0, rodata, include/param-escape-run]
+      - [0x4d4f30, rodata, include/se-env]
+      - [0x4d7db0, rodata, include/sedef]
+      - [0x4ecbe8, rodata, include/sefile]
+      - [0x4ef488, rodata, include/selist]
+      - [0x4f6c70, rodata, include/shocklist]
+      - [0x4f6d50, rodata, include/stage-all]
+      - [0x501498, rodata, include/stage-anim-model]
+      - [0x501fa0, rodata, include/stage-anim]
+      - [0x519d50, rodata, include/stream-motion-def]
+      - [0x519F30, rodata, src/DObj]
+      - [0x519FF8, rodata, src/StageManager]
+      - [0x51A1D0, rodata, src/backStage]
+      - [0x51A348, rodata, src/charFileManager]
+      - [0x51abb0, rodata, src/debug]
+      - [0x51D590, rodata, src/debug_exception]
+      - [0x51E2B0, rodata, src/debug_menu]
+      - [0x51E2D0, rodata, src/gamesys]
+      - [0x51E340, rodata, src/icoMisc]
+      - [0x51E670, rodata, src/kanban]
+      - [0x51E6F0, rodata, src/kanbanBoot]
+      - [0x51E750, rodata, src/layout_action]
+      - [0x51ED50, rodata, src/layout_texture]
+      - [0x51EDD8, rodata, src/sceneManager]
+      - [0x51EF10, rodata, src/staffroll]
+      - [0x51FE30, rodata, src/a_p_1]
+      - [0x51FE98, rodata, src/act_a_p_1]
+      - [0x51FEc8, rodata, src/attackCheckBoundary]
+      - [0x51FF10, rodata, src/box]
+      - [0x520158, rodata, src/boy]
+      - [0x520188, rodata, src/cage]
+      - [0x520198, rodata, src/candle]
+      - [0x5201D0, rodata, src/clipCollisionManager]
+      - [0x520220, rodata, src/clothAnimation]
+      - [0x5202A0, rodata, src/clothTest]
+      - [0x5202b0, rodata, src/effectTool]
+      - [0x520650, rodata, src/enemy]
+      - [0x520710, rodata, src/enemyParts]
+      - [0x520728, rodata, src/flag]
+      - [0x520740, rodata, src/frameDependSequence]
+      - [0x5208A0, rodata, src/girl]
+      - [0x5209E0, rodata, src/girlForceField]
+      - [0x520A00, rodata, src/handManager]
+      - [0x520A20, rodata, src/item]
+      - [0x520ac8, rodata, src/lodManager]
+      - [0x520B60, rodata, src/motionFileManager]
+      - [0x520BE0, rodata, src/motionManager]
+      - [0x521120, rodata, src/motionOrientManager]
+      - [0x5216b0, rodata, src/motionViewer]
+      - [0x521898, rodata, src/moveColTest]
+      - [0x5218C8, rodata, src/multiBgaManager]
+      - [0x5218E0, rodata, src/particleEffect]
+      - [0x5219C0, rodata, src/particleLayout]
+      - [0x5219D8, rodata, src/puddle]
+      - [0x521A00, rodata, src/rope]
+      - [0x521AE8, rodata, src/rotObject]
+      - [0x521B60, rodata, src/spider]
+      - [0x521CF8, rodata, src/spiderGroupManager]
+      - [0x521de0, rodata, src/staticBlur]
+      - [0x521fa0, rodata, src/stormTest]
+      - [0x521FB0, rodata, src/streamMotionManager]
+      - [0x522328, rodata, src/sugiTree]
+      - [0x522338, rodata, src/torch]
+      - [0x522388, rodata, src/waterDot]
+      - [0x5223A0, rodata, src/weapon]
+      - [0x522520, rodata, src/worm]
+      - [0x522550, rodata, src/Basic]
+      - [0x522580, rodata, src/BgAnimation]
+      - [0x522840, rodata, src/DisplayList]
+      - [0x522950, rodata, src/DmaPacket]
+      - [0x522960, rodata, src/EnemyInit]
+      - [0x522970, rodata, isys/gobj_cam_dl]
+      - [0x522A00, rodata, src/act-env]
+      - [0x522B50, rodata, src/act-way]
+      - [0x522BB0, rodata, src/act]
+      - [0x522D40, rodata, src/seMail]
+      - [0x522D58, rodata, src/way_kidnap]
+      - [0x522E80, rodata, src/way_llf]
+      - [0x522EC0, rodata, src/way_tool]
+      - [0x5234e0, rodata, src/deja]
+      - [0x5234f0, rodata, src/e3]
+      - [0x523600, rodata, src/end]
+      - [0x523630, rodata, src/op]
+      - [0x5236a0, rodata, src/st00a]
+      - [0x523700, rodata, src/st01b]
+      - [0x523710, rodata, src/st02a]
+      - [0x523820, rodata, src/st03t]
+      - [0x523840, rodata, src/st04a]
+      - [0x5239d0, rodata, src/st04b]
+      - [0x5239f0, rodata, src/st04c]
+      - [0x523a30, rodata, src/st04d]
+      - [0x523A90, rodata, src/st04e]
+      - [0x523ab0, rodata, src/st04l]
+      - [0x523ac0, rodata, src/st04r]
+      - [0x523ad0, rodata, src/st05b]
+      - [0x523af0, rodata, src/st05c]
+      - [0x523b30, rodata, src/st05d]
+      - [0x523B60, rodata, src/st06a]
+      - [0x523c60, rodata, src/st07a]
+      - [0x523D30, rodata, src/st08a]
+      - [0x523d50, rodata, src/st08b]
+      - [0x523DA0, rodata, src/st09a]
+      - [0x523de0, rodata, src/st10l]
+      - [0x523df0, rodata, src/st10r]
+      - [0x523e00, rodata, src/st13b]
+      - [0x523E10, rodata, src/st13c]
+      - [0x523f20, rodata, src/st13d]
+      - [0x523f60, rodata, src/st17a]
+      - [0x524060, rodata, src/st19a]
+      - [0x524070, rodata, src/st20a]
+      - [0x524090, rodata, src/st22a]
+      - [0x5240a0, rodata, src/st24a]
+      - [0x5240b0, rodata, src/st47a]
+      - [0x5240f0, rodata, src/stageSEProc]
+      - [0x524150, rodata, src/access]
+      - [0x524160, rodata, mpeg/mv_audiodec]
+      - [0x5243b8, rodata, mpeg/mv_disp]
+      - [0x5243e8, rodata, mpeg/mv_sub]
+      - [0x524428, rodata, mpeg/mv_vibuf]
+      - [0x524470, rodata, include/blend-motion-def]
+      - [0x525880, rodata, include/enemy-def]
+      - [0x525d70, rodata, include/enemy-model-grp]
+      - [0x525f00, rodata, include/enemy-model-tbl]
+      - [0x525f68, rodata, include/enemy-random-def]
+      - [0x526018, rodata, include/enemy-random-variation-def]
+      - [0x526170, rodata, include/layout-cloth-def]
+      - [0x527010, rodata, include/motion-eff-condition-def]
+      - [0x527278, rodata, include/motion-eff-def]
+      - [0x527600, rodata, include/motion-eff-random-def]
+      - [0x527628, rodata, include/motion-limit-def]
+      - [0x527f28, rodata, include/motion-se-condition-def]
+      - [0x528910, rodata, include/motion-se-random-def]
+      - [0x52ad08, rodata, include/obj-trigger-def]
+      - [0x52ad38, rodata, include/obj-trigger]
+      - [0x52ae40, rodata, include/parallel-motion-orient]
+      - [0x52b278, rodata, include/particle-effect]
+      - [0x52b588, rodata, include/spider-def]
+      - [0x52c648, rodata, include/way-group]
+      - [0x536Fe0, rodata, src/PObj]
+      - [0x5370E8, rodata, libgraph/graph003]
+      - [0x537120, rodata, libgraph/graph008]
+      - [0x537150, rodata, libgraph/graph012]
+      - [0x5372E0, rodata, libgraph/graph015]
+      - [0x537400, rodata, libgraph/graph017]
+      - [0x537440, rodata, libgraph/graph018]
+      - [0x537610, rodata, libdma/libdma]
+      - [0x537628, rodata, libkernl/tty]
+      - [0x5376A0, rodata, libkernl/filestub]
+      - [0x537718, rodata, libkernl/eeloadfile]
+      - [0x537720, rodata, libkernl/iopreset]
+      - [0x537750, rodata, libkernl/tlbfunc]
+      - [0x5377C0, rodata, libkernl/cdvd000]
+      - [0x537990, rodata, libkernl/cdvd005]
+      - [0x5379B8, rodata, libkernl/cdvd006]
+      - [0x5379C8, rodata, libkernl/cdvd017]
+      - [0x5379D8, rodata, libkernl/cdvd039]
+      - [0x537A18, rodata, libkernl/cdvd047]
+      - [0x537B38, rodata, libpad/libpad]
+      - [0x537C90, rodata, libmc/libmc]
+      - [0x537cf8, rodata, libmpeg/pack]
+      - [0x537d30, rodata, libmpeg/mpeg]
+      - [0x537dd8, rodata, libmpeg/init]
+      - [0x537f20, rodata, libmpeg/mpc]
+      - [0x5381b8, rodata, libmpeg/csc]
+      - [0x5381D0, rodata, libscf/libscf]
+      - [0x5382D0, rodata, libsndn2/sound]
+      - [0x5384B0, rodata, libm/wf_acos]
+      - [0x5384B8, rodata, libm/wf_asin]
+      - [0x5384C0, rodata, libm/wf_atan2]
+      - [0x5384C8, rodata, libm/wf_fmod]
+      - [0x538564, rodata, libm/ef_atan2]
+      - [0x538570, rodata, libm/ef_fmod]
+      - [0x538578, rodata, libm/ef_rem_pio2]
+      - [0x538938, rodata, libm/ef_sqrt]
+      - [0x538940, rodata, libm/kf_cos]
+      - [0x538960, rodata, libm/kf_rem_pio2]
+      - [0x5389ac, rodata, libm/kf_sin]
+      - [0x5389c8, rodata, libm/s_lib_ver]
+      - [0x5389d0, rodata, libm/sf_atan]
+      - [0x538a24, rodata, libm/sf_floor]
+      - [0x538a28, rodata, libm/sf_scalbn]
+      - [0x538a38, rodata, libgcc/_divdi3]
+      - [0x538b38, rodata, libgcc/_moddi3]
+      - [0x538c38, rodata, libgcc/_udivdi3]
+      - [0x538d38, rodata, libgcc/_umoddi3]
+      - [0x538E38, rodata, libc/assert]
+      - [0x538f70, rodata, libc/impure]
+      - [0x538F80, rodata, libc/vfprintf]
+      - [0x539380, rodata, libc/vfscanf]
+      - [0x5397f0, rodata, libc/dtoa]
+      - [0x539848, rodata, libc/locale]
+      - [0x539890, rodata, libc/mprec]
+      - [0x5399c0, rodata, libc/strtod]
+      - [0x539a90, rodata, libc/s_infconst]
+
+      # .lit4
+      # - [0x539b00, data, lit4]
+      - [0x539b00, lit4, src/main]
+      - [0x539b04, lit4, src/geometryManager]
+      - [0x539b0c, lit4, src/matrixDrive]
+      - [0x539b3c, lit4, src/motionManager2]
+      - [0x539b84, lit4, src/pool]
+      - [0x539bb8, lit4, src/quaternion]
+      - [0x539bbc, lit4, src/tableSin]
+      - [0x539bc8, lit4, src/FileManager]
+      - [0x539bcc, lit4, src/GsBase]
+      - [0x539bd8, lit4, src/Light]
+      - [0x539c40, lit4, src/Packet]
+      - [0x539c58, lit4, src/Primitive]
+      - [0x539c74, lit4, src/StageAnimation]
+      - [0x539c7c, lit4, src/Texture]
+      - [0x539c98, lit4, ios/pad]
+      - [0x539ca0, lit4, sound/s_init]
+      - [0x539cc8, lit4, src/act-game]
+      - [0x539d10, lit4, src/act-wish]
+      - [0x539d30, lit4, src/boycat]
+      - [0x539e3c, lit4, src/commonact]
+      - [0x539ef4, lit4, src/enemy_act]
+      - [0x539f5c, lit4, src/fieldCollision]
+      - [0x539f64, lit4, src/girl_act]
+      - [0x53a05c, lit4, src/way_sys]
+      - [0x53a060, lit4, src/way_util]
+      - [0x53a090, lit4, src/script]
+      - [0x53a0c4, lit4, src/st25a]
+      - [0x53a108, lit4, src/warpGirl]
+      - [0x53a10c, lit4, src/attackhit]
+      - [0x53a110, lit4, src/brain]
+      - [0x53a118, lit4, src/camera-ico2]
+      - [0x53a130, lit4, src/camera-root]
+      - [0x53a140, lit4, src/chain]
+      - [0x53a1d8, lit4, src/ebrain]
+      - [0x53a1e0, lit4, src/generator]
+      - [0x53a1ec, lit4, src/gv]
+      - [0x53a200, lit4, src/hand-camera]
+      - [0x53a22c, lit4, src/lws_kyomi]
+      - [0x53a230, lit4, src/act_bird]
+      - [0x53a294, lit4, src/gather_effect]
+      - [0x53a2a0, lit4, src/itou_boss]
+      - [0x53a2a4, lit4, src/lightning]
+      - [0x53a2c0, lit4, src/queen]
+      - [0x53a324, lit4, src/queen_barrier_disp]
+      - [0x53a328, lit4, src/stage_orient]
+      - [0x53a32c, lit4, src/DObj]
+      - [0x53a334, lit4, src/backStage]
+      - [0x53a338, lit4, src/debug]
+      - [0x53a354, lit4, src/debug_exception]
+      - [0x53a358, lit4, src/gamesys]
+      - [0x53a360, lit4, src/layout_action]
+      - [0x53a36c, lit4, src/sceneManager]
+      - [0x53a374, lit4, src/a_p_1]
+      - [0x53a394, lit4, src/act_a_p_1]
+      - [0x53a3a0, lit4, src/box]
+      - [0x53a40c, lit4, src/boy]
+      - [0x53a45c, lit4, src/cage]
+      - [0x53a470, lit4, src/clipCollisionManager]
+      - [0x53a474, lit4, src/clothAnimation]
+      - [0x53a490, lit4, src/darkVolume]
+      - [0x53a4b0, lit4, src/effectTool]
+      - [0x53a4bc, lit4, src/enemy]
+      - [0x53a4cc, lit4, src/enemyParts]
+      - [0x53a4d8, lit4, src/flyManager]
+      - [0x53a4e0, lit4, src/frameDependSequence]
+      - [0x53a4fc, lit4, src/girl]
+      - [0x53a52c, lit4, src/handManager]
+      - [0x53a530, lit4, src/item]
+      - [0x53a560, lit4, src/motionManager]
+      - [0x53a620, lit4, src/motionOrientManager]
+      - [0x53a658, lit4, src/motionViewer]
+      - [0x53a660, lit4, src/particleEffect]
+      - [0x53a67c, lit4, src/rope]
+      - [0x53a680, lit4, src/rotObject]
+      - [0x53a6a0, lit4, src/spider]
+      - [0x53a6a8, lit4, src/staticBlur]
+      - [0x53a6b0, lit4, src/stormTest]
+      - [0x53a6c8, lit4, src/streamMotionManager]
+      - [0x53a6d0, lit4, src/waterDot]
+      - [0x53a6d8, lit4, src/weapon]
+      - [0x53a6fc, lit4, src/windField]
+      - [0x53a708, lit4, src/windManager]
+      - [0x53a70c, lit4, src/wireLetter]
+      - [0x53a710, lit4, src/worm]
+      - [0x53a724, lit4, src/BgAnimation]
+      - [0x53a7e8, lit4, src/act-env]
+      - [0x53a838, lit4, src/act-way]
+      - [0x53a84c, lit4, src/act]
+      - [0x53a860, lit4, src/way_kidnap]
+      - [0x53a864, lit4, src/way_tool]
+      - [0x53a86c, lit4, src/deja]
+      - [0x53a870, lit4, src/e3]
+      - [0x53a898, lit4, src/end]
+      - [0x53a8b0, lit4, src/op]
+      - [0x53a8b4, lit4, src/st02a]
+      - [0x53a8cc, lit4, src/st03t]
+      - [0x53a8d8, lit4, src/st04a]
+      - [0x53a928, lit4, src/st04b]
+      - [0x53a940, lit4, src/st04e]
+      - [0x53a944, lit4, src/st04l]
+      - [0x53a95c, lit4, src/st04r]
+      - [0x53a97c, lit4, src/st05b]
+      - [0x53a998, lit4, src/st06a]
+      - [0x53a9b0, lit4, src/st07a]
+      - [0x53a9c0, lit4, src/st08a]
+      - [0x53a9c4, lit4, src/st08b]
+      - [0x53a9d4, lit4, src/st09a]
+      - [0x53a9e0, lit4, src/st10l]
+      - [0x53a9e8, lit4, src/st10r]
+      - [0x53aa00, lit4, src/st13a]
+      - [0x53aa30, lit4, src/st13b]
+      - [0x53aa54, lit4, src/st13c]
+      - [0x53aa60, lit4, src/st17a]
+      - [0x53aa84, lit4, src/st17b]
+      - [0x53aa90, lit4, src/st18a]
+      - [0x53aaa8, lit4, src/st19a]
+      - [0x53aab8, lit4, src/st20a]
+      - [0x53aac4, lit4, src/st22a]
+      - [0x53aae8, lit4, src/st24a]
+      - [0x53aafc, lit4, src/st47a]
+      - [0x53ab18, lit4, src/stageSEProc]
+      - [0x53ac44, lit4, src/PObj]
+
+      # .sdata
+      # - [0x53ac80, data, sdata]
+
+      - [0x53AC80, sdata, src/main]
+      - [0x53AEE0, sdata, src/delayFreeManager]
+      - [0x53AEF0, sdata, src/geometryManager]
+      - [0x53AF00, sdata, src/matrixDrive]
+      - [0x53AF08, sdata, src/motionManager2]
+      - [0x53AF28, sdata, src/pool]
+      - [0x53AF3C, sdata, src/quaternion]
+      - [0x53AF40, sdata, src/tableSin]
+      - [0x53AF44, sdata, src/DisplayP2O]
+      - [0x53AF48, sdata, src/FileManager]
+      - [0x53AF60, sdata, src/GifPacket]
+      - [0x53AF78, sdata, src/GsBase]
+      - [0x53B088, sdata, src/Light]
+      - [0x53B0E8, sdata, src/Matrix]
+      - [0x53B0F8, sdata, src/Packet]
+      - [0x53B150, sdata, src/Primitive]
+      - [0x53B168, sdata, src/RegistPacket]
+      - [0x53B178, sdata, src/Shadow]
+      - [0x53B1A8, sdata, src/StageAnimation]
+      - [0x53B1C0, sdata, src/Texture]
+      - [0x53B340, sdata, src/ZFog]
+      - [0x53B368, sdata, ios/cdvd]
+      - [0x53B3E0, sdata, ios/ios]
+      - [0x53B470, sdata, ios/mblock]
+      - [0x53B478, sdata, ios/mcard]
+      - [0x53B4D8, sdata, ios/memory]
+      - [0x53B510, sdata, ios/message]
+      - [0x53B538, sdata, ios/pad]
+      - [0x53B5D0, sdata, ios/shockdriver]
+      - [0x53B5F0, sdata, ios/thread]
+      - [0x53B600, sdata, isys/gobj]
+      - [0x53B60C, sdata, isys/isys]
+      - [0x53B628, sdata, sound/adpcm_init]
+      - [0x53B640, sdata, sound/s_init]
+      - [0x53B684, sdata, sound/soundManager]
+      - [0x53B688, sdata, src/act-game]
+      - [0x53B6C0, sdata, src/boyact]
+      - [0x53B710, sdata, src/commonact]
+      - [0x53B798, sdata, src/enemy_act]
+      - [0x53B800, sdata, src/act]
+      - [0x53B808, sdata, src/fieldCollision]
+      - [0x53B868, sdata, src/fuzio]
+      - [0x53B880, sdata, src/girl_act]
+      - [0x53B960, sdata, src/jimaku]
+      - [0x53B9A0, sdata, src/way_sys]
+      - [0x53B9E0, sdata, src/way_util]
+      - [0x53BA00, sdata, src/gflag]
+      - [0x53BA08, sdata, src/script]
+      - [0x53BA30, sdata, src/st25a]
+      - [0x53BA50, sdata, src/warpGirl]
+      - [0x53BA6C, sdata, src/brain]
+      - [0x53BA78, sdata, src/camera-editor]
+      - [0x53BB48, sdata, src/camera-ico2]
+      - [0x53BB68, sdata, src/camera-root]
+      - [0x53BBB0, sdata, src/camera-set-manager]
+      - [0x53BBC0, sdata, src/chain]
+      - [0x53BBDC, sdata, src/ebrain]
+      - [0x53BBE8, sdata, src/fightSound]
+      - [0x53BC00, sdata, src/generator]
+      - [0x53BC10, sdata, src/gv]
+      - [0x53BC20, sdata, src/act_bird]
+      - [0x53BC58, sdata, src/queen]
+      - [0x53BC60, sdata, src/queen_barrier_disp]
+      - [0x53BC68, sdata, src/stage_orient]
+      - [0x53BC70, sdata, mpeg/mv_main]
+      - [0x53BC88, sdata, mpeg/mv_videodec]
+      - [0x53BC98, sdata, src/stageManager]
+      - [0x53BCF0, sdata, src/backStage]
+      - [0x53BD00, sdata, src/charFileManager]
+      - [0x53BD28, sdata, src/debug]
+      - [0x53C268, sdata, src/debug_exception]
+      - [0x53C404, sdata, src/debug_menu]
+      - [0x53C414, sdata, src/gamesys]
+      - [0x53C428, sdata, src/icoMisc]
+      - [0x53C498, sdata, src/kanban]
+      - [0x53C4BC, sdata, src/kanbanBoot]
+      - [0x53C4D8, sdata, src/layout_action]
+      - [0x53C600, sdata, src/layout_texture]
+      - [0x53C640, sdata, src/sceneManager]
+      - [0x53C650, sdata, src/staffroll]
+      - [0x53C674, sdata, src/staffroll_dat]
+      - [0x53C678, sdata, src/a_p_1]
+      - [0x53C6C8, sdata, src/act_a_p_1]
+      - [0x53C730, sdata, src/attackCheckBoundary]
+      - [0x53C738, sdata, src/box]
+      - [0x53C748, sdata, src/boy]
+      - [0x53C754, sdata, src/clipCollisionManager]
+      - [0x53C758, sdata, src/clothAnimation]
+      - [0x53C770, sdata, src/darkVolume]
+      - [0x53C7D8, sdata, src/effectTool]
+      - [0x53C888, sdata, src/enemy]
+      - [0x53C898, sdata, src/flyManager]
+      - [0x53C89C, sdata, src/frameDependSequence]
+      - [0x53C8B8, sdata, src/girl]
+      - [0x53C8E0, sdata, src/item]
+      - [0x53C8E4, sdata, src/lineManager]
+      - [0x53C8F0, sdata, src/motionFileManager]
+      - [0x53C8F8, sdata, src/motionManager]
+      - [0x53C948, sdata, src/motionOrientManager]
+      - [0x53C9F8, sdata, src/motionViewer]
+      - [0x53CA78, sdata, src/moveColTest]
+      - [0x53CA88, sdata, src/puddle]
+      - [0x53CAA8, sdata, src/rope]
+      - [0x53CAB0, sdata, src/rotObject]
+      - [0x53CAC0, sdata, src/spider]
+      - [0x53CAC4, sdata, src/spiderGroupManager]
+      - [0x53CB04, sdata, src/stageMultiBgaManager]
+      - [0x53CB08, sdata, src/staticBlur]
+      - [0x53CBF0, sdata, src/streamMotionManager]
+      - [0x53CC48, sdata, src/waterDot]
+      - [0x53CC50, sdata, src/waySystemManager]
+      - [0x53CC54, sdata, src/windField]
+      - [0x53CC60, sdata, src/windManager]
+      - [0x53CC80, sdata, src/worm]
+      - [0x53CC88, sdata, src/Basic]
+      - [0x53CCB8, sdata, src/BgAnimation]
+      - [0x53CD00, sdata, src/displayFont]
+      - [0x53CD20, sdata, src/DisplayList]
+      - [0x53CD34, sdata, src/DmaPacket]
+      - [0x53CD38, sdata, src/EnemyInit]
+      - [0x53CD40, sdata, src/act-env]
+      - [0x53CD60, sdata, src/way_kidnap]
+      - [0x53CD70, sdata, src/way_llf]
+      - [0x53CD80, sdata, src/way_tool]
+      - [0x53CDF0, sdata, src/deja]
+      - [0x53CDF4, sdata, src/e3]
+      - [0x53CE10, sdata, src/end]
+      - [0x53CE40, sdata, src/op]
+      - [0x53CE70, sdata, src/st00a]
+      - [0x53CE7C, sdata, src/st01b]
+      - [0x53CE88, sdata, src/st02a]
+      - [0x53CE98, sdata, src/st04a]
+      - [0x53CED4, sdata, src/st04b]
+      - [0x53CEE0, sdata, src/st04l]
+      - [0x53CF18, sdata, src/st04r]
+      - [0x53CF4C, sdata, src/st05b]
+      - [0x53CF5C, sdata, src/st06a]
+      - [0x53CF68, sdata, src/st07a]
+      - [0x53CF7C, sdata, src/st08a]
+      - [0x53CF80, sdata, src/st09a]
+      - [0x53CF84, sdata, src/st10l]
+      - [0x53CF94, sdata, src/st10r]
+      - [0x53CFA4, sdata, src/st13a]
+      - [0x53CFC0, sdata, src/st13b]
+      - [0x53CFFC, sdata, src/st13c]
+      - [0x53D018, sdata, src/st17a]
+      - [0x53D020, sdata, src/st19a]
+      - [0x53D030, sdata, src/st20a]
+      - [0x53D048, sdata, src/st22a]
+      - [0x53D058, sdata, src/st24a]
+      - [0x53D05C, sdata, src/st47a]
+      - [0x53D078, sdata, src/stageSEProc]
+      - [0x53D090, sdata, src/access]
+      - [0x53D0B4, sdata, mpeg/mv_disp]
+      - [0x53D0C8, sdata, src/GobjProc]
+      - [0x53D0D8, sdata, src/PObj]
+
+
+
+
+
+      # .sbss
+      - {name: lib/crt0, type: sbss, vram: 0x0063c100}
+      - {name: src/motionManager2, type: sbss, vram: 0x0063c10c}
+      - {name: src/GsBase, type: sbss, vram: 0x0063c118}
+      - {name: src/Light, type: sbss, vram: 0x0063c12c}
+      - {name: src/MicroCode, type: sbss, vram: 0x0063c140}
+      - {name: src/Packet, type: sbss, vram: 0x0063c144}
+      - {name: src/StageAnimation, type: sbss, vram: 0x0063c158}
+      - {name: src/Texture, type: sbss, vram: 0x0063c160}
+      - {name: ios/mcdata, type: sbss, vram: 0x0063c18c}
+      - {name: ios/memory, type: sbss, vram: 0x0063c190}
+      - {name: ios/pad, type: sbss, vram: 0x0063c198}
+      - {name: ios/thread, type: sbss, vram: 0x0063c1a0}
+      - {name: isys/gobj, type: sbss, vram: 0x0063c1a8}
+      - {name: sound/adpcm_init, type: sbss, vram: 0x0063c1b8}
+      - {name: sound/s_init, type: sbss, vram: 0x0063c1d0}
+      - {name: src/boyact, type: sbss, vram: 0x0063c1f0}
+      - {name: src/enemy_act, type: sbss, vram: 0x0063c208}
+      - {name: src/fieldCollision, type: sbss, vram: 0x0063c20c}
+      - {name: src/girl_act, type: sbss, vram: 0x0063c244}
+      - {name: src/script, type: sbss, vram: 0x0063c24c}
+      - {name: src/st25a, type: sbss, vram: 0x0063c250}
+      - {name: src/warpGirl, type: sbss, vram: 0x0063c258}
+      - {name: src/camera-editor, type: sbss, vram: 0x0063c25c}
+      - {name: src/camera-ico2, type: sbss, vram: 0x0063c260}
+      - {name: src/camera-root, type: sbss, vram: 0x0063c288}
+      - {name: src/chain, type: sbss, vram: 0x0063c2c0}
+      - {name: src/ebrain, type: sbss, vram: 0x0063c2c4}
+      - {name: src/enemy-control, type: sbss, vram: 0x0063c2d4}
+      - {name: src/hand-camera, type: sbss, vram: 0x0063c2e0}
+      - {name: src/lws_kyomi, type: sbss, vram: 0x0063c2e8}
+      - {name: src/itou_boss, type: sbss, vram: 0x0063c2ec}
+      - {name: src/lightning, type: sbss, vram: 0x0063c2f4}
+      - {name: src/queen, type: sbss, vram: 0x0063c300}
+      - {name: src/queen_barrier_disp, type: sbss, vram: 0x0063c304}
+      - {name: mpeg/mv_main, type: sbss, vram: 0x0063c310}
+      - {name: src/StageManager, type: sbss, vram: 0x0063c348}
+      - {name: src/backStage, type: sbss, vram: 0x0063c350}
+      - {name: src/debug, type: sbss, vram: 0x0063c378}
+      - {name: src/icoMisc, type: sbss, vram: 0x0063c394}
+      - {name: src/kanban, type: sbss, vram: 0x0063c398}
+      - {name: src/kanbanBoot, type: sbss, vram: 0x0063c3a0}
+      - {name: src/layout_action, type: sbss, vram: 0x0063c3bc}
+      - {name: src/layout_texture, type: sbss, vram: 0x0063c3f0}
+      - {name: src/sceneManager, type: sbss, vram: 0x0063c414}
+      - {name: src/staffroll, type: sbss, vram: 0x0063c420}
+      - {name: src/act_a_p_1, type: sbss, vram: 0x0063c440}
+      - {name: src/darkVolume, type: sbss, vram: 0x0063c458}
+      - {name: src/motionFileManager, type: sbss, vram: 0x0063c46c}
+      - {name: src/motionManager, type: sbss, vram: 0x0063c474}
+      - {name: src/motionViewer, type: sbss, vram: 0x0063c4ac}
+      - {name: src/staticBlur, type: sbss, vram: 0x0063c4b0}
+      - {name: src/BgAnimation, type: sbss, vram: 0x0063c4b4}
+      - {name: src/DisplayList, type: sbss, vram: 0x0063c4bc}
+      - {name: src/act-way, type: sbss, vram: 0x0063c4c4}
+      - {name: src/way_tool, type: sbss, vram: 0x0063c4cc}
+      - {name: src/deja, type: sbss, vram: 0x0063c4dc}
+      - {name: src/e3, type: sbss, vram: 0x0063c4e0}
+      - {name: src/op, type: sbss, vram: 0x0063c4e8}
+      - {name: src/st00a, type: sbss, vram: 0x0063c4f8}
+      - {name: src/st01b, type: sbss, vram: 0x0063c4fc}
+      - {name: src/st02a, type: sbss, vram: 0x0063c504}
+      - {name: src/st04a, type: sbss, vram: 0x0063c508}
+      - {name: src/st04c, type: sbss, vram: 0x0063c510}
+      - {name: src/st04e, type: sbss, vram: 0x0063c514}
+      - {name: src/st04l, type: sbss, vram: 0x0063c51c}
+      - {name: src/st04r, type: sbss, vram: 0x0063c538}
+      - {name: src/st05e, type: sbss, vram: 0x0063c550}
+      - {name: src/st06a, type: sbss, vram: 0x0063c558}
+      - {name: src/st07a, type: sbss, vram: 0x0063c560}
+      - {name: src/st08a, type: sbss, vram: 0x0063c564}
+      - {name: src/st08b, type: sbss, vram: 0x0063c56c}
+      - {name: src/st09a, type: sbss, vram: 0x0063c570}
+      - {name: src/st10r, type: sbss, vram: 0x0063c574}
+      - {name: src/st13a, type: sbss, vram: 0x0063c578}
+      - {name: src/st13b, type: sbss, vram: 0x0063c57c}
+      - {name: src/st13c, type: sbss, vram: 0x0063c590}
+      - {name: src/st17a, type: sbss, vram: 0x0063c598}
+      - {name: src/st18a, type: sbss, vram: 0x0063c59c}
+      - {name: src/st19a, type: sbss, vram: 0x0063c5a4}
+      - {name: src/st20a, type: sbss, vram: 0x0063c5a8}
+      - {name: src/st22a, type: sbss, vram: 0x0063c5ac}
+      - {name: src/st24a, type: sbss, vram: 0x0063c5b0}
+      - {name: src/st47a, type: sbss, vram: 0x0063c5b4}
+      - {name: src/stageSEProc, type: sbss, vram: 0x0063c5b8}
+      - {name: mpeg/mv_disp, type: sbss, vram: 0x0063c5c4}
+      - {name: gcc/libgcc2, type: sbss, vram: 0x0063c5c8}
+      - {name: libc/signalr, type: sbss, vram: 0x0063c5d8}
+      - {name: lib/crt0, type: bss, vram: 0x0063c600}
+
+
+      # .bss section
+
+      - {name: libkernl/thread, type: bss, vram: 0x0063c750}
+      - {name: libkernl/kprintf, type: bss, vram: 0x0063cf60}
+      - {name: src/main, type: bss, vram: 0x0063d010}
+      - {name: src/delayFreeManager, type: bss, vram: 0x00667340}
+      - {name: src/geometryManager, type: bss, vram: 0x00668540}
+      - {name: src/quaternion, type: bss, vram: 0x00668640}
+      - {name: src/tableSin, type: bss, vram: 0x00669a40}
+      - {name: src/GsBase, type: bss, vram: 0x0067ba60}
+      - {name: src/Light, type: bss, vram: 0x0067bce0}
+      - {name: src/MicroCode, type: bss, vram: 0x0067bfd0}
+      - {name: src/Packet, type: bss, vram: 0x0067c010}
+      - {name: src/Shadow, type: bss, vram: 0x0067c070}
+      - {name: src/StageAnimation, type: bss, vram: 0x0067d098}
+      - {name: src/Texture, type: bss, vram: 0x0068af88}
+      - {name: src/ZFog, type: bss, vram: 0x006af590}
+      - {name: ios/cdvd, type: bss, vram: 0x006af9c0}
+      - {name: ios/ios, type: bss, vram: 0x006bc860}
+      - {name: ios/mcard, type: bss, vram: 0x006bc8c0}
+      - {name: ios/memory, type: bss, vram: 0x006bc918}
+      - {name: ios/message, type: bss, vram: 0x006bc938}
+      - {name: ios/pad, type: bss, vram: 0x006bcd38}
+      - {name: ios/thread, type: bss, vram: 0x006bcee0}
+      - {name: isys/gobj, type: bss, vram: 0x006bf380}
+      - {name: sound/adpcm_init, type: bss, vram: 0x006bf498}
+      - {name: sound/s_init, type: bss, vram: 0x006bf560}
+      - {name: src/act-game, type: bss, vram: 0x006c0600}
+      - {name: src/act-parallel-control, type: bss, vram: 0x006c0928}
+      - {name: src/boyact, type: bss, vram: 0x006c0a80}
+      - {name: src/commonact, type: bss, vram: 0x006c0ba0}
+      - {name: src/fieldCollision, type: bss, vram: 0x006c0bc0}
+      - {name: src/girl_act, type: bss, vram: 0x006c1180}
+      - {name: src/jimaku, type: bss, vram: 0x006c1e80}
+      - {name: src/way_sys, type: bss, vram: 0x006e50a8}
+      - {name: src/script, type: bss, vram: 0x006e5940}
+      - {name: src/camera-editor, type: bss, vram: 0x006e5990}
+      - {name: src/camera-ico2, type: bss, vram: 0x006e6190}
+      - {name: src/camera-root, type: bss, vram: 0x006e6690}
+      - {name: src/ebrain, type: bss, vram: 0x006e6750}
+      - {name: src/enemy-control, type: bss, vram: 0x006e6bd0}
+      - {name: src/fightSound, type: bss, vram: 0x006e6d60}
+      - {name: src/generator, type: bss, vram: 0x006e6d80}
+      - {name: src/hand-camera, type: bss, vram: 0x006e9990}
+      - {name: src/lws_kyomi, type: bss, vram: 0x006e99b0}
+      - {name: src/itou_boss, type: bss, vram: 0x006e9a30}
+      - {name: src/lightning, type: bss, vram: 0x006ea7c0}
+      - {name: src/queen, type: bss, vram: 0x006ea7f0}
+      - {name: src/stage_orient, type: bss, vram: 0x006ea800}
+      - {name: mpeg/mv_main, type: bss, vram: 0x006ea900}
+      - {name: src/StageManager, type: bss, vram: 0x006fac80}
+      - {name: src/backStage, type: bss, vram: 0x006facf0}
+      - {name: src/charFileManager, type: bss, vram: 0x006fad00}
+      - {name: src/debug, type: bss, vram: 0x00704680}
+      - {name: src/debug_exception, type: bss, vram: 0x0070fa80}
+      - {name: src/icoMisc, type: bss, vram: 0x0071ca90}
+      - {name: src/kanban, type: bss, vram: 0x0071cb10}
+      - {name: src/kanbanBoot, type: bss, vram: 0x0071cf00}
+      - {name: src/layout_action, type: bss, vram: 0x0071d900}
+      - {name: src/sceneManager, type: bss, vram: 0x0071d960}
+      - {name: src/staffroll, type: bss, vram: 0x0071d980}
+      - {name: src/act_a_p_1, type: bss, vram: 0x0071ec40}
+      - {name: src/darkVolume, type: bss, vram: 0x0071ecd0}
+      - {name: src/effectTool, type: bss, vram: 0x00720070}
+      - {name: src/motionManager, type: bss, vram: 0x00720180}
+      - {name: src/particleEffect, type: bss, vram: 0x00720220}
+      - {name: src/spiderGroupManager, type: bss, vram: 0x00723ae0}
+      - {name: src/stageMultiBgaManager, type: bss, vram: 0x007240a0}
+      - {name: src/staticBlur, type: bss, vram: 0x00724a78}
+      - {name: src/streamMotionManager, type: bss, vram: 0x00724aa8}
+      - {name: src/waterDot, type: bss, vram: 0x00724bc0}
+      - {name: src/windField, type: bss, vram: 0x00724be0}
+      - {name: src/BgAnimation, type: bss, vram: 0x007281f0}
+      - {name: src/DisplayList, type: bss, vram: 0x00728310}
+      - {name: src/EnemyInit, type: bss, vram: 0x007285a0}
+      - {name: src/way_kidnap, type: bss, vram: 0x00728610}
+      - {name: src/way_tool, type: bss, vram: 0x00729b60}
+      - {name: src/access, type: bss, vram: 0x00729e30}
+      - {name: mpeg/mv_disp, type: bss, vram: 0x0072a040}
+      - {name: src/GobjProc, type: bss, vram: 0x0072a2c0}
+      - {name: libkernl/tty, type: bss, vram: 0x0072a600}
+      - {name: libkernl/sifrpc, type: bss, vram: 0x0072aa00}
+      - {name: libkernl/filestub, type: bss, vram: 0x0072c200}
+      - {name: libkernl/iopheap, type: bss, vram: 0x0072d580}
+      - {name: libkernl/eeloadfile, type: bss, vram: 0x0072d780}
+      - {name: libkernl/iopreset, type: bss, vram: 0x0072d9c0}
+      - {name: libkernl/tlbtrap, type: bss, vram: 0x0072ea50}
+      - {name: libkernl/sifcmd, type: bss, vram: 0x0072ec80}
+      - {name: libkernl/cdvd000, type: bss, vram: 0x0072ef00}
+      - {name: libpad/libpad, type: bss, vram: 0x0072f200}
+      - {name: libmc/libmc, type: bss, vram: 0x0072f5c0}
+      - {name: libmpeg/mpc, type: bss, vram: 0x00730bc0}
+      - {name: libmpeg/init, type: bss, vram: 0x00730dc0}
+      - {name: libmpeg/csc, type: bss, vram: 0x007315d0}
+      - {name: libsndn2/sound, type: bss, vram: 0x00731600}
+      - {name: gcc/libgcc2, type: bss, vram: 0x00736168}
+      - {name: gcc/dp-bit, type: bss, vram: 0x00736170}
+
+
+
+
+      # - {start: 0x53d124, type: bss, vram: 0x736198, name: os/vubss}
+      #- [0x53ac80, sdata, os/sdata]
+      #- [0x53d100, sbss, os/sbss]
+      #- [0x53d124, bss, os/bss]
+      #- [0x53d124, bss, os/vubss]
+  - [0x53d124, bin, elf/reginfo] # .reginfo
+  - [0x53d13c, bin, elf/dvp] # .DVP sections
+  - [0x54235a, bin, elf/shstrtab] # .shstrtab
+  - [0x542568, bin, elf/sectionheaders] # ELF section headers
+  - [0x5429a0] # end of file
