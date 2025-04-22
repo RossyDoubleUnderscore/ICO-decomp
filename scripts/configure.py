@@ -33,7 +33,7 @@ COMMON_INCLUDES = (
 COMPILER = "ee-gcc2.96"
 GAME_CC_DIR = f"{TOOLS_DIR}/cc/{COMPILER}/bin"
 
-GAME_COMPILE_CMD = f"{GAME_CC_DIR}/ee-gcc -c {COMMON_INCLUDES} $optlevel -g2 $regnames"
+GAME_COMPILE_CMD = f"{GAME_CC_DIR}/ee-gcc -c {COMMON_INCLUDES} -O2 -g2 $regnames"
 
 
 def exec_shell(command: List[str], stdout=subprocess.PIPE) -> str:
@@ -142,6 +142,8 @@ def build_stuff(linker_entries: List[LinkerEntry]):
                 "as",
                 variables={"override": override},
             )
+        elif isinstance(seg, splat.segtypes.common.c.CommonSegC):
+            build(entry.object_path, entry.src_paths, "cc")
         else:
             print(f"ERROR: Unsupported build segment type {seg.type}")
             sys.exit(1)

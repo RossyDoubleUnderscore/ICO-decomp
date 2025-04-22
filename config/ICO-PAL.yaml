@@ -67,8 +67,7 @@ options:
   ld_bss_is_noload: true
 
   migrate_rodata_to_functions: False
-  #migrate_rodata_to_functions: True      #Uncomment this when done with .rodata
-  #use_gp_rel_macro_nonmatching: False
+  use_gp_rel_macro_nonmatching: False
 
   #include_macro_inc: False
 
@@ -90,7 +89,7 @@ segments:
     type: code
     start: 0x1000
     vram: 0x100000
-    bss_size: 0xfa074 # .bss + .sbss size
+    bss_size: 0xfa074 # .bss + .sbss
     subalign: 4
     subsegments:
       # .text
@@ -144,7 +143,7 @@ segments:
       - [0x03d4a8, asm,     ico2/fumi/ios/message]
       - [0x03daf0, asm,     ico2/fumi/ios/pad]
       - [0x03ef68, asm,     ico2/fumi/ios/shockdriver]
-      - [0x040528, asm,     ico2/fumi/ios/thread]
+      - [0x040528, c,       ico2/fumi/ios/thread]
 
       - [0x041170, asm,     ico2/fumi/isys/gobj]
       - [0x042198, asm,     ico2/fumi/isys/gobj_dl]

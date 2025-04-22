@@ -10,7 +10,7 @@
         "   .set noreorder\n"                                           \
         "   .globl\t" #NAME ".NON_MATCHING\n"                           \
         "   .ent\t" #NAME "\n" #NAME ".NON_MATCHING:\n"                 \
-        "   .include \"asm/nonmatchings/" FOLDER "/" #NAME ".s\"\n"     \
+        "   .include \"./" FOLDER "/" #NAME ".s\"\n"                    \
         "   .set reorder\n"                                             \
         "   .set at\n"                                                  \
         "   .end\t" #NAME                                               \
@@ -20,7 +20,7 @@
 #define INCLUDE_RODATA(FOLDER, NAME)                                    \
     __asm__(                                                            \
         ".section .rodata\n"                                            \
-        "    .include \"asm/nonmatchings/" FOLDER "/" #NAME ".s\"\n"    \
+        "    .include \"./" FOLDER "/" #NAME ".s\"\n"                   \
         ".section .text"                                                \
     )
 #endif
