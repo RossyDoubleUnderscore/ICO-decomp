@@ -5784,3 +5784,8 @@ fadeColor.r = 0x63BCB0;
 fadeColor.g = 0x63BCB1;
 fadeColor.b = 0x63BCB2;
 fadeColor.a = 0x63BCB3;
+target.432                      = 0x004d9d58; // type:s8
+
+// .bss / .sbss
+uidle_time.103                  = 0x0063C100; // type:u32
+D_0063C5D8                      = 0x0063C5D8; // type:u32
