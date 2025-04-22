@@ -1,6 +1,7 @@
 .ninja_log
 .splache
 
+include/sdk/*
 iso/*
 
 asm/*
