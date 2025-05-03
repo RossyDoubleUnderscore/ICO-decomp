@@ -15,6 +15,7 @@ typedef unsigned long u64;
 
 typedef float f32;
 
-#define STATIC_ASSERT(x) int static_assert(int static_assert[(x)? 1 : (-1)])
+#define UNUSED(x)           (void)(x);
+#define STATIC_ASSERT(x)    int static_assert(int static_assert[(x)? 1 : (-1)])
 
 #endif // COMMON_H_

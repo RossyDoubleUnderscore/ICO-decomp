@@ -1,10 +1,3 @@
-# QUESTIONS:
-# 1) should .bss and .sbss sections have a starting address, even though they technically don't exist in the .elf?
-# 2) do I need to include all of these .DVP.overlay sections in my .yaml? I don't even know what their purpose is.
-
-
-
-
 # Section Headers:
 #  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al
 #  [ 0]                   NULL            00000000 000000 000000 00      0   0  0
@@ -36,8 +29,6 @@
 #  [26] .shstrtab         STRTAB          00000000 54235a 00020d 00      0   0  1
 
 
-
-
 name: ICO (PAL)
 sha1: da3644c54c26fe760f3b6a591a5fc2eab396ed2b
 options:
@@ -48,7 +39,7 @@ options:
   #cache_path: cache/cache
 
   asm_path: asm
-  src_path: src
+  src_path: ico2
   build_path: build
 
   extensions_path: tools/splat_ext
@@ -107,249 +98,249 @@ segments:
       - [0x002aa0, asm,     sdk/lib/libkernl/deci2]
       #################
       # ico2000.a
-      - [0x002c80, asm,     ico2/common/src/main]
+      - [0x002c80, asm,     common/src/main]
 
-      - [0x0035a8, asm,     ico2/sugipon/src/delayFreeManager]
-      - [0x0037d8, asm,     ico2/sugipon/src/geometryManager]
-      - [0x005be0, asm,     ico2/sugipon/src/keyInput]
-      - [0x005f38, asm,     ico2/sugipon/src/matrixDrive]
-      - [0x0070d8, asm,     ico2/sugipon/src/motionManager2]
-      - [0x00bdc0, asm,     ico2/sugipon/src/pool]
-      - [0x00e3a8, asm,     ico2/sugipon/src/quaternion]
-      - [0x00f918, asm,     ico2/sugipon/src/tableSin]
+      - [0x0035a8, asm,     sugipon/src/delayFreeManager]
+      - [0x0037d8, asm,     sugipon/src/geometryManager]
+      - [0x005be0, asm,     sugipon/src/keyInput]
+      - [0x005f38, asm,     sugipon/src/matrixDrive]
+      - [0x0070d8, asm,     sugipon/src/motionManager2]
+      - [0x00bdc0, asm,     sugipon/src/pool]
+      - [0x00e3a8, asm,     sugipon/src/quaternion]
+      - [0x00f918, asm,     sugipon/src/tableSin]
 
-      - [0x00fc18, asm,     ico2/seki/src/DisplayP2O]
-      - [0x00fca8, asm,     ico2/seki/src/FileManager]
-      - [0x010650, asm,     ico2/seki/src/GifPacket]
-      - [0x013558, asm,     ico2/seki/src/GsBase]
-      - [0x017690, asm,     ico2/seki/src/Light]
-      - [0x01a018, asm,     ico2/seki/src/Matrix]
-      - [0x01b2e0, asm,     ico2/seki/src/MicroCode]
-      - [0x01b7a0, asm,     ico2/seki/src/Packet]
-      - [0x01e7f0, asm,     ico2/seki/src/Primitive]
-      - [0x020ef0, asm,     ico2/seki/src/RegistPacket]
-      - [0x0254d8, asm,     ico2/seki/src/Shadow]
-      - [0x02af50, asm,     ico2/seki/src/StageAnimation]
-      - [0x02d8f0, asm,     ico2/seki/src/Texture]
-      - [0x0330f0, asm,     ico2/seki/src/ZFog]
+      - [0x00fc18, asm,     seki/src/DisplayP2O]
+      - [0x00fca8, asm,     seki/src/FileManager]
+      - [0x010650, asm,     seki/src/GifPacket]
+      - [0x013558, asm,     seki/src/GsBase]
+      - [0x017690, asm,     seki/src/Light]
+      - [0x01a018, asm,     seki/src/Matrix]
+      - [0x01b2e0, asm,     seki/src/MicroCode]
+      - [0x01b7a0, asm,     seki/src/Packet]
+      - [0x01e7f0, asm,     seki/src/Primitive]
+      - [0x020ef0, asm,     seki/src/RegistPacket]
+      - [0x0254d8, asm,     seki/src/Shadow]
+      - [0x02af50, asm,     seki/src/StageAnimation]
+      - [0x02d8f0, asm,     seki/src/Texture]
+      - [0x0330f0, asm,     seki/src/ZFog]
 
-      - [0x034250, asm,     ico2/fumi/ios/cdvd]
-      - [0x0368b0, asm,     ico2/fumi/ios/inflate]
-      - [0x038de8, asm,     ico2/fumi/ios/ios]
-      - [0x039158, asm,     ico2/fumi/ios/mblock]
-      - [0x039478, asm,     ico2/fumi/ios/mcard]
-      - [0x03b778, asm,     ico2/fumi/ios/mcdata]
-      - [0x03ba78, asm,     ico2/fumi/ios/memory]
-      - [0x03d4a8, asm,     ico2/fumi/ios/message]
-      - [0x03daf0, asm,     ico2/fumi/ios/pad]
-      - [0x03ef68, asm,     ico2/fumi/ios/shockdriver]
-      - [0x040528, c,       ico2/fumi/ios/thread]
+      - [0x034250, asm,     fumi/ios/cdvd]
+      - [0x0368b0, asm,     fumi/ios/inflate]
+      - [0x038de8, asm,     fumi/ios/ios]
+      - [0x039158, asm,     fumi/ios/mblock]
+      - [0x039478, asm,     fumi/ios/mcard]
+      - [0x03b778, asm,     fumi/ios/mcdata]
+      - [0x03ba78, asm,     fumi/ios/memory]
+      - [0x03d4a8, asm,     fumi/ios/message]
+      - [0x03daf0, asm,     fumi/ios/pad]
+      - [0x03ef68, asm,     fumi/ios/shockdriver]
+      - [0x040528, c,       fumi/ios/thread]
 
-      - [0x041170, asm,     ico2/fumi/isys/gobj]
-      - [0x042198, asm,     ico2/fumi/isys/gobj_dl]
-      - [0x0427d0, asm,     ico2/fumi/isys/gobj_process]
-      - [0x042d80, asm,     ico2/fumi/isys/isys]
-      - [0x042d88, asm,     ico2/fumi/isys/obj_manager]
+      - [0x041170, asm,     fumi/isys/gobj]
+      - [0x042198, asm,     fumi/isys/gobj_dl]
+      - [0x0427d0, asm,     fumi/isys/gobj_process]
+      - [0x042d80, asm,     fumi/isys/isys]
+      - [0x042d88, asm,     fumi/isys/obj_manager]
 
-      - [0x043518, asm,     ico2/fumi/sound/adpcm_init]
-      - [0x044550, asm,     ico2/fumi/sound/s_init]
-      - [0x047b68, asm,     ico2/fumi/sound/soundManager]
+      - [0x043518, asm,     fumi/sound/adpcm_init]
+      - [0x044550, asm,     fumi/sound/s_init]
+      - [0x047b68, asm,     fumi/sound/soundManager]
 
-      - [0x047cc0, asm,     ico2/fumi/src/act-game]
-      - [0x04f8a0, asm,     ico2/fumi/src/act-parallel-control]
-      - [0x04fa68, asm,     ico2/fumi/src/act-wish]
-      - [0x050d50, asm,     ico2/fumi/src/boyact]
-      - [0x059c88, asm,     ico2/fumi/src/commonact]
-      - [0x064f98, asm,     ico2/fumi/src/enemy_act]
-      - [0x06c038, asm,     ico2/fumi/src/fieldCollision]
-      - [0x0701e8, asm,     ico2/fumi/src/fuzio]
-      - [0x070600, asm,     ico2/fumi/src/girl_act]
-      - [0x07d988, asm,     ico2/fumi/src/jimaku]
-      - [0x07e5d0, asm,     ico2/fumi/src/way_sys]
-      - [0x080180, asm,     ico2/fumi/src/way_util]
+      - [0x047cc0, asm,     fumi/src/act-game]
+      - [0x04f8a0, asm,     fumi/src/act-parallel-control]
+      - [0x04fa68, asm,     fumi/src/act-wish]
+      - [0x050d50, asm,     fumi/src/boyact]
+      - [0x059c88, asm,     fumi/src/commonact]
+      - [0x064f98, asm,     fumi/src/enemy_act]
+      - [0x06c038, asm,     fumi/src/fieldCollision]
+      - [0x0701e8, asm,     fumi/src/fuzio]
+      - [0x070600, asm,     fumi/src/girl_act]
+      - [0x07d988, asm,     fumi/src/jimaku]
+      - [0x07e5d0, asm,     fumi/src/way_sys]
+      - [0x080180, asm,     fumi/src/way_util]
 
-      - [0x082900, asm,     ico2/script/src/gflag]
-      - [0x082ad0, asm,     ico2/script/src/script]
-      - [0x086cd0, asm,     ico2/script/src/st25a]
-      - [0x088f00, asm,     ico2/script/src/warpGirl]
+      - [0x082900, asm,     script/src/gflag]
+      - [0x082ad0, asm,     script/src/script]
+      - [0x086cd0, asm,     script/src/st25a]
+      - [0x088f00, asm,     script/src/warpGirl]
 
-      - [0x089280, asm,     ico2/omori/src/attackhit]
-      - [0x08a738, asm,     ico2/omori/src/brain]
-      - [0x08b478, asm,     ico2/omori/src/camera-editor]
-      - [0x090980, asm,     ico2/omori/src/camera-ico2]
-      - [0x0941c8, asm,     ico2/omori/src/camera-root]
-      - [0x095f68, asm,     ico2/omori/src/camera-set-manager]
-      - [0x095f70, asm,     ico2/omori/src/chain]
-      - [0x099f70, asm,     ico2/omori/src/ebrain]
-      - [0x09b0c0, asm,     ico2/omori/src/enemy-control]
-      - [0x09b1b0, asm,     ico2/omori/src/fightSound]
-      - [0x09b4e8, asm,     ico2/omori/src/generator]
-      - [0x09d560, asm,     ico2/omori/src/gv]
-      - [0x09df48, asm,     ico2/omori/src/hand-camera]
-      - [0x09e628, asm,     ico2/omori/src/lws_kyomi]
-      - [0x09eda0, asm,     ico2/omori/src/mail-add-data]
-      - [0x09efc0, asm,     ico2/omori/src/poly-flat]
+      - [0x089280, asm,     omori/src/attackhit]
+      - [0x08a738, asm,     omori/src/brain]
+      - [0x08b478, asm,     omori/src/camera-editor]
+      - [0x090980, asm,     omori/src/camera-ico2]
+      - [0x0941c8, asm,     omori/src/camera-root]
+      - [0x095f68, asm,     omori/src/camera-set-manager]
+      - [0x095f70, asm,     omori/src/chain]
+      - [0x099f70, asm,     omori/src/ebrain]
+      - [0x09b0c0, asm,     omori/src/enemy-control]
+      - [0x09b1b0, asm,     omori/src/fightSound]
+      - [0x09b4e8, asm,     omori/src/generator]
+      - [0x09d560, asm,     omori/src/gv]
+      - [0x09df48, asm,     omori/src/hand-camera]
+      - [0x09e628, asm,     omori/src/lws_kyomi]
+      - [0x09eda0, asm,     omori/src/mail-add-data]
+      - [0x09efc0, asm,     omori/src/poly-flat]
 
-      - [0x09f340, asm,     ico2/ito/src/act_bird]
-      - [0x0a1160, asm,     ico2/ito/src/gather_effect]
-      - [0x0a15d0, asm,     ico2/ito/src/itou_boss]
-      - [0x0a21e8, asm,     ico2/ito/src/itou_gflag]
-      - [0x0a2200, asm,     ico2/ito/src/itou_sub]
-      - [0x0a2520, asm,     ico2/ito/src/lightning]
-      - [0x0a3770, asm,     ico2/ito/src/queen]
-      - [0x0a5b68, asm,     ico2/ito/src/queen_barrier_disp]
-      - [0x0a6618, asm,     ico2/ito/src/stage_orient]
+      - [0x09f340, asm,     ito/src/act_bird]
+      - [0x0a1160, asm,     ito/src/gather_effect]
+      - [0x0a15d0, asm,     ito/src/itou_boss]
+      - [0x0a21e8, asm,     ito/src/itou_gflag]
+      - [0x0a2200, asm,     ito/src/itou_sub]
+      - [0x0a2520, asm,     ito/src/lightning]
+      - [0x0a3770, asm,     ito/src/queen]
+      - [0x0a5b68, asm,     ito/src/queen_barrier_disp]
+      - [0x0a6618, asm,     ito/src/stage_orient]
 
-      - [0x0a6db8, asm,     ico2/ito/mpeg/mv_main]
-      - [0x0a7810, asm,     ico2/ito/mpeg/mv_readbuf]
-      - [0x0a79a0, asm,     ico2/ito/mpeg/mv_strfile]
-      - [0x0a7a18, asm,     ico2/ito/mpeg/mv_videodec]
-      - [0x0a8180, asm,     ico2/ito/mpeg/mv_vobuf]
+      - [0x0a6db8, asm,     ito/mpeg/mv_main]
+      - [0x0a7810, asm,     ito/mpeg/mv_readbuf]
+      - [0x0a79a0, asm,     ito/mpeg/mv_strfile]
+      - [0x0a7a18, asm,     ito/mpeg/mv_videodec]
+      - [0x0a8180, asm,     ito/mpeg/mv_vobuf]
 
-      - [0x0a8478, asm,     ico2/common/src/DObj]
-      - [0x0a93a0, asm,     ico2/common/src/StageManager]
-      - [0x0a9ed0, asm,     ico2/common/src/backStage]
-      - [0x0aae60, asm,     ico2/common/src/charFileManager]
-      - [0x0acc40, asm,     ico2/common/src/debug]
-      - [0x0b4e20, asm,     ico2/common/src/debug_exception]
-      - [0x0b74f0, asm,     ico2/common/src/debug_menu]
-      - [0x0b76a8, asm,     ico2/common/src/gamesys]
-      - [0x0b85e8, asm,     ico2/common/src/haveParentSimpleObj]
-      - [0x0b8600, asm,     ico2/common/src/icoMisc]
-      - [0x0b9738, asm,     ico2/common/src/kanban]
-      - [0x0ba2d0, asm,     ico2/common/src/kanbanBoot]
-      - [0x0baaa8, asm,     ico2/common/src/layout_action]
-      - [0x0bfea8, asm,     ico2/common/src/layout_texture]
-      - [0x0c1fa8, asm,     ico2/common/src/sceneManager]
-      - [0x0c2f58, asm,     ico2/common/src/staffroll]
+      - [0x0a8478, asm,     common/src/DObj]
+      - [0x0a93a0, asm,     common/src/StageManager]
+      - [0x0a9ed0, asm,     common/src/backStage]
+      - [0x0aae60, asm,     common/src/charFileManager]
+      - [0x0acc40, asm,     common/src/debug]
+      - [0x0b4e20, asm,     common/src/debug_exception]
+      - [0x0b74f0, asm,     common/src/debug_menu]
+      - [0x0b76a8, asm,     common/src/gamesys]
+      - [0x0b85e8, asm,     common/src/haveParentSimpleObj]
+      - [0x0b8600, asm,     common/src/icoMisc]
+      - [0x0b9738, asm,     common/src/kanban]
+      - [0x0ba2d0, asm,     common/src/kanbanBoot]
+      - [0x0baaa8, asm,     common/src/layout_action]
+      - [0x0bfea8, asm,     common/src/layout_texture]
+      - [0x0c1fa8, asm,     common/src/sceneManager]
+      - [0x0c2f58, asm,     common/src/staffroll]
 
-      - [0x0c3510, asm,     ico2/sugipon/src/a_p_1]
-      - [0x0c5788, asm,     ico2/sugipon/src/act_a_p_1]
-      - [0x0c6780, asm,     ico2/sugipon/src/actressLight]
-      - [0x0c6848, asm,     ico2/sugipon/src/attackCheckBoundary]
-      - [0x0c6f58, asm,     ico2/sugipon/src/switch]
-      - [0x0c7850, asm,     ico2/sugipon/src/box]
-      - [0x0cc2e0, asm,     ico2/sugipon/src/boy]
-      - [0x0cd740, asm,     ico2/sugipon/src/cage]
-      - [0x0ce4a8, asm,     ico2/sugipon/src/cageFix]
-      - [0x0ce578, asm,     ico2/sugipon/src/candle]
-      - [0x0ce9a8, asm,     ico2/sugipon/src/chandelier]
-      - [0x0cea90, asm,     ico2/sugipon/src/clipCollisionManager]
-      - [0x0ced48, asm,     ico2/sugipon/src/clothAnimation]
-      - [0x0d5458, asm,     ico2/sugipon/src/clothTest]
-      - [0x0d54b8, asm,     ico2/sugipon/src/darkVolume]
-      - [0x0d8088, asm,     ico2/sugipon/src/effectTool]
-      - [0x0d97c0, asm,     ico2/sugipon/src/enemy]
-      - [0x0db0a8, asm,     ico2/sugipon/src/enemyParts]
-      - [0x0dbe80, asm,     ico2/sugipon/src/flag]
-      - [0x0dcbe0, asm,     ico2/sugipon/src/flyManager]
-      - [0x0dcde8, asm,     ico2/sugipon/src/frameDependSequence]
-      - [0x0de128, asm,     ico2/sugipon/src/girl]
-      - [0x0ded50, asm,     ico2/sugipon/src/girlForceField]
-      - [0x0def20, asm,     ico2/sugipon/src/handManager]
-      - [0x0df7e8, asm,     ico2/sugipon/src/item]
-      - [0x0e1840, asm,     ico2/sugipon/src/lineManager]
-      - [0x0e2158, asm,     ico2/sugipon/src/lodManager]
-      - [0x0e2218, asm,     ico2/sugipon/src/motionFileManager]
-      - [0x0e24d0, asm,     ico2/sugipon/src/motionManager]
-      - [0x0ee758, asm,     ico2/sugipon/src/motionOrientManager]
-      - [0x0f27f0, asm,     ico2/sugipon/src/motionViewer]
-      - [0x0f4668, asm,     ico2/sugipon/src/moveColTest]
-      - [0x0f48b8, asm,     ico2/sugipon/src/multiBgaManager]
-      - [0x0f4c48, asm,     ico2/sugipon/src/particleEffect]
-      - [0x0f67a0, asm,     ico2/sugipon/src/particleLayout]
-      - [0x0f68a0, asm,     ico2/sugipon/src/puddle]
-      - [0x0f76e8, asm,     ico2/sugipon/src/rope]
-      - [0x0f8038, asm,     ico2/sugipon/src/ropeFix]
-      - [0x0f80c8, asm,     ico2/sugipon/src/rotObject]
-      - [0x0f8a98, asm,     ico2/sugipon/src/spider]
-      - [0x0f9ca8, asm,     ico2/sugipon/src/spiderGroupManager]
-      - [0x0fa390, asm,     ico2/sugipon/src/stageMultiBgaManager]
-      - [0x0fa890, asm,     ico2/sugipon/src/staticBlur]
-      - [0x0fe5f8, asm,     ico2/sugipon/src/stormTest]
-      - [0x0ff1a0, asm,     ico2/sugipon/src/streamMotionManager]
-      - [0x1002b8, asm,     ico2/sugipon/src/sugiTree]
-      - [0x1007c0, asm,     ico2/sugipon/src/torch]
-      - [0x1013a8, asm,     ico2/sugipon/src/waterDot]
-      - [0x101ad0, asm,     ico2/sugipon/src/waySystemManager]
-      - [0x101bb8, asm,     ico2/sugipon/src/weapon]
-      - [0x1044f0, asm,     ico2/sugipon/src/windField]
-      - [0x104ff8, asm,     ico2/sugipon/src/windManager]
-      - [0x105388, asm,     ico2/sugipon/src/windmill]
-      - [0x105500, asm,     ico2/sugipon/src/wireLetter]
-      - [0x105888, asm,     ico2/sugipon/src/worm]
+      - [0x0c3510, asm,     sugipon/src/a_p_1]
+      - [0x0c5788, asm,     sugipon/src/act_a_p_1]
+      - [0x0c6780, asm,     sugipon/src/actressLight]
+      - [0x0c6848, asm,     sugipon/src/attackCheckBoundary]
+      - [0x0c6f58, asm,     sugipon/src/switch]
+      - [0x0c7850, asm,     sugipon/src/box]
+      - [0x0cc2e0, asm,     sugipon/src/boy]
+      - [0x0cd740, asm,     sugipon/src/cage]
+      - [0x0ce4a8, asm,     sugipon/src/cageFix]
+      - [0x0ce578, asm,     sugipon/src/candle]
+      - [0x0ce9a8, asm,     sugipon/src/chandelier]
+      - [0x0cea90, asm,     sugipon/src/clipCollisionManager]
+      - [0x0ced48, asm,     sugipon/src/clothAnimation]
+      - [0x0d5458, asm,     sugipon/src/clothTest]
+      - [0x0d54b8, asm,     sugipon/src/darkVolume]
+      - [0x0d8088, asm,     sugipon/src/effectTool]
+      - [0x0d97c0, asm,     sugipon/src/enemy]
+      - [0x0db0a8, asm,     sugipon/src/enemyParts]
+      - [0x0dbe80, asm,     sugipon/src/flag]
+      - [0x0dcbe0, asm,     sugipon/src/flyManager]
+      - [0x0dcde8, asm,     sugipon/src/frameDependSequence]
+      - [0x0de128, asm,     sugipon/src/girl]
+      - [0x0ded50, asm,     sugipon/src/girlForceField]
+      - [0x0def20, asm,     sugipon/src/handManager]
+      - [0x0df7e8, asm,     sugipon/src/item]
+      - [0x0e1840, asm,     sugipon/src/lineManager]
+      - [0x0e2158, asm,     sugipon/src/lodManager]
+      - [0x0e2218, asm,     sugipon/src/motionFileManager]
+      - [0x0e24d0, asm,     sugipon/src/motionManager]
+      - [0x0ee758, asm,     sugipon/src/motionOrientManager]
+      - [0x0f27f0, asm,     sugipon/src/motionViewer]
+      - [0x0f4668, asm,     sugipon/src/moveColTest]
+      - [0x0f48b8, asm,     sugipon/src/multiBgaManager]
+      - [0x0f4c48, asm,     sugipon/src/particleEffect]
+      - [0x0f67a0, asm,     sugipon/src/particleLayout]
+      - [0x0f68a0, asm,     sugipon/src/puddle]
+      - [0x0f76e8, asm,     sugipon/src/rope]
+      - [0x0f8038, asm,     sugipon/src/ropeFix]
+      - [0x0f80c8, asm,     sugipon/src/rotObject]
+      - [0x0f8a98, asm,     sugipon/src/spider]
+      - [0x0f9ca8, asm,     sugipon/src/spiderGroupManager]
+      - [0x0fa390, asm,     sugipon/src/stageMultiBgaManager]
+      - [0x0fa890, asm,     sugipon/src/staticBlur]
+      - [0x0fe5f8, asm,     sugipon/src/stormTest]
+      - [0x0ff1a0, asm,     sugipon/src/streamMotionManager]
+      - [0x1002b8, asm,     sugipon/src/sugiTree]
+      - [0x1007c0, asm,     sugipon/src/torch]
+      - [0x1013a8, asm,     sugipon/src/waterDot]
+      - [0x101ad0, asm,     sugipon/src/waySystemManager]
+      - [0x101bb8, asm,     sugipon/src/weapon]
+      - [0x1044f0, asm,     sugipon/src/windField]
+      - [0x104ff8, asm,     sugipon/src/windManager]
+      - [0x105388, asm,     sugipon/src/windmill]
+      - [0x105500, asm,     sugipon/src/wireLetter]
+      - [0x105888, asm,     sugipon/src/worm]
 
-      - [0x106da8, asm,     ico2/seki/src/Basic]
-      - [0x106fb0, asm,     ico2/seki/src/BgAnimation]
-      - [0x10ba90, asm,     ico2/seki/src/DisplayFont]
-      - [0x10c458, asm,     ico2/seki/src/DisplayList]
-      - [0x10cad8, asm,     ico2/seki/src/DmaPacket]
-      - [0x10cbd8, asm,     ico2/seki/src/EnemyInit]
+      - [0x106da8, asm,     seki/src/Basic]
+      - [0x106fb0, asm,     seki/src/BgAnimation]
+      - [0x10ba90, asm,     seki/src/DisplayFont]
+      - [0x10c458, asm,     seki/src/DisplayList]
+      - [0x10cad8, asm,     seki/src/DmaPacket]
+      - [0x10cbd8, asm,     seki/src/EnemyInit]
 
-      - [0x10cf58, asm,     ico2/fumi/isys/gobj_cam_dl]
+      - [0x10cf58, asm,     fumi/isys/gobj_cam_dl]
 
-      - [0x10d4b0, asm,     ico2/fumi/src/act-env]
-      - [0x112428, asm,     ico2/fumi/src/act-way]
-      - [0x1139a8, asm,     ico2/fumi/src/act]
-      - [0x1159b0, asm,     ico2/fumi/src/act2]
-      - [0x115b38, asm,     ico2/fumi/src/seMail]
-      - [0x115d80, asm,     ico2/fumi/src/way_kidnap]
-      - [0x116ca0, asm,     ico2/fumi/src/way_llf]
-      - [0x117790, asm,     ico2/fumi/src/way_tool]
+      - [0x10d4b0, asm,     fumi/src/act-env]
+      - [0x112428, asm,     fumi/src/act-way]
+      - [0x1139a8, asm,     fumi/src/act]
+      - [0x1159b0, asm,     fumi/src/act2]
+      - [0x115b38, asm,     fumi/src/seMail]
+      - [0x115d80, asm,     fumi/src/way_kidnap]
+      - [0x116ca0, asm,     fumi/src/way_llf]
+      - [0x117790, asm,     fumi/src/way_tool]
 
-      - [0x118e08, asm,     ico2/script/src/deja]
-      - [0x1196d8, asm,     ico2/script/src/e3]
-      - [0x11c8a0, asm,     ico2/script/src/end]
-      - [0x120060, asm,     ico2/script/src/op]
-      - [0x122238, asm,     ico2/script/src/st00a]
-      - [0x123710, asm,     ico2/script/src/st01b]
-      - [0x124318, asm,     ico2/script/src/st02a]
-      - [0x125ea8, asm,     ico2/script/src/st03t]
-      - [0x1273d8, asm,     ico2/script/src/st04a]
-      - [0x12c088, asm,     ico2/script/src/st04b]
-      - [0x12ca00, asm,     ico2/script/src/st04c]
-      - [0x12d4a8, asm,     ico2/script/src/st04d]
-      - [0x12dfb8, asm,     ico2/script/src/st04e]
-      - [0x12eb38, asm,     ico2/script/src/st04l]
-      - [0x1349b8, asm,     ico2/script/src/st04r]
-      - [0x139740, asm,     ico2/script/src/st05b]
-      - [0x139e60, asm,     ico2/script/src/st05c]
-      - [0x13ab30, asm,     ico2/script/src/st05d]
-      - [0x13b480, asm,     ico2/script/src/st05e]
-      - [0x13bb10, asm,     ico2/script/src/st06a]
-      - [0x13edd0, asm,     ico2/script/src/st07a]
-      - [0x140e40, asm,     ico2/script/src/st08a]
-      - [0x142220, asm,     ico2/script/src/st08b]
-      - [0x1430d8, asm,     ico2/script/src/st09a]
-      - [0x143b58, asm,     ico2/script/src/st10l]
-      - [0x145620, asm,     ico2/script/src/st10r]
-      - [0x147718, asm,     ico2/script/src/st13a]
-      - [0x1483e8, asm,     ico2/script/src/st13b]
-      - [0x14af88, asm,     ico2/script/src/st13b2]
-      - [0x14afb8, asm,     ico2/script/src/st13c]
-      - [0x14e3d0, asm,     ico2/script/src/st13d]
-      - [0x14e658, asm,     ico2/script/src/st17a]
-      - [0x14f928, asm,     ico2/script/src/st17b]
-      - [0x14fa30, asm,     ico2/script/src/st18a]
-      - [0x150e38, asm,     ico2/script/src/st19a]
-      - [0x151d80, asm,     ico2/script/src/st20a]
-      - [0x153418, asm,     ico2/script/src/st22a]
-      - [0x153ac0, asm,     ico2/script/src/st24a]
-      - [0x154090, asm,     ico2/script/src/st47a]
-      - [0x155d40, asm,     ico2/script/src/st99a]
-      - [0x156520, asm,     ico2/script/src/stageSEProc]
+      - [0x118e08, asm,     script/src/deja]
+      - [0x1196d8, asm,     script/src/e3]
+      - [0x11c8a0, asm,     script/src/end]
+      - [0x120060, asm,     script/src/op]
+      - [0x122238, asm,     script/src/st00a]
+      - [0x123710, asm,     script/src/st01b]
+      - [0x124318, asm,     script/src/st02a]
+      - [0x125ea8, asm,     script/src/st03t]
+      - [0x1273d8, asm,     script/src/st04a]
+      - [0x12c088, asm,     script/src/st04b]
+      - [0x12ca00, asm,     script/src/st04c]
+      - [0x12d4a8, asm,     script/src/st04d]
+      - [0x12dfb8, asm,     script/src/st04e]
+      - [0x12eb38, asm,     script/src/st04l]
+      - [0x1349b8, asm,     script/src/st04r]
+      - [0x139740, asm,     script/src/st05b]
+      - [0x139e60, asm,     script/src/st05c]
+      - [0x13ab30, asm,     script/src/st05d]
+      - [0x13b480, asm,     script/src/st05e]
+      - [0x13bb10, asm,     script/src/st06a]
+      - [0x13edd0, asm,     script/src/st07a]
+      - [0x140e40, asm,     script/src/st08a]
+      - [0x142220, asm,     script/src/st08b]
+      - [0x1430d8, asm,     script/src/st09a]
+      - [0x143b58, asm,     script/src/st10l]
+      - [0x145620, asm,     script/src/st10r]
+      - [0x147718, asm,     script/src/st13a]
+      - [0x1483e8, asm,     script/src/st13b]
+      - [0x14af88, asm,     script/src/st13b2]
+      - [0x14afb8, asm,     script/src/st13c]
+      - [0x14e3d0, asm,     script/src/st13d]
+      - [0x14e658, asm,     script/src/st17a]
+      - [0x14f928, asm,     script/src/st17b]
+      - [0x14fa30, asm,     script/src/st18a]
+      - [0x150e38, asm,     script/src/st19a]
+      - [0x151d80, asm,     script/src/st20a]
+      - [0x153418, asm,     script/src/st22a]
+      - [0x153ac0, asm,     script/src/st24a]
+      - [0x154090, asm,     script/src/st47a]
+      - [0x155d40, asm,     script/src/st99a]
+      - [0x156520, asm,     script/src/stageSEProc]
 
-      - [0x158218, asm,     ico2/omori/src/access]
-      - [0x158310, asm,     ico2/omori/src/objact]
+      - [0x158218, asm,     omori/src/access]
+      - [0x158310, asm,     omori/src/objact]
 
-      - [0x158550, asm,     ico2/ito/mpeg/mv_audiodec]
-      - [0x159090, asm,     ico2/ito/mpeg/mv_disp]
-      - [0x15a338, asm,     ico2/ito/mpeg/mv_sub]
-      - [0x15a480, asm,     ico2/ito/mpeg/mv_vibuf]
+      - [0x158550, asm,     ito/mpeg/mv_audiodec]
+      - [0x159090, asm,     ito/mpeg/mv_disp]
+      - [0x15a338, asm,     ito/mpeg/mv_sub]
+      - [0x15a480, asm,     ito/mpeg/mv_vibuf]
 
-      - [0x15b6b8, asm,     ico2/common/src/GobjProc]
-      - [0x15bb20, asm,     ico2/common/src/PObj]
-      - [0x15c578, asm,     ico2/common/src/vobj]
+      - [0x15b6b8, asm,     common/src/GobjProc]
+      - [0x15bb20, asm,     common/src/PObj]
+      - [0x15c578, asm,     common/src/vobj]
       #################
       # more SDK libs #                   # good up to here
       #################
@@ -563,183 +554,183 @@ segments:
       - [0x1904B0, data,    sdk/lib/libkernl/thread]
       - [0x1904B4, data,    sdk/lib/libkernl/kprintf]
 
-      - [0x1904C0, data,    ico2/common/src/main]
+      - [0x1904C0, data,    common/src/main]
 
-      - [0x190EB8, data,    ico2/sugipon/src/geometryManager]
-      - [0x190ED0, data,    ico2/sugipon/src/keyinput]
-      - [0x190EF0, data,    ico2/sugipon/src/matrixDrive]
-      - [0x191080, data,    ico2/sugipon/src/motionManager2]
-      - [0x1916E0, data,    ico2/sugipon/src/pool]
-      - [0x1917E0, data,    ico2/sugipon/src/quaternion]
+      - [0x190EB8, data,    sugipon/src/geometryManager]
+      - [0x190ED0, data,    sugipon/src/keyinput]
+      - [0x190EF0, data,    sugipon/src/matrixDrive]
+      - [0x191080, data,    sugipon/src/motionManager2]
+      - [0x1916E0, data,    sugipon/src/pool]
+      - [0x1917E0, data,    sugipon/src/quaternion]
 
-      - [0x191810, data,    ico2/seki/src/GsBase]
-      - [0x1918B8, data,    ico2/seki/src/Light]
-      - [0x1918E0, data,    ico2/seki/src/Matrix]
-      - [0x191B20, data,    ico2/seki/src/MicroCode]
-      - [0x191B40, data,    ico2/seki/src/Shadow]
-      - [0x191B58, data,    ico2/seki/src/Texture]
+      - [0x191810, data,    seki/src/GsBase]
+      - [0x1918B8, data,    seki/src/Light]
+      - [0x1918E0, data,    seki/src/Matrix]
+      - [0x191B20, data,    seki/src/MicroCode]
+      - [0x191B40, data,    seki/src/Shadow]
+      - [0x191B58, data,    seki/src/Texture]
 
-      - [0x191C40, data,    ico2/fumi/ios/cdvd]
-      - [0x19C430, data,    ico2/fumi/ios/inflate]
-      - [0x19C580, data,    ico2/fumi/ios/mcard]
-      - [0x19CA40, data,    ico2/fumi/ios/pad]
-      - [0x19D0E0, data,    ico2/fumi/ios/shockdriver]
+      - [0x191C40, data,    fumi/ios/cdvd]
+      - [0x19C430, data,    fumi/ios/inflate]
+      - [0x19C580, data,    fumi/ios/mcard]
+      - [0x19CA40, data,    fumi/ios/pad]
+      - [0x19D0E0, data,    fumi/ios/shockdriver]
 
-      - [0x19D4F0, data,    ico2/fumi/isys/isys]
-      - [0x19D570, data,    ico2/fumi/isys/obj_manager]
+      - [0x19D4F0, data,    fumi/isys/isys]
+      - [0x19D570, data,    fumi/isys/obj_manager]
 
-      - [0x19D5D0, data,    ico2/fumi/src/act-game]
-      - [0x19D610, data,    ico2/fumi/src/boyact]
-      - [0x19D840, data,    ico2/fumi/src/commonact]
-      - [0x19DF70, data,    ico2/fumi/src/enemy_act]
-      - [0x19E1D0, data,    ico2/fumi/src/fieldCollision]
-      - [0x19E420, data,    ico2/fumi/src/girl_act]
-      - [0x1A3FD0, data,    ico2/fumi/src/jimaku]
+      - [0x19D5D0, data,    fumi/src/act-game]
+      - [0x19D610, data,    fumi/src/boyact]
+      - [0x19D840, data,    fumi/src/commonact]
+      - [0x19DF70, data,    fumi/src/enemy_act]
+      - [0x19E1D0, data,    fumi/src/fieldCollision]
+      - [0x19E420, data,    fumi/src/girl_act]
+      - [0x1A3FD0, data,    fumi/src/jimaku]
 
-      - [0x1A60C0, data,    ico2/script/src/gflag]
-      - [0x1A6100, data,    ico2/script/src/script]
-      - [0x1A6440, data,    ico2/script/src/st25a]
+      - [0x1A60C0, data,    script/src/gflag]
+      - [0x1A6100, data,    script/src/script]
+      - [0x1A6440, data,    script/src/st25a]
 
-      - [0x1A6580, data,    ico2/omori/src/brain]
-      - [0x1A6A10, data,    ico2/omori/src/camera-editor]
-      - [0x1A6E70, data,    ico2/omori/src/camera-root]
-      - [0x1A6ED0, data,    ico2/omori/src/chain]
-      - [0x1A7020, data,    ico2/omori/src/lws_kyomi]
-      - [0x1A7030, data,    ico2/omori/src/poly-flat]
+      - [0x1A6580, data,    omori/src/brain]
+      - [0x1A6A10, data,    omori/src/camera-editor]
+      - [0x1A6E70, data,    omori/src/camera-root]
+      - [0x1A6ED0, data,    omori/src/chain]
+      - [0x1A7020, data,    omori/src/lws_kyomi]
+      - [0x1A7030, data,    omori/src/poly-flat]
 
-      - [0x1A7070, data,    ico2/ito/src/lightning]
-      - [0x1A70B0, data,    ico2/ito/src/queen]
+      - [0x1A7070, data,    ito/src/lightning]
+      - [0x1A70B0, data,    ito/src/queen]
 
-      - [0x1A8920, data,    ico2/ito/mpeg/mv_main]
-
-        # ?
-      - [0x1A89B8, data,    ico2/src/access]
-      - [0x1A8DC8, data,    ico2/src/act-data-tbl]
-      - [0x1A8E08, data,    ico2/src/act-intrlist]
-      - [0x1AE010, data,    ico2/src/camera-set]
-      - [0x1AEAF0, data,    ico2/src/game-param]
-      - [0x1AEBA0, data,    ico2/src/lws_kyomi-tmp]
-      - [0x1AED60, data,    ico2/src/motion-orient]
-      - [0x1BD4C0, data,    ico2/src/node-fix-ofs]
-      - [0x1BD6E0, data,    ico2/src/obj-action]
-      - [0x1C2270, data,    ico2/src/obj-kind-data]
-      - [0x1C3DC8, data,    ico2/src/obj-layout]
-      - [0x2099C0, data,    ico2/src/parallel-motion-tbl]
-      - [0x20D4E0, data,    ico2/src/sekind]
-      - [0x20DFF8, data,    ico2/src/tex-property]
-      - [0x219EB8, data,    ico2/src/weapon-def]
-
-      - [0x21A020, data,    ico2/common/src/DObj]
-      - [0x21AA00, data,    ico2/common/src/StageManager]
-      - [0x3DAC10, data,    ico2/common/src/charFileManager]
-      - [0x3DAC30, data,    ico2/common/src/debug]
-      - [0x3DAF70, data,    ico2/common/src/debug_exception]
-      - [0x3DB770, data,    ico2/common/src/gamesys]
-      - [0x3E4B00, data,    ico2/common/src/icoMisc]
-      - [0x3E4B40, data,    ico2/common/src/layout_action]
-      - [0x3E55C0, data,    ico2/common/src/sceneManager]
-      - [0x3E5600, data,    ico2/common/src/staffroll]
+      - [0x1A8920, data,    ito/mpeg/mv_main]
 
         # ?
-      - [0x3E5610, data,    ico2/src/staffroll_dat]
+      - [0x1A89B8, data,    src/access]
+      - [0x1A8DC8, data,    src/act-data-tbl]
+      - [0x1A8E08, data,    src/act-intrlist]
+      - [0x1AE010, data,    src/camera-set]
+      - [0x1AEAF0, data,    src/game-param]
+      - [0x1AEBA0, data,    src/lws_kyomi-tmp]
+      - [0x1AED60, data,    src/motion-orient]
+      - [0x1BD4C0, data,    src/node-fix-ofs]
+      - [0x1BD6E0, data,    src/obj-action]
+      - [0x1C2270, data,    src/obj-kind-data]
+      - [0x1C3DC8, data,    src/obj-layout]
+      - [0x2099C0, data,    src/parallel-motion-tbl]
+      - [0x20D4E0, data,    src/sekind]
+      - [0x20DFF8, data,    src/tex-property]
+      - [0x219EB8, data,    src/weapon-def]
 
-      - [0x3E6520, data,    ico2/sugipon/src/a_p_1]
-      - [0x3E6A30, data,    ico2/sugipon/src/act_a_p_1]
-      - [0x3E6A90, data,    ico2/sugipon/src/attackCheckBoundary]
-      - [0x3E6AA0, data,    ico2/sugipon/src/box]
-      - [0x3E72B0, data,    ico2/sugipon/src/boy]
-      - [0x3E7E20, data,    ico2/sugipon/src/cage]
-      - [0x3E7ED0, data,    ico2/sugipon/src/clothAnimation]
-      - [0x3E8060, data,    ico2/sugipon/src/clothTest]
-      - [0x3E8460, data,    ico2/sugipon/src/darkVolume]
-      - [0x3E8480, data,    ico2/sugipon/src/effectTool]
-      - [0x3E88A0, data,    ico2/sugipon/src/enemy]
-      - [0x3E88E0, data,    ico2/sugipon/src/enemyParts]
-      - [0x3E8A20, data,    ico2/sugipon/src/flag]
-      - [0x3E8AC0, data,    ico2/sugipon/src/girl]
-      - [0x3EC420, data,    ico2/sugipon/src/girlForceField]
-      - [0x3EC430, data,    ico2/sugipon/src/handManager]
-      - [0x3EC440, data,    ico2/sugipon/src/item]
-      - [0x3EC5E0, data,    ico2/sugipon/src/lodManager]
-      - [0x3EC758, data,    ico2/sugipon/src/motionFileManager]
-      - [0x3ED950, data,    ico2/sugipon/src/motionManager]
-      - [0x3EDBE0, data,    ico2/sugipon/src/motionOrientManager]
-      - [0x3EDC70, data,    ico2/sugipon/src/motionViewer]
-      - [0x3EDCA0, data,    ico2/sugipon/src/multiBgaManager]
-      - [0x3EDCF0, data,    ico2/sugipon/src/particleEffect]
-      - [0x3EDEA0, data,    ico2/sugipon/src/puddle]
-      - [0x3EDEE0, data,    ico2/sugipon/src/rope]
-      - [0x3EDF90, data,    ico2/sugipon/src/rotObject]
-      - [0x3EDFA0, data,    ico2/sugipon/src/spider]
-      - [0x3EDFB0, data,    ico2/sugipon/src/spiderGroupManager]
-      - [0x3EE020, data,    ico2/sugipon/src/staticBlur]
-      - [0x3EE0F0, data,    ico2/sugipon/src/stormTest]
-      - [0x3EE100, data,    ico2/sugipon/src/streamMotionManager]
-      - [0x3EE120, data,    ico2/sugipon/src/torch]
-      - [0x3EE170, data,    ico2/sugipon/src/waterDot]
-      - [0x3EE1F0, data,    ico2/sugipon/src/weapon]
-      - [0x3EE350, data,    ico2/sugipon/src/windField]
-      - [0x3EE760, data,    ico2/sugipon/src/wireLetter]
+      - [0x21A020, data,    common/src/DObj]
+      - [0x21AA00, data,    common/src/StageManager]
+      - [0x3DAC10, data,    common/src/charFileManager]
+      - [0x3DAC30, data,    common/src/debug]
+      - [0x3DAF70, data,    common/src/debug_exception]
+      - [0x3DB770, data,    common/src/gamesys]
+      - [0x3E4B00, data,    common/src/icoMisc]
+      - [0x3E4B40, data,    common/src/layout_action]
+      - [0x3E55C0, data,    common/src/sceneManager]
+      - [0x3E5600, data,    common/src/staffroll]
 
-      - [0x3EF5B0, data,    ico2/seki/src/BgAnimation]
-      - [0x3EF5F0, data,    ico2/seki/src/DisplayFont]
-      - [0x3EF6F0, data,    ico2/seki/src/DmaPacket]
-      - [0x3EF710, data,    ico2/seki/src/EnemyInit]
+        # ?
+      - [0x3E5610, data,    src/staffroll_dat]
 
-      - [0x3F2D60, data,    ico2/fumi/src/act-env]
-      - [0x3F2E10, data,    ico2/fumi/src/act-way]
-      - [0x3F2EC0, data,    ico2/fumi/src/way_llf]
-      - [0x3F86A0, data,    ico2/fumi/src/way_tool]
+      - [0x3E6520, data,    sugipon/src/a_p_1]
+      - [0x3E6A30, data,    sugipon/src/act_a_p_1]
+      - [0x3E6A90, data,    sugipon/src/attackCheckBoundary]
+      - [0x3E6AA0, data,    sugipon/src/box]
+      - [0x3E72B0, data,    sugipon/src/boy]
+      - [0x3E7E20, data,    sugipon/src/cage]
+      - [0x3E7ED0, data,    sugipon/src/clothAnimation]
+      - [0x3E8060, data,    sugipon/src/clothTest]
+      - [0x3E8460, data,    sugipon/src/darkVolume]
+      - [0x3E8480, data,    sugipon/src/effectTool]
+      - [0x3E88A0, data,    sugipon/src/enemy]
+      - [0x3E88E0, data,    sugipon/src/enemyParts]
+      - [0x3E8A20, data,    sugipon/src/flag]
+      - [0x3E8AC0, data,    sugipon/src/girl]
+      - [0x3EC420, data,    sugipon/src/girlForceField]
+      - [0x3EC430, data,    sugipon/src/handManager]
+      - [0x3EC440, data,    sugipon/src/item]
+      - [0x3EC5E0, data,    sugipon/src/lodManager]
+      - [0x3EC758, data,    sugipon/src/motionFileManager]
+      - [0x3ED950, data,    sugipon/src/motionManager]
+      - [0x3EDBE0, data,    sugipon/src/motionOrientManager]
+      - [0x3EDC70, data,    sugipon/src/motionViewer]
+      - [0x3EDCA0, data,    sugipon/src/multiBgaManager]
+      - [0x3EDCF0, data,    sugipon/src/particleEffect]
+      - [0x3EDEA0, data,    sugipon/src/puddle]
+      - [0x3EDEE0, data,    sugipon/src/rope]
+      - [0x3EDF90, data,    sugipon/src/rotObject]
+      - [0x3EDFA0, data,    sugipon/src/spider]
+      - [0x3EDFB0, data,    sugipon/src/spiderGroupManager]
+      - [0x3EE020, data,    sugipon/src/staticBlur]
+      - [0x3EE0F0, data,    sugipon/src/stormTest]
+      - [0x3EE100, data,    sugipon/src/streamMotionManager]
+      - [0x3EE120, data,    sugipon/src/torch]
+      - [0x3EE170, data,    sugipon/src/waterDot]
+      - [0x3EE1F0, data,    sugipon/src/weapon]
+      - [0x3EE350, data,    sugipon/src/windField]
+      - [0x3EE760, data,    sugipon/src/wireLetter]
 
-      - [0x3F8988, data,    ico2/script/src/deja]
-      - [0x3F89D0, data,    ico2/script/src/e3]
-      - [0x3F8BD0, data,    ico2/script/src/end]
-      - [0x3F8E10, data,    ico2/script/src/op]
-      - [0x3F8E50, data,    ico2/script/src/st00a]
-      - [0x3F8FB0, data,    ico2/script/src/st01b]
-      - [0x3F9050, data,    ico2/script/src/st02a]
-      - [0x3F9330, data,    ico2/script/src/st03t]
-      - [0x3F95D0, data,    ico2/script/src/st04a]
-      - [0x3F97B0, data,    ico2/script/src/st04b]
-      - [0x3F97F0, data,    ico2/script/src/st04c]
-      - [0x3F9870, data,    ico2/script/src/st04d]
-      - [0x3F9970, data,    ico2/script/src/st04e]
-      - [0x3F9AA0, data,    ico2/script/src/st04l]
-      - [0x3FA160, data,    ico2/script/src/st04r]
-      - [0x3FA720, data,    ico2/script/src/st05b]
-      - [0x3FA740, data,    ico2/script/src/st05c]
-      - [0x3FA7E0, data,    ico2/script/src/st05d]
-      - [0x3FA8A0, data,    ico2/script/src/st05e]
-      - [0x3FA920, data,    ico2/script/src/st06a]
-      - [0x3FAF20, data,    ico2/script/src/st07a]
-      - [0x3FB020, data,    ico2/script/src/st08a]
-      - [0x3FB1F0, data,    ico2/script/src/st08b]
-      - [0x3FB2F0, data,    ico2/script/src/st09a]
-      - [0x3FB740, data,    ico2/script/src/st10r]
-      - [0x3FB9A0, data,    ico2/script/src/st13a]
-      - [0x3FBAE0, data,    ico2/script/src/st13b]
-      - [0x3FBD10, data,    ico2/script/src/st13c]
-      - [0x3FBF10, data,    ico2/script/src/st17a]
-      - [0x3FC050, data,    ico2/script/src/st17b]
-      - [0x3FC070, data,    ico2/script/src/st18a]
-      - [0x3FC250, data,    ico2/script/src/st19a]
-      - [0x3FC370, data,    ico2/script/src/st20a]
-      - [0x3FC5D0, data,    ico2/script/src/st22a]
-      - [0x3FC5F0, data,    ico2/script/src/st24a]
-      - [0x3FC630, data,    ico2/script/src/st47a]
-      - [0x3FC890, data,    ico2/script/src/st99a]
+      - [0x3EF5B0, data,    seki/src/BgAnimation]
+      - [0x3EF5F0, data,    seki/src/DisplayFont]
+      - [0x3EF6F0, data,    seki/src/DmaPacket]
+      - [0x3EF710, data,    seki/src/EnemyInit]
+
+      - [0x3F2D60, data,    fumi/src/act-env]
+      - [0x3F2E10, data,    fumi/src/act-way]
+      - [0x3F2EC0, data,    fumi/src/way_llf]
+      - [0x3F86A0, data,    fumi/src/way_tool]
+
+      - [0x3F8988, data,    script/src/deja]
+      - [0x3F89D0, data,    script/src/e3]
+      - [0x3F8BD0, data,    script/src/end]
+      - [0x3F8E10, data,    script/src/op]
+      - [0x3F8E50, data,    script/src/st00a]
+      - [0x3F8FB0, data,    script/src/st01b]
+      - [0x3F9050, data,    script/src/st02a]
+      - [0x3F9330, data,    script/src/st03t]
+      - [0x3F95D0, data,    script/src/st04a]
+      - [0x3F97B0, data,    script/src/st04b]
+      - [0x3F97F0, data,    script/src/st04c]
+      - [0x3F9870, data,    script/src/st04d]
+      - [0x3F9970, data,    script/src/st04e]
+      - [0x3F9AA0, data,    script/src/st04l]
+      - [0x3FA160, data,    script/src/st04r]
+      - [0x3FA720, data,    script/src/st05b]
+      - [0x3FA740, data,    script/src/st05c]
+      - [0x3FA7E0, data,    script/src/st05d]
+      - [0x3FA8A0, data,    script/src/st05e]
+      - [0x3FA920, data,    script/src/st06a]
+      - [0x3FAF20, data,    script/src/st07a]
+      - [0x3FB020, data,    script/src/st08a]
+      - [0x3FB1F0, data,    script/src/st08b]
+      - [0x3FB2F0, data,    script/src/st09a]
+      - [0x3FB740, data,    script/src/st10r]
+      - [0x3FB9A0, data,    script/src/st13a]
+      - [0x3FBAE0, data,    script/src/st13b]
+      - [0x3FBD10, data,    script/src/st13c]
+      - [0x3FBF10, data,    script/src/st17a]
+      - [0x3FC050, data,    script/src/st17b]
+      - [0x3FC070, data,    script/src/st18a]
+      - [0x3FC250, data,    script/src/st19a]
+      - [0x3FC370, data,    script/src/st20a]
+      - [0x3FC5D0, data,    script/src/st22a]
+      - [0x3FC5F0, data,    script/src/st24a]
+      - [0x3FC630, data,    script/src/st47a]
+      - [0x3FC890, data,    script/src/st99a]
 
       # .csv compiled tables
-      - [0x3FC970, data,    ico2/src/item-kind-def]
-      - [0x3FCA50, data,    ico2/src/mirror-motion-def]
-      - [0x3FCA80, data,    ico2/src/model-path]
-      - [0x4349C0, data,    ico2/src/prog-se-link]
-      - [0x434FC0, data,    ico2/src/mot-origin]
-      - [0x434FE8, data,    ico2/src/texture-layout]
-      - [0x437070, data,    ico2/src/way-point]
-      - [0x44B040, data,    ico2/src/weapon-fumble-def]
+      - [0x3FC970, data,    src/item-kind-def]
+      - [0x3FCA50, data,    src/mirror-motion-def]
+      - [0x3FCA80, data,    src/model-path]
+      - [0x4349C0, data,    src/prog-se-link]
+      - [0x434FC0, data,    src/mot-origin]
+      - [0x434FE8, data,    src/texture-layout]
+      - [0x437070, data,    src/way-point]
+      - [0x44B040, data,    src/weapon-fumble-def]
 
-      - [0x44B240, data,    ico2/common/src/vobj]
+      - [0x44B240, data,    common/src/vobj]
 
       - [0x44B2A0, data,    sdk/lib/libgraph/graph001]
       - [0x44B2C0, data,    sdk/lib/libgraph/graph002]
@@ -790,262 +781,262 @@ segments:
       - [0x44E380, rodata,  sdk/lib/libkernl/thread]
       - [0x44E3B0, rodata,  sdk/lib/libkernl/kprintf]
 
-      - [0x44E508, rodata,  ico2/common/src/main]
+      - [0x44E508, rodata,  common/src/main]
 
-      - [0x44E6F8, rodata,  ico2/sugipon/src/delayFreeManager]
-      - [0x44E750, rodata,  ico2/sugipon/src/geometryManager]
-      - [0x44E7F8, rodata,  ico2/sugipon/src/keyInput]
-      - [0x44E850, rodata,  ico2/sugipon/src/motionManager2]
-      - [0x44EA50, rodata,  ico2/sugipon/src/pool]
-      - [0x44EA80, rodata,  ico2/sugipon/src/quaternion]
+      - [0x44E6F8, rodata,  sugipon/src/delayFreeManager]
+      - [0x44E750, rodata,  sugipon/src/geometryManager]
+      - [0x44E7F8, rodata,  sugipon/src/keyInput]
+      - [0x44E850, rodata,  sugipon/src/motionManager2]
+      - [0x44EA50, rodata,  sugipon/src/pool]
+      - [0x44EA80, rodata,  sugipon/src/quaternion]
 
-      - [0x44EB10, rodata,  ico2/seki/src/DisplayP2O]
-      - [0x44EB30, rodata,  ico2/seki/src/FileManager]
-      - [0x44f0b0, rodata,  ico2/seki/src/GifPacket]
-      - [0x44F170, rodata,  ico2/seki/src/GsBase]
-      - [0x4500B0, rodata,  ico2/seki/src/Light]
-      - [0x4501C8, rodata,  ico2/seki/src/Matrix]
-      - [0x4501E0, rodata,  ico2/seki/src/MicroCode]
-      - [0x450200, rodata,  ico2/seki/src/Packet]
-      - [0x4508C0, rodata,  ico2/seki/src/Primitive]
-      - [0x450A50, rodata,  ico2/seki/src/RegistPacket]
-      - [0x450D50, rodata,  ico2/seki/src/Shadow]
-      - [0x450FA0, rodata,  ico2/seki/src/StageAnimation]
-      - [0x4512C0, rodata,  ico2/seki/src/Texture]
-      - [0x451AE8, rodata,  ico2/seki/src/ZFog]
+      - [0x44EB10, rodata,  seki/src/DisplayP2O]
+      - [0x44EB30, rodata,  seki/src/FileManager]
+      - [0x44f0b0, rodata,  seki/src/GifPacket]
+      - [0x44F170, rodata,  seki/src/GsBase]
+      - [0x4500B0, rodata,  seki/src/Light]
+      - [0x4501C8, rodata,  seki/src/Matrix]
+      - [0x4501E0, rodata,  seki/src/MicroCode]
+      - [0x450200, rodata,  seki/src/Packet]
+      - [0x4508C0, rodata,  seki/src/Primitive]
+      - [0x450A50, rodata,  seki/src/RegistPacket]
+      - [0x450D50, rodata,  seki/src/Shadow]
+      - [0x450FA0, rodata,  seki/src/StageAnimation]
+      - [0x4512C0, rodata,  seki/src/Texture]
+      - [0x451AE8, rodata,  seki/src/ZFog]
 
-      - [0x451C40, rodata,  ico2/fumi/ios/cdvd]
-      - [0x451FF0, rodata,  ico2/fumi/ios/inflate]
-      - [0x452058, rodata,  ico2/fumi/ios/ios]
-      - [0x4520F8, rodata,  ico2/fumi/ios/mblock]
-      - [0x452110, rodata,  ico2/fumi/ios/mcard]
-      - [0x452470, rodata,  ico2/fumi/ios/memory]
-      - [0x452A60, rodata,  ico2/fumi/ios/message]
-      - [0x452af0, rodata,  ico2/fumi/ios/pad]
-      - [0x452D98, rodata,  ico2/fumi/ios/shockdriver]
-      - [0x452db0, rodata,  ico2/fumi/ios/thread]
+      - [0x451C40, rodata,  fumi/ios/cdvd]
+      - [0x451FF0, rodata,  fumi/ios/inflate]
+      - [0x452058, rodata,  fumi/ios/ios]
+      - [0x4520F8, rodata,  fumi/ios/mblock]
+      - [0x452110, rodata,  fumi/ios/mcard]
+      - [0x452470, rodata,  fumi/ios/memory]
+      - [0x452A60, rodata,  fumi/ios/message]
+      - [0x452af0, rodata,  fumi/ios/pad]
+      - [0x452D98, rodata,  fumi/ios/shockdriver]
+      - [0x452db0, .rodata, fumi/ios/thread]
 
-      - [0x452f30, rodata,  ico2/fumi/isys/gobj]
-      - [0x452F78, rodata,  ico2/fumi/isys/gobj_dl]
-      - [0x452FF0, rodata,  ico2/fumi/isys/gobj_process]
-      - [0x453080, rodata,  ico2/fumi/isys/obj_manager]
+      - [0x452f30, rodata,  fumi/isys/gobj]
+      - [0x452F78, rodata,  fumi/isys/gobj_dl]
+      - [0x452FF0, rodata,  fumi/isys/gobj_process]
+      - [0x453080, rodata,  fumi/isys/obj_manager]
 
-      - [0x453098, rodata,  ico2/fumi/sound/adpcm_init]
-      - [0x453170, rodata,  ico2/fumi/sound/s_init]
-      - [0x4533A8, rodata,  ico2/fumi/sound/soundManager]
+      - [0x453098, rodata,  fumi/sound/adpcm_init]
+      - [0x453170, rodata,  fumi/sound/s_init]
+      - [0x4533A8, rodata,  fumi/sound/soundManager]
 
-      - [0x4533F0, rodata,  ico2/fumi/src/act-game]
-      - [0x4536f0, rodata,  ico2/fumi/src/act-parallel-control]
-      - [0x453710, rodata,  ico2/fumi/src/act-wish]
-      - [0x453730, rodata,  ico2/fumi/src/boyact]
-      - [0x453CB8, rodata,  ico2/fumi/src/commonact]
-      - [0x454320, rodata,  ico2/fumi/src/enemy_act]
-      - [0x454750, rodata,  ico2/fumi/src/fieldCollision]
-      - [0x454990, rodata,  ico2/fumi/src/girl_act]
-      - [0x4550B0, rodata,  ico2/fumi/src/jimaku]
-      - [0x455120, rodata,  ico2/fumi/src/way_sys]
-      - [0x455300, rodata,  ico2/fumi/src/way_util]
+      - [0x4533F0, rodata,  fumi/src/act-game]
+      - [0x4536f0, rodata,  fumi/src/act-parallel-control]
+      - [0x453710, rodata,  fumi/src/act-wish]
+      - [0x453730, rodata,  fumi/src/boyact]
+      - [0x453CB8, rodata,  fumi/src/commonact]
+      - [0x454320, rodata,  fumi/src/enemy_act]
+      - [0x454750, rodata,  fumi/src/fieldCollision]
+      - [0x454990, rodata,  fumi/src/girl_act]
+      - [0x4550B0, rodata,  fumi/src/jimaku]
+      - [0x455120, rodata,  fumi/src/way_sys]
+      - [0x455300, rodata,  fumi/src/way_util]
 
-      - [0x4553C0, rodata,  ico2/script/src/script]
-      - [0x4558f0, rodata,  ico2/script/src/st25a]
-      - [0x4559E8, rodata,  ico2/script/src/warpGirl]
+      - [0x4553C0, rodata,  script/src/script]
+      - [0x4558f0, rodata,  script/src/st25a]
+      - [0x4559E8, rodata,  script/src/warpGirl]
 
-      - [0x455a40, rodata,  ico2/omori/src/attackhit]
-      - [0x455C88, rodata,  ico2/omori/src/brain]
-      - [0x455Ce0, rodata,  ico2/omori/src/camera-editor]
-      - [0x456050, rodata,  ico2/omori/src/camera-ico2]
-      - [0x456170, rodata,  ico2/omori/src/camera-root]
-      - [0x4561c0, rodata,  ico2/omori/src/chain]
-      - [0x456580, rodata,  ico2/omori/src/ebrain]
-      - [0x456628, rodata,  ico2/omori/src/fightSound]
-      - [0x456640, rodata,  ico2/omori/src/generator]
-      - [0x4566A8, rodata,  ico2/omori/src/lws_kyomi]
-      - [0x4566b8, rodata,  ico2/omori/src/mail-add-data]
+      - [0x455a40, rodata,  omori/src/attackhit]
+      - [0x455C88, rodata,  omori/src/brain]
+      - [0x455Ce0, rodata,  omori/src/camera-editor]
+      - [0x456050, rodata,  omori/src/camera-ico2]
+      - [0x456170, rodata,  omori/src/camera-root]
+      - [0x4561c0, rodata,  omori/src/chain]
+      - [0x456580, rodata,  omori/src/ebrain]
+      - [0x456628, rodata,  omori/src/fightSound]
+      - [0x456640, rodata,  omori/src/generator]
+      - [0x4566A8, rodata,  omori/src/lws_kyomi]
+      - [0x4566b8, rodata,  omori/src/mail-add-data]
 
-      - [0x456710, rodata,  ico2/ito/src/act_bird]
-      - [0x456798, rodata,  ico2/ito/src/gather_effect]
-      - [0x4567b0, rodata,  ico2/ito/src/itou_boss]
-      - [0x457890, rodata,  ico2/ito/src/itou_sub]
-      - [0x4578A0, rodata,  ico2/ito/src/lightning]
-      - [0x457900, rodata,  ico2/ito/src/queen]
-      - [0x457E00, rodata,  ico2/ito/src/queen_barrier_disp]
-      - [0x457e50, rodata,  ico2/ito/src/stage_orient]
+      - [0x456710, rodata,  ito/src/act_bird]
+      - [0x456798, rodata,  ito/src/gather_effect]
+      - [0x4567b0, rodata,  ito/src/itou_boss]
+      - [0x457890, rodata,  ito/src/itou_sub]
+      - [0x4578A0, rodata,  ito/src/lightning]
+      - [0x457900, rodata,  ito/src/queen]
+      - [0x457E00, rodata,  ito/src/queen_barrier_disp]
+      - [0x457e50, rodata,  ito/src/stage_orient]
 
-      - [0x458560, rodata,  ico2/ito/mpeg/mv_main]
-      - [0x4586A8, rodata,  ico2/ito/mpeg/mv_readbuf]
-      - [0x4586d8, rodata,  ico2/ito/mpeg/mv_strfile]
-      - [0x458708, rodata,  ico2/ito/mpeg/mv_videodec]
-      - [0x4587A0, rodata,  ico2/ito/mpeg/mv_vobuf]
+      - [0x458560, rodata,  ito/mpeg/mv_main]
+      - [0x4586A8, rodata,  ito/mpeg/mv_readbuf]
+      - [0x4586d8, rodata,  ito/mpeg/mv_strfile]
+      - [0x458708, rodata,  ito/mpeg/mv_videodec]
+      - [0x4587A0, rodata,  ito/mpeg/mv_vobuf]
 
-      - [0x4587d0, rodata,  ico2/include/act-mode-def]
-      - [0x45ad50, rodata,  ico2/include/adpcmfile]
-      - [0x45c790, rodata,  ico2/include/attack-def]
-      - [0x45ca60, rodata,  ico2/include/auto-escort]
-      - [0x45d518, rodata,  ico2/include/exit-data]
-      - [0x45fde0, rodata,  ico2/include/generator-sub-position]
-      - [0x45fe50, rodata,  ico2/include/girl-warp-list]
-      - [0x4606e8, rodata,  ico2/include/iconfile]
-      - [0x4607a0, rodata,  ico2/include/idle-mot-def]
-      - [0x460828, rodata,  ico2/include/init-func]
-      - [0x460bd0, rodata,  ico2/include/jimakufile]
-      - [0x460d10, rodata,  ico2/include/look-target-data]
-      - [0x460e58, rodata,  ico2/include/motion-def]
-      - [0x4d2208, rodata,  ico2/include/motion-ik-eff-def]
-      - [0x4d2278, rodata,  ico2/include/motion-orient-def]
-      - [0x4d4b58, rodata,  ico2/include/motion-random-def]
-      - [0x4d4ce8, rodata,  ico2/include/moviefile]
-      - [0x4d4dc8, rodata,  ico2/include/obj-light]
-      - [0x4d4df8, rodata,  ico2/include/pair-motion]
-      - [0x4d4ef0, rodata,  ico2/include/param-escape-run]
-      - [0x4d4f30, rodata,  ico2/include/se-env]
-      - [0x4d7db0, rodata,  ico2/include/sedef]
-      - [0x4ecbe8, rodata,  ico2/include/sefile]
-      - [0x4ef488, rodata,  ico2/include/selist]
-      - [0x4f6c70, rodata,  ico2/include/shocklist]
-      - [0x4f6d50, rodata,  ico2/include/stage-all]
-      - [0x501498, rodata,  ico2/include/stage-anim-model]
-      - [0x501fa0, rodata,  ico2/include/stage-anim]
-      - [0x519d50, rodata,  ico2/include/stream-motion-def]
+      - [0x4587d0, rodata,  include/act-mode-def]
+      - [0x45ad50, rodata,  include/adpcmfile]
+      - [0x45c790, rodata,  include/attack-def]
+      - [0x45ca60, rodata,  include/auto-escort]
+      - [0x45d518, rodata,  include/exit-data]
+      - [0x45fde0, rodata,  include/generator-sub-position]
+      - [0x45fe50, rodata,  include/girl-warp-list]
+      - [0x4606e8, rodata,  include/iconfile]
+      - [0x4607a0, rodata,  include/idle-mot-def]
+      - [0x460828, rodata,  include/init-func]
+      - [0x460bd0, rodata,  include/jimakufile]
+      - [0x460d10, rodata,  include/look-target-data]
+      - [0x460e58, rodata,  include/motion-def]
+      - [0x4d2208, rodata,  include/motion-ik-eff-def]
+      - [0x4d2278, rodata,  include/motion-orient-def]
+      - [0x4d4b58, rodata,  include/motion-random-def]
+      - [0x4d4ce8, rodata,  include/moviefile]
+      - [0x4d4dc8, rodata,  include/obj-light]
+      - [0x4d4df8, rodata,  include/pair-motion]
+      - [0x4d4ef0, rodata,  include/param-escape-run]
+      - [0x4d4f30, rodata,  include/se-env]
+      - [0x4d7db0, rodata,  include/sedef]
+      - [0x4ecbe8, rodata,  include/sefile]
+      - [0x4ef488, rodata,  include/selist]
+      - [0x4f6c70, rodata,  include/shocklist]
+      - [0x4f6d50, rodata,  include/stage-all]
+      - [0x501498, rodata,  include/stage-anim-model]
+      - [0x501fa0, rodata,  include/stage-anim]
+      - [0x519d50, rodata,  include/stream-motion-def]
 
-      - [0x519F30, rodata,  ico2/common/src/DObj]
-      - [0x519FF8, rodata,  ico2/common/src/StageManager]
-      - [0x51A1D0, rodata,  ico2/common/src/backStage]
-      - [0x51A348, rodata,  ico2/common/src/charFileManager]
-      - [0x51abb0, rodata,  ico2/common/src/debug]
-      - [0x51D590, rodata,  ico2/common/src/debug_exception]
-      - [0x51E2B0, rodata,  ico2/common/src/debug_menu]
-      - [0x51E2D0, rodata,  ico2/common/src/gamesys]
-      - [0x51E340, rodata,  ico2/common/src/icoMisc]
-      - [0x51E670, rodata,  ico2/common/src/kanban]
-      - [0x51E6F0, rodata,  ico2/common/src/kanbanBoot]
-      - [0x51E750, rodata,  ico2/common/src/layout_action]
-      - [0x51ED50, rodata,  ico2/common/src/layout_texture]
-      - [0x51EDD8, rodata,  ico2/common/src/sceneManager]
-      - [0x51EF10, rodata,  ico2/common/src/staffroll]
+      - [0x519F30, rodata,  common/src/DObj]
+      - [0x519FF8, rodata,  common/src/StageManager]
+      - [0x51A1D0, rodata,  common/src/backStage]
+      - [0x51A348, rodata,  common/src/charFileManager]
+      - [0x51abb0, rodata,  common/src/debug]
+      - [0x51D590, rodata,  common/src/debug_exception]
+      - [0x51E2B0, rodata,  common/src/debug_menu]
+      - [0x51E2D0, rodata,  common/src/gamesys]
+      - [0x51E340, rodata,  common/src/icoMisc]
+      - [0x51E670, rodata,  common/src/kanban]
+      - [0x51E6F0, rodata,  common/src/kanbanBoot]
+      - [0x51E750, rodata,  common/src/layout_action]
+      - [0x51ED50, rodata,  common/src/layout_texture]
+      - [0x51EDD8, rodata,  common/src/sceneManager]
+      - [0x51EF10, rodata,  common/src/staffroll]
 
-      - [0x51FE30, rodata,  ico2/sugipon/src/a_p_1]
-      - [0x51FE98, rodata,  ico2/sugipon/src/act_a_p_1]
-      - [0x51FEc8, rodata,  ico2/sugipon/src/attackCheckBoundary]
-      - [0x51FF10, rodata,  ico2/sugipon/src/box]
-      - [0x520158, rodata,  ico2/sugipon/src/boy]
-      - [0x520188, rodata,  ico2/sugipon/src/cage]
-      - [0x520198, rodata,  ico2/sugipon/src/candle]
-      - [0x5201D0, rodata,  ico2/sugipon/src/clipCollisionManager]
-      - [0x520220, rodata,  ico2/sugipon/src/clothAnimation]
-      - [0x5202A0, rodata,  ico2/sugipon/src/clothTest]
-      - [0x5202b0, rodata,  ico2/sugipon/src/effectTool]
-      - [0x520650, rodata,  ico2/sugipon/src/enemy]
-      - [0x520710, rodata,  ico2/sugipon/src/enemyParts]
-      - [0x520728, rodata,  ico2/sugipon/src/flag]
-      - [0x520740, rodata,  ico2/sugipon/src/frameDependSequence]
-      - [0x5208A0, rodata,  ico2/sugipon/src/girl]
-      - [0x5209E0, rodata,  ico2/sugipon/src/girlForceField]
-      - [0x520A00, rodata,  ico2/sugipon/src/handManager]
-      - [0x520A20, rodata,  ico2/sugipon/src/item]
-      - [0x520ac8, rodata,  ico2/sugipon/src/lodManager]
-      - [0x520B60, rodata,  ico2/sugipon/src/motionFileManager]
-      - [0x520BE0, rodata,  ico2/sugipon/src/motionManager]
-      - [0x521120, rodata,  ico2/sugipon/src/motionOrientManager]
-      - [0x5216b0, rodata,  ico2/sugipon/src/motionViewer]
-      - [0x521898, rodata,  ico2/sugipon/src/moveColTest]
-      - [0x5218C8, rodata,  ico2/sugipon/src/multiBgaManager]
-      - [0x5218E0, rodata,  ico2/sugipon/src/particleEffect]
-      - [0x5219C0, rodata,  ico2/sugipon/src/particleLayout]
-      - [0x5219D8, rodata,  ico2/sugipon/src/puddle]
-      - [0x521A00, rodata,  ico2/sugipon/src/rope]
-      - [0x521AE8, rodata,  ico2/sugipon/src/rotObject]
-      - [0x521B60, rodata,  ico2/sugipon/src/spider]
-      - [0x521CF8, rodata,  ico2/sugipon/src/spiderGroupManager]
-      - [0x521de0, rodata,  ico2/sugipon/src/staticBlur]
-      - [0x521fa0, rodata,  ico2/sugipon/src/stormTest]
-      - [0x521FB0, rodata,  ico2/sugipon/src/streamMotionManager]
-      - [0x522328, rodata,  ico2/sugipon/src/sugiTree]
-      - [0x522338, rodata,  ico2/sugipon/src/torch]
-      - [0x522388, rodata,  ico2/sugipon/src/waterDot]
-      - [0x5223A0, rodata,  ico2/sugipon/src/weapon]
-      - [0x522520, rodata,  ico2/sugipon/src/worm]
+      - [0x51FE30, rodata,  sugipon/src/a_p_1]
+      - [0x51FE98, rodata,  sugipon/src/act_a_p_1]
+      - [0x51FEc8, rodata,  sugipon/src/attackCheckBoundary]
+      - [0x51FF10, rodata,  sugipon/src/box]
+      - [0x520158, rodata,  sugipon/src/boy]
+      - [0x520188, rodata,  sugipon/src/cage]
+      - [0x520198, rodata,  sugipon/src/candle]
+      - [0x5201D0, rodata,  sugipon/src/clipCollisionManager]
+      - [0x520220, rodata,  sugipon/src/clothAnimation]
+      - [0x5202A0, rodata,  sugipon/src/clothTest]
+      - [0x5202b0, rodata,  sugipon/src/effectTool]
+      - [0x520650, rodata,  sugipon/src/enemy]
+      - [0x520710, rodata,  sugipon/src/enemyParts]
+      - [0x520728, rodata,  sugipon/src/flag]
+      - [0x520740, rodata,  sugipon/src/frameDependSequence]
+      - [0x5208A0, rodata,  sugipon/src/girl]
+      - [0x5209E0, rodata,  sugipon/src/girlForceField]
+      - [0x520A00, rodata,  sugipon/src/handManager]
+      - [0x520A20, rodata,  sugipon/src/item]
+      - [0x520ac8, rodata,  sugipon/src/lodManager]
+      - [0x520B60, rodata,  sugipon/src/motionFileManager]
+      - [0x520BE0, rodata,  sugipon/src/motionManager]
+      - [0x521120, rodata,  sugipon/src/motionOrientManager]
+      - [0x5216b0, rodata,  sugipon/src/motionViewer]
+      - [0x521898, rodata,  sugipon/src/moveColTest]
+      - [0x5218C8, rodata,  sugipon/src/multiBgaManager]
+      - [0x5218E0, rodata,  sugipon/src/particleEffect]
+      - [0x5219C0, rodata,  sugipon/src/particleLayout]
+      - [0x5219D8, rodata,  sugipon/src/puddle]
+      - [0x521A00, rodata,  sugipon/src/rope]
+      - [0x521AE8, rodata,  sugipon/src/rotObject]
+      - [0x521B60, rodata,  sugipon/src/spider]
+      - [0x521CF8, rodata,  sugipon/src/spiderGroupManager]
+      - [0x521de0, rodata,  sugipon/src/staticBlur]
+      - [0x521fa0, rodata,  sugipon/src/stormTest]
+      - [0x521FB0, rodata,  sugipon/src/streamMotionManager]
+      - [0x522328, rodata,  sugipon/src/sugiTree]
+      - [0x522338, rodata,  sugipon/src/torch]
+      - [0x522388, rodata,  sugipon/src/waterDot]
+      - [0x5223A0, rodata,  sugipon/src/weapon]
+      - [0x522520, rodata,  sugipon/src/worm]
 
-      - [0x522550, rodata,  ico2/seki/src/Basic]
-      - [0x522580, rodata,  ico2/seki/src/BgAnimation]
-      - [0x522840, rodata,  ico2/seki/src/DisplayList]
-      - [0x522950, rodata,  ico2/seki/src/DmaPacket]
-      - [0x522960, rodata,  ico2/seki/src/EnemyInit]
+      - [0x522550, rodata,  seki/src/Basic]
+      - [0x522580, rodata,  seki/src/BgAnimation]
+      - [0x522840, rodata,  seki/src/DisplayList]
+      - [0x522950, rodata,  seki/src/DmaPacket]
+      - [0x522960, rodata,  seki/src/EnemyInit]
 
-      - [0x522970, rodata,  ico2/fumi/isys/gobj_cam_dl]
+      - [0x522970, rodata,  fumi/isys/gobj_cam_dl]
 
-      - [0x522A00, rodata,  ico2/fumi/src/act-env]
-      - [0x522B50, rodata,  ico2/fumi/src/act-way]
-      - [0x522BB0, rodata,  ico2/fumi/src/act]
-      - [0x522D40, rodata,  ico2/fumi/src/seMail]
-      - [0x522D58, rodata,  ico2/fumi/src/way_kidnap]
-      - [0x522E80, rodata,  ico2/fumi/src/way_llf]
-      - [0x522EC0, rodata,  ico2/fumi/src/way_tool]
+      - [0x522A00, rodata,  fumi/src/act-env]
+      - [0x522B50, rodata,  fumi/src/act-way]
+      - [0x522BB0, rodata,  fumi/src/act]
+      - [0x522D40, rodata,  fumi/src/seMail]
+      - [0x522D58, rodata,  fumi/src/way_kidnap]
+      - [0x522E80, rodata,  fumi/src/way_llf]
+      - [0x522EC0, rodata,  fumi/src/way_tool]
 
-      - [0x5234e0, rodata,  ico2/script/src/deja]
-      - [0x5234f0, rodata,  ico2/script/src/e3]
-      - [0x523600, rodata,  ico2/script/src/end]
-      - [0x523630, rodata,  ico2/script/src/op]
-      - [0x5236a0, rodata,  ico2/script/src/st00a]
-      - [0x523700, rodata,  ico2/script/src/st01b]
-      - [0x523710, rodata,  ico2/script/src/st02a]
-      - [0x523820, rodata,  ico2/script/src/st03t]
-      - [0x523840, rodata,  ico2/script/src/st04a]
-      - [0x5239d0, rodata,  ico2/script/src/st04b]
-      - [0x5239f0, rodata,  ico2/script/src/st04c]
-      - [0x523a30, rodata,  ico2/script/src/st04d]
-      - [0x523A90, rodata,  ico2/script/src/st04e]
-      - [0x523ab0, rodata,  ico2/script/src/st04l]
-      - [0x523ac0, rodata,  ico2/script/src/st04r]
-      - [0x523ad0, rodata,  ico2/script/src/st05b]
-      - [0x523af0, rodata,  ico2/script/src/st05c]
-      - [0x523b30, rodata,  ico2/script/src/st05d]
-      - [0x523B60, rodata,  ico2/script/src/st06a]
-      - [0x523c60, rodata,  ico2/script/src/st07a]
-      - [0x523D30, rodata,  ico2/script/src/st08a]
-      - [0x523d50, rodata,  ico2/script/src/st08b]
-      - [0x523DA0, rodata,  ico2/script/src/st09a]
-      - [0x523de0, rodata,  ico2/script/src/st10l]
-      - [0x523df0, rodata,  ico2/script/src/st10r]
-      - [0x523e00, rodata,  ico2/script/src/st13b]
-      - [0x523E10, rodata,  ico2/script/src/st13c]
-      - [0x523f20, rodata,  ico2/script/src/st13d]
-      - [0x523f60, rodata,  ico2/script/src/st17a]
-      - [0x524060, rodata,  ico2/script/src/st19a]
-      - [0x524070, rodata,  ico2/script/src/st20a]
-      - [0x524090, rodata,  ico2/script/src/st22a]
-      - [0x5240a0, rodata,  ico2/script/src/st24a]
-      - [0x5240b0, rodata,  ico2/script/src/st47a]
-      - [0x5240f0, rodata,  ico2/script/src/stageSEProc]
+      - [0x5234e0, rodata,  script/src/deja]
+      - [0x5234f0, rodata,  script/src/e3]
+      - [0x523600, rodata,  script/src/end]
+      - [0x523630, rodata,  script/src/op]
+      - [0x5236a0, rodata,  script/src/st00a]
+      - [0x523700, rodata,  script/src/st01b]
+      - [0x523710, rodata,  script/src/st02a]
+      - [0x523820, rodata,  script/src/st03t]
+      - [0x523840, rodata,  script/src/st04a]
+      - [0x5239d0, rodata,  script/src/st04b]
+      - [0x5239f0, rodata,  script/src/st04c]
+      - [0x523a30, rodata,  script/src/st04d]
+      - [0x523A90, rodata,  script/src/st04e]
+      - [0x523ab0, rodata,  script/src/st04l]
+      - [0x523ac0, rodata,  script/src/st04r]
+      - [0x523ad0, rodata,  script/src/st05b]
+      - [0x523af0, rodata,  script/src/st05c]
+      - [0x523b30, rodata,  script/src/st05d]
+      - [0x523B60, rodata,  script/src/st06a]
+      - [0x523c60, rodata,  script/src/st07a]
+      - [0x523D30, rodata,  script/src/st08a]
+      - [0x523d50, rodata,  script/src/st08b]
+      - [0x523DA0, rodata,  script/src/st09a]
+      - [0x523de0, rodata,  script/src/st10l]
+      - [0x523df0, rodata,  script/src/st10r]
+      - [0x523e00, rodata,  script/src/st13b]
+      - [0x523E10, rodata,  script/src/st13c]
+      - [0x523f20, rodata,  script/src/st13d]
+      - [0x523f60, rodata,  script/src/st17a]
+      - [0x524060, rodata,  script/src/st19a]
+      - [0x524070, rodata,  script/src/st20a]
+      - [0x524090, rodata,  script/src/st22a]
+      - [0x5240a0, rodata,  script/src/st24a]
+      - [0x5240b0, rodata,  script/src/st47a]
+      - [0x5240f0, rodata,  script/src/stageSEProc]
 
-      - [0x524150, rodata,  ico2/omori/src/access]
+      - [0x524150, rodata,  omori/src/access]
 
-      - [0x524160, rodata,  ico2/ito/mpeg/mv_audiodec]
-      - [0x5243b8, rodata,  ico2/ito/mpeg/mv_disp]
-      - [0x5243e8, rodata,  ico2/ito/mpeg/mv_sub]
-      - [0x524428, rodata,  ico2/ito/mpeg/mv_vibuf]
+      - [0x524160, rodata,  ito/mpeg/mv_audiodec]
+      - [0x5243b8, rodata,  ito/mpeg/mv_disp]
+      - [0x5243e8, rodata,  ito/mpeg/mv_sub]
+      - [0x524428, rodata,  ito/mpeg/mv_vibuf]
 
         # .csv tables
-      - [0x524470, rodata,  ico2/include/blend-motion-def]
-      - [0x525880, rodata,  ico2/include/enemy-def]
-      - [0x525d70, rodata,  ico2/include/enemy-model-grp]
-      - [0x525f00, rodata,  ico2/include/enemy-model-tbl]
-      - [0x525f68, rodata,  ico2/include/enemy-random-def]
-      - [0x526018, rodata,  ico2/include/enemy-random-variation-def]
-      - [0x526170, rodata,  ico2/include/layout-cloth-def]
-      - [0x527010, rodata,  ico2/include/motion-eff-condition-def]
-      - [0x527278, rodata,  ico2/include/motion-eff-def]
-      - [0x527600, rodata,  ico2/include/motion-eff-random-def]
-      - [0x527628, rodata,  ico2/include/motion-limit-def]
-      - [0x527f28, rodata,  ico2/include/motion-se-condition-def]
-      - [0x528910, rodata,  ico2/include/motion-se-random-def]
-      - [0x52ad08, rodata,  ico2/include/obj-trigger-def]
-      - [0x52ad38, rodata,  ico2/include/obj-trigger]
-      - [0x52ae40, rodata,  ico2/include/parallel-motion-orient]
-      - [0x52b278, rodata,  ico2/include/particle-effect]
-      - [0x52b588, rodata,  ico2/include/spider-def]
-      - [0x52c648, rodata,  ico2/include/way-group]
+      - [0x524470, rodata,  include/blend-motion-def]
+      - [0x525880, rodata,  include/enemy-def]
+      - [0x525d70, rodata,  include/enemy-model-grp]
+      - [0x525f00, rodata,  include/enemy-model-tbl]
+      - [0x525f68, rodata,  include/enemy-random-def]
+      - [0x526018, rodata,  include/enemy-random-variation-def]
+      - [0x526170, rodata,  include/layout-cloth-def]
+      - [0x527010, rodata,  include/motion-eff-condition-def]
+      - [0x527278, rodata,  include/motion-eff-def]
+      - [0x527600, rodata,  include/motion-eff-random-def]
+      - [0x527628, rodata,  include/motion-limit-def]
+      - [0x527f28, rodata,  include/motion-se-condition-def]
+      - [0x528910, rodata,  include/motion-se-random-def]
+      - [0x52ad08, rodata,  include/obj-trigger-def]
+      - [0x52ad38, rodata,  include/obj-trigger]
+      - [0x52ae40, rodata,  include/parallel-motion-orient]
+      - [0x52b278, rodata,  include/particle-effect]
+      - [0x52b588, rodata,  include/spider-def]
+      - [0x52c648, rodata,  include/way-group]
 
-      - [0x536Fe0, rodata,  ico2/common/src/PObj]
+      - [0x536Fe0, rodata,  common/src/PObj]
 
       - [0x5370E8, rodata,  sdk/lib/libgraph/graph003]
       - [0x537120, rodata,  sdk/lib/libgraph/graph008]
@@ -1114,419 +1105,419 @@ segments:
       - [0x539a90, rodata,  sdk/lib/libc/s_infconst]
 
       # .lit4
-      - [0x539b00, lit4,    ico2/common/src/main]
+      - [0x539b00, lit4,    common/src/main]
 
-      - [0x539b04, lit4,    ico2/sugipon/src/geometryManager]
-      - [0x539b0c, lit4,    ico2/sugipon/src/matrixDrive]
-      - [0x539b3c, lit4,    ico2/sugipon/src/motionManager2]
-      - [0x539b84, lit4,    ico2/sugipon/src/pool]
-      - [0x539bb8, lit4,    ico2/sugipon/src/quaternion]
-      - [0x539bbc, lit4,    ico2/sugipon/src/tableSin]
+      - [0x539b04, lit4,    sugipon/src/geometryManager]
+      - [0x539b0c, lit4,    sugipon/src/matrixDrive]
+      - [0x539b3c, lit4,    sugipon/src/motionManager2]
+      - [0x539b84, lit4,    sugipon/src/pool]
+      - [0x539bb8, lit4,    sugipon/src/quaternion]
+      - [0x539bbc, lit4,    sugipon/src/tableSin]
 
-      - [0x539bc8, lit4,    ico2/seki/src/FileManager]
-      - [0x539bcc, lit4,    ico2/seki/src/GsBase]
-      - [0x539bd8, lit4,    ico2/seki/src/Light]
-      - [0x539c40, lit4,    ico2/seki/src/Packet]
-      - [0x539c58, lit4,    ico2/seki/src/Primitive]
-      - [0x539c74, lit4,    ico2/seki/src/StageAnimation]
-      - [0x539c7c, lit4,    ico2/seki/src/Texture]
+      - [0x539bc8, lit4,    seki/src/FileManager]
+      - [0x539bcc, lit4,    seki/src/GsBase]
+      - [0x539bd8, lit4,    seki/src/Light]
+      - [0x539c40, lit4,    seki/src/Packet]
+      - [0x539c58, lit4,    seki/src/Primitive]
+      - [0x539c74, lit4,    seki/src/StageAnimation]
+      - [0x539c7c, lit4,    seki/src/Texture]
 
-      - [0x539c98, lit4,    ico2/fumi/src/ios/pad]
-      - [0x539ca0, lit4,    ico2/fumi/src/sound/s_init]
+      - [0x539c98, lit4,    fumi/src/ios/pad]
+      - [0x539ca0, lit4,    fumi/src/sound/s_init]
 
-      - [0x539cc8, lit4,    ico2/fumi/src/act-game]
-      - [0x539d10, lit4,    ico2/fumi/src/act-wish]
-      - [0x539d30, lit4,    ico2/fumi/src/boyact]
-      - [0x539e3c, lit4,    ico2/fumi/src/commonact]
-      - [0x539ef4, lit4,    ico2/fumi/src/enemy_act]
-      - [0x539f5c, lit4,    ico2/fumi/src/fieldCollision]
-      - [0x539f64, lit4,    ico2/fumi/src/girl_act]
-      - [0x53a05c, lit4,    ico2/fumi/src/way_sys]
-      - [0x53a060, lit4,    ico2/fumi/src/way_util]
+      - [0x539cc8, lit4,    fumi/src/act-game]
+      - [0x539d10, lit4,    fumi/src/act-wish]
+      - [0x539d30, lit4,    fumi/src/boyact]
+      - [0x539e3c, lit4,    fumi/src/commonact]
+      - [0x539ef4, lit4,    fumi/src/enemy_act]
+      - [0x539f5c, lit4,    fumi/src/fieldCollision]
+      - [0x539f64, lit4,    fumi/src/girl_act]
+      - [0x53a05c, lit4,    fumi/src/way_sys]
+      - [0x53a060, lit4,    fumi/src/way_util]
 
-      - [0x53a090, lit4,    ico2/script/src/script]
-      - [0x53a0c4, lit4,    ico2/script/src/st25a]
-      - [0x53a108, lit4,    ico2/script/src/warpGirl]
+      - [0x53a090, lit4,    script/src/script]
+      - [0x53a0c4, lit4,    script/src/st25a]
+      - [0x53a108, lit4,    script/src/warpGirl]
 
-      - [0x53a10c, lit4,    ico2/omori/src/attackhit]
-      - [0x53a110, lit4,    ico2/omori/src/brain]
-      - [0x53a118, lit4,    ico2/omori/src/camera-ico2]
-      - [0x53a130, lit4,    ico2/omori/src/camera-root]
-      - [0x53a140, lit4,    ico2/omori/src/chain]
-      - [0x53a1d8, lit4,    ico2/omori/src/ebrain]
-      - [0x53a1e0, lit4,    ico2/omori/src/generator]
-      - [0x53a1ec, lit4,    ico2/omori/src/gv]
-      - [0x53a200, lit4,    ico2/omori/src/hand-camera]
-      - [0x53a22c, lit4,    ico2/omori/src/lws_kyomi]
+      - [0x53a10c, lit4,    omori/src/attackhit]
+      - [0x53a110, lit4,    omori/src/brain]
+      - [0x53a118, lit4,    omori/src/camera-ico2]
+      - [0x53a130, lit4,    omori/src/camera-root]
+      - [0x53a140, lit4,    omori/src/chain]
+      - [0x53a1d8, lit4,    omori/src/ebrain]
+      - [0x53a1e0, lit4,    omori/src/generator]
+      - [0x53a1ec, lit4,    omori/src/gv]
+      - [0x53a200, lit4,    omori/src/hand-camera]
+      - [0x53a22c, lit4,    omori/src/lws_kyomi]
 
-      - [0x53a230, lit4,    ico2/ito/src/act_bird]
-      - [0x53a294, lit4,    ico2/ito/src/gather_effect]
-      - [0x53a2a0, lit4,    ico2/ito/src/itou_boss]
-      - [0x53a2a4, lit4,    ico2/ito/src/lightning]
-      - [0x53a2c0, lit4,    ico2/ito/src/queen]
-      - [0x53a324, lit4,    ico2/ito/src/queen_barrier_disp]
-      - [0x53a328, lit4,    ico2/ito/src/stage_orient]
+      - [0x53a230, lit4,    ito/src/act_bird]
+      - [0x53a294, lit4,    ito/src/gather_effect]
+      - [0x53a2a0, lit4,    ito/src/itou_boss]
+      - [0x53a2a4, lit4,    ito/src/lightning]
+      - [0x53a2c0, lit4,    ito/src/queen]
+      - [0x53a324, lit4,    ito/src/queen_barrier_disp]
+      - [0x53a328, lit4,    ito/src/stage_orient]
 
-      - [0x53a32c, lit4,    ico2/common/src/DObj]
-      - [0x53a334, lit4,    ico2/common/src/backStage]
-      - [0x53a338, lit4,    ico2/common/src/debug]
-      - [0x53a354, lit4,    ico2/common/src/debug_exception]
-      - [0x53a358, lit4,    ico2/common/src/gamesys]
-      - [0x53a360, lit4,    ico2/common/src/layout_action]
-      - [0x53a36c, lit4,    ico2/common/src/sceneManager]
+      - [0x53a32c, lit4,    common/src/DObj]
+      - [0x53a334, lit4,    common/src/backStage]
+      - [0x53a338, lit4,    common/src/debug]
+      - [0x53a354, lit4,    common/src/debug_exception]
+      - [0x53a358, lit4,    common/src/gamesys]
+      - [0x53a360, lit4,    common/src/layout_action]
+      - [0x53a36c, lit4,    common/src/sceneManager]
 
-      - [0x53a374, lit4,    ico2/sugipon/src/a_p_1]
-      - [0x53a394, lit4,    ico2/sugipon/src/act_a_p_1]
-      - [0x53a3a0, lit4,    ico2/sugipon/src/box]
-      - [0x53a40c, lit4,    ico2/sugipon/src/boy]
-      - [0x53a45c, lit4,    ico2/sugipon/src/cage]
-      - [0x53a470, lit4,    ico2/sugipon/src/clipCollisionManager]
-      - [0x53a474, lit4,    ico2/sugipon/src/clothAnimation]
-      - [0x53a490, lit4,    ico2/sugipon/src/darkVolume]
-      - [0x53a4b0, lit4,    ico2/sugipon/src/effectTool]
-      - [0x53a4bc, lit4,    ico2/sugipon/src/enemy]
-      - [0x53a4cc, lit4,    ico2/sugipon/src/enemyParts]
-      - [0x53a4d8, lit4,    ico2/sugipon/src/flyManager]
-      - [0x53a4e0, lit4,    ico2/sugipon/src/frameDependSequence]
-      - [0x53a4fc, lit4,    ico2/sugipon/src/girl]
-      - [0x53a52c, lit4,    ico2/sugipon/src/handManager]
-      - [0x53a530, lit4,    ico2/sugipon/src/item]
-      - [0x53a560, lit4,    ico2/sugipon/src/motionManager]
-      - [0x53a620, lit4,    ico2/sugipon/src/motionOrientManager]
-      - [0x53a658, lit4,    ico2/sugipon/src/motionViewer]
-      - [0x53a660, lit4,    ico2/sugipon/src/particleEffect]
-      - [0x53a67c, lit4,    ico2/sugipon/src/rope]
-      - [0x53a680, lit4,    ico2/sugipon/src/rotObject]
-      - [0x53a6a0, lit4,    ico2/sugipon/src/spider]
-      - [0x53a6a8, lit4,    ico2/sugipon/src/staticBlur]
-      - [0x53a6b0, lit4,    ico2/sugipon/src/stormTest]
-      - [0x53a6c8, lit4,    ico2/sugipon/src/streamMotionManager]
-      - [0x53a6d0, lit4,    ico2/sugipon/src/waterDot]
-      - [0x53a6d8, lit4,    ico2/sugipon/src/weapon]
-      - [0x53a6fc, lit4,    ico2/sugipon/src/windField]
-      - [0x53a708, lit4,    ico2/sugipon/src/windManager]
-      - [0x53a70c, lit4,    ico2/sugipon/src/wireLetter]
-      - [0x53a710, lit4,    ico2/sugipon/src/worm]
+      - [0x53a374, lit4,    sugipon/src/a_p_1]
+      - [0x53a394, lit4,    sugipon/src/act_a_p_1]
+      - [0x53a3a0, lit4,    sugipon/src/box]
+      - [0x53a40c, lit4,    sugipon/src/boy]
+      - [0x53a45c, lit4,    sugipon/src/cage]
+      - [0x53a470, lit4,    sugipon/src/clipCollisionManager]
+      - [0x53a474, lit4,    sugipon/src/clothAnimation]
+      - [0x53a490, lit4,    sugipon/src/darkVolume]
+      - [0x53a4b0, lit4,    sugipon/src/effectTool]
+      - [0x53a4bc, lit4,    sugipon/src/enemy]
+      - [0x53a4cc, lit4,    sugipon/src/enemyParts]
+      - [0x53a4d8, lit4,    sugipon/src/flyManager]
+      - [0x53a4e0, lit4,    sugipon/src/frameDependSequence]
+      - [0x53a4fc, lit4,    sugipon/src/girl]
+      - [0x53a52c, lit4,    sugipon/src/handManager]
+      - [0x53a530, lit4,    sugipon/src/item]
+      - [0x53a560, lit4,    sugipon/src/motionManager]
+      - [0x53a620, lit4,    sugipon/src/motionOrientManager]
+      - [0x53a658, lit4,    sugipon/src/motionViewer]
+      - [0x53a660, lit4,    sugipon/src/particleEffect]
+      - [0x53a67c, lit4,    sugipon/src/rope]
+      - [0x53a680, lit4,    sugipon/src/rotObject]
+      - [0x53a6a0, lit4,    sugipon/src/spider]
+      - [0x53a6a8, lit4,    sugipon/src/staticBlur]
+      - [0x53a6b0, lit4,    sugipon/src/stormTest]
+      - [0x53a6c8, lit4,    sugipon/src/streamMotionManager]
+      - [0x53a6d0, lit4,    sugipon/src/waterDot]
+      - [0x53a6d8, lit4,    sugipon/src/weapon]
+      - [0x53a6fc, lit4,    sugipon/src/windField]
+      - [0x53a708, lit4,    sugipon/src/windManager]
+      - [0x53a70c, lit4,    sugipon/src/wireLetter]
+      - [0x53a710, lit4,    sugipon/src/worm]
 
-      - [0x53a724, lit4,    ico2/seki/src/BgAnimation]
+      - [0x53a724, lit4,    seki/src/BgAnimation]
 
-      - [0x53a7e8, lit4,    ico2/fumi/src/act-env]
-      - [0x53a838, lit4,    ico2/fumi/src/act-way]
-      - [0x53a84c, lit4,    ico2/fumi/src/act]
-      - [0x53a860, lit4,    ico2/fumi/src/way_kidnap]
-      - [0x53a864, lit4,    ico2/fumi/src/way_tool]
+      - [0x53a7e8, lit4,    fumi/src/act-env]
+      - [0x53a838, lit4,    fumi/src/act-way]
+      - [0x53a84c, lit4,    fumi/src/act]
+      - [0x53a860, lit4,    fumi/src/way_kidnap]
+      - [0x53a864, lit4,    fumi/src/way_tool]
 
-      - [0x53a86c, lit4,    ico2/script/src/deja]
-      - [0x53a870, lit4,    ico2/script/src/e3]
-      - [0x53a898, lit4,    ico2/script/src/end]
-      - [0x53a8b0, lit4,    ico2/script/src/op]
-      - [0x53a8b4, lit4,    ico2/script/src/st02a]
-      - [0x53a8cc, lit4,    ico2/script/src/st03t]
-      - [0x53a8d8, lit4,    ico2/script/src/st04a]
-      - [0x53a928, lit4,    ico2/script/src/st04b]
-      - [0x53a940, lit4,    ico2/script/src/st04e]
-      - [0x53a944, lit4,    ico2/script/src/st04l]
-      - [0x53a95c, lit4,    ico2/script/src/st04r]
-      - [0x53a97c, lit4,    ico2/script/src/st05b]
-      - [0x53a998, lit4,    ico2/script/src/st06a]
-      - [0x53a9b0, lit4,    ico2/script/src/st07a]
-      - [0x53a9c0, lit4,    ico2/script/src/st08a]
-      - [0x53a9c4, lit4,    ico2/script/src/st08b]
-      - [0x53a9d4, lit4,    ico2/script/src/st09a]
-      - [0x53a9e0, lit4,    ico2/script/src/st10l]
-      - [0x53a9e8, lit4,    ico2/script/src/st10r]
-      - [0x53aa00, lit4,    ico2/script/src/st13a]
-      - [0x53aa30, lit4,    ico2/script/src/st13b]
-      - [0x53aa54, lit4,    ico2/script/src/st13c]
-      - [0x53aa60, lit4,    ico2/script/src/st17a]
-      - [0x53aa84, lit4,    ico2/script/src/st17b]
-      - [0x53aa90, lit4,    ico2/script/src/st18a]
-      - [0x53aaa8, lit4,    ico2/script/src/st19a]
-      - [0x53aab8, lit4,    ico2/script/src/st20a]
-      - [0x53aac4, lit4,    ico2/script/src/st22a]
-      - [0x53aae8, lit4,    ico2/script/src/st24a]
-      - [0x53aafc, lit4,    ico2/script/src/st47a]
-      - [0x53ab18, lit4,    ico2/script/src/stageSEProc]
+      - [0x53a86c, lit4,    script/src/deja]
+      - [0x53a870, lit4,    script/src/e3]
+      - [0x53a898, lit4,    script/src/end]
+      - [0x53a8b0, lit4,    script/src/op]
+      - [0x53a8b4, lit4,    script/src/st02a]
+      - [0x53a8cc, lit4,    script/src/st03t]
+      - [0x53a8d8, lit4,    script/src/st04a]
+      - [0x53a928, lit4,    script/src/st04b]
+      - [0x53a940, lit4,    script/src/st04e]
+      - [0x53a944, lit4,    script/src/st04l]
+      - [0x53a95c, lit4,    script/src/st04r]
+      - [0x53a97c, lit4,    script/src/st05b]
+      - [0x53a998, lit4,    script/src/st06a]
+      - [0x53a9b0, lit4,    script/src/st07a]
+      - [0x53a9c0, lit4,    script/src/st08a]
+      - [0x53a9c4, lit4,    script/src/st08b]
+      - [0x53a9d4, lit4,    script/src/st09a]
+      - [0x53a9e0, lit4,    script/src/st10l]
+      - [0x53a9e8, lit4,    script/src/st10r]
+      - [0x53aa00, lit4,    script/src/st13a]
+      - [0x53aa30, lit4,    script/src/st13b]
+      - [0x53aa54, lit4,    script/src/st13c]
+      - [0x53aa60, lit4,    script/src/st17a]
+      - [0x53aa84, lit4,    script/src/st17b]
+      - [0x53aa90, lit4,    script/src/st18a]
+      - [0x53aaa8, lit4,    script/src/st19a]
+      - [0x53aab8, lit4,    script/src/st20a]
+      - [0x53aac4, lit4,    script/src/st22a]
+      - [0x53aae8, lit4,    script/src/st24a]
+      - [0x53aafc, lit4,    script/src/st47a]
+      - [0x53ab18, lit4,    script/src/stageSEProc]
 
-      - [0x53ac44, lit4,    ico2/common/src/PObj]
+      - [0x53ac44, lit4,    common/src/PObj]
 
       # .sdata
-      - [0x53AC80, sdata,   ico2/common/src/main]
+      - [0x53AC80, sdata,   common/src/main]
 
-      - [0x53AEE0, sdata,   ico2/sugipon/src/delayFreeManager]
-      - [0x53AEF0, sdata,   ico2/sugipon/src/geometryManager]
-      - [0x53AF00, sdata,   ico2/sugipon/src/matrixDrive]
-      - [0x53AF08, sdata,   ico2/sugipon/src/motionManager2]
-      - [0x53AF28, sdata,   ico2/sugipon/src/pool]
-      - [0x53AF3C, sdata,   ico2/sugipon/src/quaternion]
-      - [0x53AF40, sdata,   ico2/sugipon/src/tableSin]
+      - [0x53AEE0, sdata,   sugipon/src/delayFreeManager]
+      - [0x53AEF0, sdata,   sugipon/src/geometryManager]
+      - [0x53AF00, sdata,   sugipon/src/matrixDrive]
+      - [0x53AF08, sdata,   sugipon/src/motionManager2]
+      - [0x53AF28, sdata,   sugipon/src/pool]
+      - [0x53AF3C, sdata,   sugipon/src/quaternion]
+      - [0x53AF40, sdata,   sugipon/src/tableSin]
 
-      - [0x53AF44, sdata,   ico2/seki/src/DisplayP2O]
-      - [0x53AF48, sdata,   ico2/seki/src/FileManager]
-      - [0x53AF60, sdata,   ico2/seki/src/GifPacket]
-      - [0x53AF78, sdata,   ico2/seki/src/GsBase]
-      - [0x53B088, sdata,   ico2/seki/src/Light]
-      - [0x53B0E8, sdata,   ico2/seki/src/Matrix]
-      - [0x53B0F8, sdata,   ico2/seki/src/Packet]
-      - [0x53B150, sdata,   ico2/seki/src/Primitive]
-      - [0x53B168, sdata,   ico2/seki/src/RegistPacket]
-      - [0x53B178, sdata,   ico2/seki/src/Shadow]
-      - [0x53B1A8, sdata,   ico2/seki/src/StageAnimation]
-      - [0x53B1C0, sdata,   ico2/seki/src/Texture]
-      - [0x53B340, sdata,   ico2/seki/src/ZFog]
+      - [0x53AF44, sdata,   seki/src/DisplayP2O]
+      - [0x53AF48, sdata,   seki/src/FileManager]
+      - [0x53AF60, sdata,   seki/src/GifPacket]
+      - [0x53AF78, sdata,   seki/src/GsBase]
+      - [0x53B088, sdata,   seki/src/Light]
+      - [0x53B0E8, sdata,   seki/src/Matrix]
+      - [0x53B0F8, sdata,   seki/src/Packet]
+      - [0x53B150, sdata,   seki/src/Primitive]
+      - [0x53B168, sdata,   seki/src/RegistPacket]
+      - [0x53B178, sdata,   seki/src/Shadow]
+      - [0x53B1A8, sdata,   seki/src/StageAnimation]
+      - [0x53B1C0, sdata,   seki/src/Texture]
+      - [0x53B340, sdata,   seki/src/ZFog]
 
-      - [0x53B368, sdata,   ico2/fumi/ios/cdvd]
-      - [0x53B3E0, sdata,   ico2/fumi/ios/ios]
-      - [0x53B470, sdata,   ico2/fumi/ios/mblock]
-      - [0x53B478, sdata,   ico2/fumi/ios/mcard]
-      - [0x53B4D8, sdata,   ico2/fumi/ios/memory]
-      - [0x53B510, sdata,   ico2/fumi/ios/message]
-      - [0x53B538, sdata,   ico2/fumi/ios/pad]
-      - [0x53B5D0, sdata,   ico2/fumi/ios/shockdriver]
-      - [0x53B5F0, sdata,   ico2/fumi/ios/thread]
+      - [0x53B368, sdata,   fumi/ios/cdvd]
+      - [0x53B3E0, sdata,   fumi/ios/ios]
+      - [0x53B470, sdata,   fumi/ios/mblock]
+      - [0x53B478, sdata,   fumi/ios/mcard]
+      - [0x53B4D8, sdata,   fumi/ios/memory]
+      - [0x53B510, sdata,   fumi/ios/message]
+      - [0x53B538, sdata,   fumi/ios/pad]
+      - [0x53B5D0, sdata,   fumi/ios/shockdriver]
+      - [0x53B5F0, sdata,  fumi/ios/thread]
 
-      - [0x53B600, sdata,   ico2/fumi/isys/gobj]
-      - [0x53B60C, sdata,   ico2/fumi/isys/isys]
+      - [0x53B600, sdata,   fumi/isys/gobj]
+      - [0x53B60C, sdata,   fumi/isys/isys]
 
-      - [0x53B628, sdata,   ico2/fumi/sound/adpcm_init]
-      - [0x53B640, sdata,   ico2/fumi/sound/s_init]
-      - [0x53B684, sdata,   ico2/fumi/sound/soundManager]
+      - [0x53B628, sdata,   fumi/sound/adpcm_init]
+      - [0x53B640, sdata,   fumi/sound/s_init]
+      - [0x53B684, sdata,   fumi/sound/soundManager]
 
-      - [0x53B688, sdata,   ico2/fumi/src/act-game]
-      - [0x53B6C0, sdata,   ico2/fumi/src/boyact]
-      - [0x53B710, sdata,   ico2/fumi/src/commonact]
-      - [0x53B798, sdata,   ico2/fumi/src/enemy_act]
-      - [0x53B800, sdata,   ico2/fumi/src/act]
-      - [0x53B808, sdata,   ico2/fumi/src/fieldCollision]
-      - [0x53B868, sdata,   ico2/fumi/src/fuzio]
-      - [0x53B880, sdata,   ico2/fumi/src/girl_act]
-      - [0x53B960, sdata,   ico2/fumi/src/jimaku]
-      - [0x53B9A0, sdata,   ico2/fumi/src/way_sys]
-      - [0x53B9E0, sdata,   ico2/fumi/src/way_util]
+      - [0x53B688, sdata,   fumi/src/act-game]
+      - [0x53B6C0, sdata,   fumi/src/boyact]
+      - [0x53B710, sdata,   fumi/src/commonact]
+      - [0x53B798, sdata,   fumi/src/enemy_act]
+      - [0x53B800, sdata,   fumi/src/act]
+      - [0x53B808, sdata,   fumi/src/fieldCollision]
+      - [0x53B868, sdata,   fumi/src/fuzio]
+      - [0x53B880, sdata,   fumi/src/girl_act]
+      - [0x53B960, sdata,   fumi/src/jimaku]
+      - [0x53B9A0, sdata,   fumi/src/way_sys]
+      - [0x53B9E0, sdata,   fumi/src/way_util]
 
-      - [0x53BA00, sdata,   ico2/script/src/gflag]
-      - [0x53BA08, sdata,   ico2/script/src/script]
-      - [0x53BA30, sdata,   ico2/script/src/st25a]
-      - [0x53BA50, sdata,   ico2/script/src/warpGirl]
+      - [0x53BA00, sdata,   script/src/gflag]
+      - [0x53BA08, sdata,   script/src/script]
+      - [0x53BA30, sdata,   script/src/st25a]
+      - [0x53BA50, sdata,   script/src/warpGirl]
 
-      - [0x53BA6C, sdata,   ico2/omori/src/brain]
-      - [0x53BA78, sdata,   ico2/omori/src/camera-editor]
-      - [0x53BB48, sdata,   ico2/omori/src/camera-ico2]
-      - [0x53BB68, sdata,   ico2/omori/src/camera-root]
-      - [0x53BBB0, sdata,   ico2/omori/src/camera-set-manager]
-      - [0x53BBC0, sdata,   ico2/omori/src/chain]
-      - [0x53BBDC, sdata,   ico2/omori/src/ebrain]
-      - [0x53BBE8, sdata,   ico2/omori/src/fightSound]
-      - [0x53BC00, sdata,   ico2/omori/src/generator]
-      - [0x53BC10, sdata,   ico2/omori/src/gv]
+      - [0x53BA6C, sdata,   omori/src/brain]
+      - [0x53BA78, sdata,   omori/src/camera-editor]
+      - [0x53BB48, sdata,   omori/src/camera-ico2]
+      - [0x53BB68, sdata,   omori/src/camera-root]
+      - [0x53BBB0, sdata,   omori/src/camera-set-manager]
+      - [0x53BBC0, sdata,   omori/src/chain]
+      - [0x53BBDC, sdata,   omori/src/ebrain]
+      - [0x53BBE8, sdata,   omori/src/fightSound]
+      - [0x53BC00, sdata,   omori/src/generator]
+      - [0x53BC10, sdata,   omori/src/gv]
 
-      - [0x53BC20, sdata,   ico2/ito/src/act_bird]
-      - [0x53BC58, sdata,   ico2/ito/src/queen]
-      - [0x53BC60, sdata,   ico2/ito/src/queen_barrier_disp]
-      - [0x53BC68, sdata,   ico2/ito/src/stage_orient]
+      - [0x53BC20, sdata,   ito/src/act_bird]
+      - [0x53BC58, sdata,   ito/src/queen]
+      - [0x53BC60, sdata,   ito/src/queen_barrier_disp]
+      - [0x53BC68, sdata,   ito/src/stage_orient]
 
-      - [0x53BC70, sdata,   ico2/ito/mpeg/mv_main]
-      - [0x53BC88, sdata,   ico2/ito/mpeg/mv_videodec]
+      - [0x53BC70, sdata,   ito/mpeg/mv_main]
+      - [0x53BC88, sdata,   ito/mpeg/mv_videodec]
 
-      - [0x53BC98, sdata,   ico2/common/src/stageManager]
-      - [0x53BCF0, sdata,   ico2/common/src/backStage]
-      - [0x53BD00, sdata,   ico2/common/src/charFileManager]
-      - [0x53BD28, sdata,   ico2/common/src/debug]
-      - [0x53C268, sdata,   ico2/common/src/debug_exception]
-      - [0x53C404, sdata,   ico2/common/src/debug_menu]
-      - [0x53C414, sdata,   ico2/common/src/gamesys]
-      - [0x53C428, sdata,   ico2/common/src/icoMisc]
-      - [0x53C498, sdata,   ico2/common/src/kanban]
-      - [0x53C4BC, sdata,   ico2/common/src/kanbanBoot]
-      - [0x53C4D8, sdata,   ico2/common/src/layout_action]
-      - [0x53C600, sdata,   ico2/common/src/layout_texture]
-      - [0x53C640, sdata,   ico2/common/src/sceneManager]
-      - [0x53C650, sdata,   ico2/common/src/staffroll]
+      - [0x53BC98, sdata,   common/src/stageManager]
+      - [0x53BCF0, sdata,   common/src/backStage]
+      - [0x53BD00, sdata,   common/src/charFileManager]
+      - [0x53BD28, sdata,   common/src/debug]
+      - [0x53C268, sdata,   common/src/debug_exception]
+      - [0x53C404, sdata,   common/src/debug_menu]
+      - [0x53C414, sdata,   common/src/gamesys]
+      - [0x53C428, sdata,   common/src/icoMisc]
+      - [0x53C498, sdata,   common/src/kanban]
+      - [0x53C4BC, sdata,   common/src/kanbanBoot]
+      - [0x53C4D8, sdata,   common/src/layout_action]
+      - [0x53C600, sdata,   common/src/layout_texture]
+      - [0x53C640, sdata,   common/src/sceneManager]
+      - [0x53C650, sdata,   common/src/staffroll]
 
       # ?
-      - [0x53C674, sdata,   ico2/src/staffroll_dat]
+      - [0x53C674, sdata,   src/staffroll_dat]
 
-      - [0x53C678, sdata,   ico2/sugipon/src/a_p_1]
-      - [0x53C6C8, sdata,   ico2/sugipon/src/act_a_p_1]
-      - [0x53C730, sdata,   ico2/sugipon/src/attackCheckBoundary]
-      - [0x53C738, sdata,   ico2/sugipon/src/box]
-      - [0x53C748, sdata,   ico2/sugipon/src/boy]
-      - [0x53C754, sdata,   ico2/sugipon/src/clipCollisionManager]
-      - [0x53C758, sdata,   ico2/sugipon/src/clothAnimation]
-      - [0x53C770, sdata,   ico2/sugipon/src/darkVolume]
-      - [0x53C7D8, sdata,   ico2/sugipon/src/effectTool]
-      - [0x53C888, sdata,   ico2/sugipon/src/enemy]
-      - [0x53C898, sdata,   ico2/sugipon/src/flyManager]
-      - [0x53C89C, sdata,   ico2/sugipon/src/frameDependSequence]
-      - [0x53C8B8, sdata,   ico2/sugipon/src/girl]
-      - [0x53C8E0, sdata,   ico2/sugipon/src/item]
-      - [0x53C8E4, sdata,   ico2/sugipon/src/lineManager]
-      - [0x53C8F0, sdata,   ico2/sugipon/src/motionFileManager]
-      - [0x53C8F8, sdata,   ico2/sugipon/src/motionManager]
-      - [0x53C948, sdata,   ico2/sugipon/src/motionOrientManager]
-      - [0x53C9F8, sdata,   ico2/sugipon/src/motionViewer]
-      - [0x53CA78, sdata,   ico2/sugipon/src/moveColTest]
-      - [0x53CA88, sdata,   ico2/sugipon/src/puddle]
-      - [0x53CAA8, sdata,   ico2/sugipon/src/rope]
-      - [0x53CAB0, sdata,   ico2/sugipon/src/rotObject]
-      - [0x53CAC0, sdata,   ico2/sugipon/src/spider]
-      - [0x53CAC4, sdata,   ico2/sugipon/src/spiderGroupManager]
-      - [0x53CB04, sdata,   ico2/sugipon/src/stageMultiBgaManager]
-      - [0x53CB08, sdata,   ico2/sugipon/src/staticBlur]
-      - [0x53CBF0, sdata,   ico2/sugipon/src/streamMotionManager]
-      - [0x53CC48, sdata,   ico2/sugipon/src/waterDot]
-      - [0x53CC50, sdata,   ico2/sugipon/src/waySystemManager]
-      - [0x53CC54, sdata,   ico2/sugipon/src/windField]
-      - [0x53CC60, sdata,   ico2/sugipon/src/windManager]
-      - [0x53CC80, sdata,   ico2/sugipon/src/worm]
+      - [0x53C678, sdata,   sugipon/src/a_p_1]
+      - [0x53C6C8, sdata,   sugipon/src/act_a_p_1]
+      - [0x53C730, sdata,   sugipon/src/attackCheckBoundary]
+      - [0x53C738, sdata,   sugipon/src/box]
+      - [0x53C748, sdata,   sugipon/src/boy]
+      - [0x53C754, sdata,   sugipon/src/clipCollisionManager]
+      - [0x53C758, sdata,   sugipon/src/clothAnimation]
+      - [0x53C770, sdata,   sugipon/src/darkVolume]
+      - [0x53C7D8, sdata,   sugipon/src/effectTool]
+      - [0x53C888, sdata,   sugipon/src/enemy]
+      - [0x53C898, sdata,   sugipon/src/flyManager]
+      - [0x53C89C, sdata,   sugipon/src/frameDependSequence]
+      - [0x53C8B8, sdata,   sugipon/src/girl]
+      - [0x53C8E0, sdata,   sugipon/src/item]
+      - [0x53C8E4, sdata,   sugipon/src/lineManager]
+      - [0x53C8F0, sdata,   sugipon/src/motionFileManager]
+      - [0x53C8F8, sdata,   sugipon/src/motionManager]
+      - [0x53C948, sdata,   sugipon/src/motionOrientManager]
+      - [0x53C9F8, sdata,   sugipon/src/motionViewer]
+      - [0x53CA78, sdata,   sugipon/src/moveColTest]
+      - [0x53CA88, sdata,   sugipon/src/puddle]
+      - [0x53CAA8, sdata,   sugipon/src/rope]
+      - [0x53CAB0, sdata,   sugipon/src/rotObject]
+      - [0x53CAC0, sdata,   sugipon/src/spider]
+      - [0x53CAC4, sdata,   sugipon/src/spiderGroupManager]
+      - [0x53CB04, sdata,   sugipon/src/stageMultiBgaManager]
+      - [0x53CB08, sdata,   sugipon/src/staticBlur]
+      - [0x53CBF0, sdata,   sugipon/src/streamMotionManager]
+      - [0x53CC48, sdata,   sugipon/src/waterDot]
+      - [0x53CC50, sdata,   sugipon/src/waySystemManager]
+      - [0x53CC54, sdata,   sugipon/src/windField]
+      - [0x53CC60, sdata,   sugipon/src/windManager]
+      - [0x53CC80, sdata,   sugipon/src/worm]
 
-      - [0x53CC88, sdata,   ico2/seki/src/Basic]
-      - [0x53CCB8, sdata,   ico2/seki/src/BgAnimation]
-      - [0x53CD00, sdata,   ico2/seki/src/displayFont]
-      - [0x53CD20, sdata,   ico2/seki/src/DisplayList]
-      - [0x53CD34, sdata,   ico2/seki/src/DmaPacket]
-      - [0x53CD38, sdata,   ico2/seki/src/EnemyInit]
+      - [0x53CC88, sdata,   seki/src/Basic]
+      - [0x53CCB8, sdata,   seki/src/BgAnimation]
+      - [0x53CD00, sdata,   seki/src/displayFont]
+      - [0x53CD20, sdata,   seki/src/DisplayList]
+      - [0x53CD34, sdata,   seki/src/DmaPacket]
+      - [0x53CD38, sdata,   seki/src/EnemyInit]
 
-      - [0x53CD40, sdata,   ico2/fumi/src/act-env]
-      - [0x53CD60, sdata,   ico2/fumi/src/way_kidnap]
-      - [0x53CD70, sdata,   ico2/fumi/src/way_llf]
-      - [0x53CD80, sdata,   ico2/fumi/src/way_tool]
+      - [0x53CD40, sdata,   fumi/src/act-env]
+      - [0x53CD60, sdata,   fumi/src/way_kidnap]
+      - [0x53CD70, sdata,   fumi/src/way_llf]
+      - [0x53CD80, sdata,   fumi/src/way_tool]
 
-      - [0x53CDF0, sdata,   ico2/script/src/deja]
-      - [0x53CDF4, sdata,   ico2/script/src/e3]
-      - [0x53CE10, sdata,   ico2/script/src/end]
-      - [0x53CE40, sdata,   ico2/script/src/op]
-      - [0x53CE70, sdata,   ico2/script/src/st00a]
-      - [0x53CE7C, sdata,   ico2/script/src/st01b]
-      - [0x53CE88, sdata,   ico2/script/src/st02a]
-      - [0x53CE98, sdata,   ico2/script/src/st04a]
-      - [0x53CED4, sdata,   ico2/script/src/st04b]
-      - [0x53CEE0, sdata,   ico2/script/src/st04l]
-      - [0x53CF18, sdata,   ico2/script/src/st04r]
-      - [0x53CF4C, sdata,   ico2/script/src/st05b]
-      - [0x53CF5C, sdata,   ico2/script/src/st06a]
-      - [0x53CF68, sdata,   ico2/script/src/st07a]
-      - [0x53CF7C, sdata,   ico2/script/src/st08a]
-      - [0x53CF80, sdata,   ico2/script/src/st09a]
-      - [0x53CF84, sdata,   ico2/script/src/st10l]
-      - [0x53CF94, sdata,   ico2/script/src/st10r]
-      - [0x53CFA4, sdata,   ico2/script/src/st13a]
-      - [0x53CFC0, sdata,   ico2/script/src/st13b]
-      - [0x53CFFC, sdata,   ico2/script/src/st13c]
-      - [0x53D018, sdata,   ico2/script/src/st17a]
-      - [0x53D020, sdata,   ico2/script/src/st19a]
-      - [0x53D030, sdata,   ico2/script/src/st20a]
-      - [0x53D048, sdata,   ico2/script/src/st22a]
-      - [0x53D058, sdata,   ico2/script/src/st24a]
-      - [0x53D05C, sdata,   ico2/script/src/st47a]
-      - [0x53D078, sdata,   ico2/script/src/stageSEProc]
+      - [0x53CDF0, sdata,   script/src/deja]
+      - [0x53CDF4, sdata,   script/src/e3]
+      - [0x53CE10, sdata,   script/src/end]
+      - [0x53CE40, sdata,   script/src/op]
+      - [0x53CE70, sdata,   script/src/st00a]
+      - [0x53CE7C, sdata,   script/src/st01b]
+      - [0x53CE88, sdata,   script/src/st02a]
+      - [0x53CE98, sdata,   script/src/st04a]
+      - [0x53CED4, sdata,   script/src/st04b]
+      - [0x53CEE0, sdata,   script/src/st04l]
+      - [0x53CF18, sdata,   script/src/st04r]
+      - [0x53CF4C, sdata,   script/src/st05b]
+      - [0x53CF5C, sdata,   script/src/st06a]
+      - [0x53CF68, sdata,   script/src/st07a]
+      - [0x53CF7C, sdata,   script/src/st08a]
+      - [0x53CF80, sdata,   script/src/st09a]
+      - [0x53CF84, sdata,   script/src/st10l]
+      - [0x53CF94, sdata,   script/src/st10r]
+      - [0x53CFA4, sdata,   script/src/st13a]
+      - [0x53CFC0, sdata,   script/src/st13b]
+      - [0x53CFFC, sdata,   script/src/st13c]
+      - [0x53D018, sdata,   script/src/st17a]
+      - [0x53D020, sdata,   script/src/st19a]
+      - [0x53D030, sdata,   script/src/st20a]
+      - [0x53D048, sdata,   script/src/st22a]
+      - [0x53D058, sdata,   script/src/st24a]
+      - [0x53D05C, sdata,   script/src/st47a]
+      - [0x53D078, sdata,   script/src/stageSEProc]
 
-      - [0x53D090, sdata,   ico2/omori/src/access]
+      - [0x53D090, sdata,   omori/src/access]
 
-      - [0x53D0B4, sdata,   ico2/ito/mpeg/mv_disp]
+      - [0x53D0B4, sdata,   ito/mpeg/mv_disp]
 
-      - [0x53D0C8, sdata,   ico2/common/src/GobjProc]
-      - [0x53D0D8, sdata,   ico2/common/src/PObj]
+      - [0x53D0C8, sdata,   common/src/GobjProc]
+      - [0x53D0D8, sdata,   common/src/PObj]
 
       # .sbss
       #- {start: 0x53d0f8, name: sbssbin, type: sbss, vram: 0x0063c100, size: 0x4dc}
       - {start: 0x53d0f8, name: sdk/lib/crt0,                       type: sbss, vram: 0x0063c100}
-      - {                 name: ico2/sugipon/src/motionManager2,    type: sbss, vram: 0x0063c10c}
-      - {                 name: ico2/seki/src/GsBase,               type: sbss, vram: 0x0063c118}
-      - {                 name: ico2/seki/src/Light,                type: sbss, vram: 0x0063c12c}
-      - {                 name: ico2/seki/src/MicroCode,            type: sbss, vram: 0x0063c140}
-      - {                 name: ico2/seki/src/Packet,               type: sbss, vram: 0x0063c144}
-      - {                 name: ico2/seki/src/StageAnimation,       type: sbss, vram: 0x0063c158}
-      - {                 name: ico2/seki/src/Texture,              type: sbss, vram: 0x0063c160}
+      - {                 name: sugipon/src/motionManager2,    type: sbss, vram: 0x0063c10c}
+      - {                 name: seki/src/GsBase,               type: sbss, vram: 0x0063c118}
+      - {                 name: seki/src/Light,                type: sbss, vram: 0x0063c12c}
+      - {                 name: seki/src/MicroCode,            type: sbss, vram: 0x0063c140}
+      - {                 name: seki/src/Packet,               type: sbss, vram: 0x0063c144}
+      - {                 name: seki/src/StageAnimation,       type: sbss, vram: 0x0063c158}
+      - {                 name: seki/src/Texture,              type: sbss, vram: 0x0063c160}
 
-      - {                 name: ico2/fumi/ios/mcdata,               type: sbss, vram: 0x0063c18c}
-      - {                 name: ico2/fumi/ios/memory,               type: sbss, vram: 0x0063c190}
-      - {                 name: ico2/fumi/ios/pad,                  type: sbss, vram: 0x0063c198}
-      - {                 name: ico2/fumi/ios/thread,               type: sbss, vram: 0x0063c1a0}
+      - {                 name: fumi/ios/mcdata,               type: sbss, vram: 0x0063c18c}
+      - {                 name: fumi/ios/memory,               type: sbss, vram: 0x0063c190}
+      - {                 name: fumi/ios/pad,                  type: sbss, vram: 0x0063c198}
+      - {                 name: fumi/ios/thread,               type: .sbss, vram: 0x0063c1a0}
 
-      - {                 name: ico2/fumi/isys/gobj,                type: sbss, vram: 0x0063c1a8}
+      - {                 name: fumi/isys/gobj,                type: sbss, vram: 0x0063c1a8}
 
-      - {                 name: ico2/fumi/sound/adpcm_init,         type: sbss, vram: 0x0063c1b8}
-      - {                 name: ico2/fumi/sound/s_init,             type: sbss, vram: 0x0063c1d0}
+      - {                 name: fumi/sound/adpcm_init,         type: sbss, vram: 0x0063c1b8}
+      - {                 name: fumi/sound/s_init,             type: sbss, vram: 0x0063c1d0}
 
-      - {                 name: ico2/fumi/src/boyact,               type: sbss, vram: 0x0063c1f0}
-      - {                 name: ico2/fumi/src/enemy_act,            type: sbss, vram: 0x0063c208}
-      - {                 name: ico2/fumi/src/fieldCollision,       type: sbss, vram: 0x0063c20c}
-      - {                 name: ico2/fumi/src/girl_act,             type: sbss, vram: 0x0063c244}
+      - {                 name: fumi/src/boyact,               type: sbss, vram: 0x0063c1f0}
+      - {                 name: fumi/src/enemy_act,            type: sbss, vram: 0x0063c208}
+      - {                 name: fumi/src/fieldCollision,       type: sbss, vram: 0x0063c20c}
+      - {                 name: fumi/src/girl_act,             type: sbss, vram: 0x0063c244}
 
-      - {                 name: ico2/script/src/script,             type: sbss, vram: 0x0063c24c}
-      - {                 name: ico2/script/src/st25a,              type: sbss, vram: 0x0063c250}
-      - {                 name: ico2/script/src/warpGirl,           type: sbss, vram: 0x0063c258}
+      - {                 name: script/src/script,             type: sbss, vram: 0x0063c24c}
+      - {                 name: script/src/st25a,              type: sbss, vram: 0x0063c250}
+      - {                 name: script/src/warpGirl,           type: sbss, vram: 0x0063c258}
 
-      - {                 name: ico2/omori/src/camera-editor,       type: sbss, vram: 0x0063c25c}
-      - {                 name: ico2/omori/src/camera-ico2,         type: sbss, vram: 0x0063c260}
-      - {                 name: ico2/omori/src/camera-root,         type: sbss, vram: 0x0063c288}
-      - {                 name: ico2/omori/src/chain,               type: sbss, vram: 0x0063c2c0}
-      - {                 name: ico2/omori/src/ebrain,              type: sbss, vram: 0x0063c2c4}
-      - {                 name: ico2/omori/src/enemy-control,       type: sbss, vram: 0x0063c2d4}
-      - {                 name: ico2/omori/src/hand-camera,         type: sbss, vram: 0x0063c2e0}
-      - {                 name: ico2/omori/src/lws_kyomi,           type: sbss, vram: 0x0063c2e8}
+      - {                 name: omori/src/camera-editor,       type: sbss, vram: 0x0063c25c}
+      - {                 name: omori/src/camera-ico2,         type: sbss, vram: 0x0063c260}
+      - {                 name: omori/src/camera-root,         type: sbss, vram: 0x0063c288}
+      - {                 name: omori/src/chain,               type: sbss, vram: 0x0063c2c0}
+      - {                 name: omori/src/ebrain,              type: sbss, vram: 0x0063c2c4}
+      - {                 name: omori/src/enemy-control,       type: sbss, vram: 0x0063c2d4}
+      - {                 name: omori/src/hand-camera,         type: sbss, vram: 0x0063c2e0}
+      - {                 name: omori/src/lws_kyomi,           type: sbss, vram: 0x0063c2e8}
 
-      - {                 name: ico2/ito/src/itou_boss,             type: sbss, vram: 0x0063c2ec}
-      - {                 name: ico2/ito/src/lightning,             type: sbss, vram: 0x0063c2f4}
-      - {                 name: ico2/ito/src/queen,                 type: sbss, vram: 0x0063c300}
-      - {                 name: ico2/ito/src/queen_barrier_disp,    type: sbss, vram: 0x0063c304}
+      - {                 name: ito/src/itou_boss,             type: sbss, vram: 0x0063c2ec}
+      - {                 name: ito/src/lightning,             type: sbss, vram: 0x0063c2f4}
+      - {                 name: ito/src/queen,                 type: sbss, vram: 0x0063c300}
+      - {                 name: ito/src/queen_barrier_disp,    type: sbss, vram: 0x0063c304}
 
-      - {                 name: ico2/ito/mpeg/mv_main,              type: sbss, vram: 0x0063c310}
+      - {                 name: ito/mpeg/mv_main,              type: sbss, vram: 0x0063c310}
 
-      - {                 name: ico2/common/src/StageManager,       type: sbss, vram: 0x0063c348}
-      - {                 name: ico2/common/src/backStage,          type: sbss, vram: 0x0063c350}
-      - {                 name: ico2/common/src/debug,              type: sbss, vram: 0x0063c378}
-      - {                 name: ico2/common/src/icoMisc,            type: sbss, vram: 0x0063c394}
-      - {                 name: ico2/common/src/kanban,             type: sbss, vram: 0x0063c398}
-      - {                 name: ico2/common/src/kanbanBoot,         type: sbss, vram: 0x0063c3a0}
-      - {                 name: ico2/common/src/layout_action,      type: sbss, vram: 0x0063c3bc}
-      - {                 name: ico2/common/src/layout_texture,     type: sbss, vram: 0x0063c3f0}
-      - {                 name: ico2/common/src/sceneManager,       type: sbss, vram: 0x0063c414}
-      - {                 name: ico2/common/src/staffroll,          type: sbss, vram: 0x0063c420}
+      - {                 name: common/src/StageManager,       type: sbss, vram: 0x0063c348}
+      - {                 name: common/src/backStage,          type: sbss, vram: 0x0063c350}
+      - {                 name: common/src/debug,              type: sbss, vram: 0x0063c378}
+      - {                 name: common/src/icoMisc,            type: sbss, vram: 0x0063c394}
+      - {                 name: common/src/kanban,             type: sbss, vram: 0x0063c398}
+      - {                 name: common/src/kanbanBoot,         type: sbss, vram: 0x0063c3a0}
+      - {                 name: common/src/layout_action,      type: sbss, vram: 0x0063c3bc}
+      - {                 name: common/src/layout_texture,     type: sbss, vram: 0x0063c3f0}
+      - {                 name: common/src/sceneManager,       type: sbss, vram: 0x0063c414}
+      - {                 name: common/src/staffroll,          type: sbss, vram: 0x0063c420}
 
-      - {                 name: ico2/sugipon/src/act_a_p_1,         type: sbss, vram: 0x0063c440}
-      - {                 name: ico2/sugipon/src/darkVolume,        type: sbss, vram: 0x0063c458}
-      - {                 name: ico2/sugipon/src/motionFileManager, type: sbss, vram: 0x0063c46c}
-      - {                 name: ico2/sugipon/src/motionManager,     type: sbss, vram: 0x0063c474}
-      - {                 name: ico2/sugipon/src/motionViewer,      type: sbss, vram: 0x0063c4ac}
-      - {                 name: ico2/sugipon/src/staticBlur,        type: sbss, vram: 0x0063c4b0}
-      - {                 name: ico2/sugipon/src/BgAnimation,       type: sbss, vram: 0x0063c4b4}
-      - {                 name: ico2/sugipon/src/DisplayList,       type: sbss, vram: 0x0063c4bc}
-      - {                 name: ico2/sugipon/src/act-way,           type: sbss, vram: 0x0063c4c4}
-      - {                 name: ico2/sugipon/src/way_tool,          type: sbss, vram: 0x0063c4cc}
+      - {                 name: sugipon/src/act_a_p_1,         type: sbss, vram: 0x0063c440}
+      - {                 name: sugipon/src/darkVolume,        type: sbss, vram: 0x0063c458}
+      - {                 name: sugipon/src/motionFileManager, type: sbss, vram: 0x0063c46c}
+      - {                 name: sugipon/src/motionManager,     type: sbss, vram: 0x0063c474}
+      - {                 name: sugipon/src/motionViewer,      type: sbss, vram: 0x0063c4ac}
+      - {                 name: sugipon/src/staticBlur,        type: sbss, vram: 0x0063c4b0}
+      - {                 name: sugipon/src/BgAnimation,       type: sbss, vram: 0x0063c4b4}
+      - {                 name: sugipon/src/DisplayList,       type: sbss, vram: 0x0063c4bc}
+      - {                 name: sugipon/src/act-way,           type: sbss, vram: 0x0063c4c4}
+      - {                 name: sugipon/src/way_tool,          type: sbss, vram: 0x0063c4cc}
 
-      - {                 name: ico2/script/src/deja,               type: sbss, vram: 0x0063c4dc}
-      - {                 name: ico2/script/src/e3,                 type: sbss, vram: 0x0063c4e0}
-      - {                 name: ico2/script/src/op,                 type: sbss, vram: 0x0063c4e8}
-      - {                 name: ico2/script/src/st00a,              type: sbss, vram: 0x0063c4f8}
-      - {                 name: ico2/script/src/st01b,              type: sbss, vram: 0x0063c4fc}
-      - {                 name: ico2/script/src/st02a,              type: sbss, vram: 0x0063c504}
-      - {                 name: ico2/script/src/st04a,              type: sbss, vram: 0x0063c508}
-      - {                 name: ico2/script/src/st04c,              type: sbss, vram: 0x0063c510}
-      - {                 name: ico2/script/src/st04e,              type: sbss, vram: 0x0063c514}
-      - {                 name: ico2/script/src/st04l,              type: sbss, vram: 0x0063c51c}
-      - {                 name: ico2/script/src/st04r,              type: sbss, vram: 0x0063c538}
-      - {                 name: ico2/script/src/st05e,              type: sbss, vram: 0x0063c550}
-      - {                 name: ico2/script/src/st06a,              type: sbss, vram: 0x0063c558}
-      - {                 name: ico2/script/src/st07a,              type: sbss, vram: 0x0063c560}
-      - {                 name: ico2/script/src/st08a,              type: sbss, vram: 0x0063c564}
-      - {                 name: ico2/script/src/st08b,              type: sbss, vram: 0x0063c56c}
-      - {                 name: ico2/script/src/st09a,              type: sbss, vram: 0x0063c570}
-      - {                 name: ico2/script/src/st10r,              type: sbss, vram: 0x0063c574}
-      - {                 name: ico2/script/src/st13a,              type: sbss, vram: 0x0063c578}
-      - {                 name: ico2/script/src/st13b,              type: sbss, vram: 0x0063c57c}
-      - {                 name: ico2/script/src/st13c,              type: sbss, vram: 0x0063c590}
-      - {                 name: ico2/script/src/st17a,              type: sbss, vram: 0x0063c598}
-      - {                 name: ico2/script/src/st18a,              type: sbss, vram: 0x0063c59c}
-      - {                 name: ico2/script/src/st19a,              type: sbss, vram: 0x0063c5a4}
-      - {                 name: ico2/script/src/st20a,              type: sbss, vram: 0x0063c5a8}
-      - {                 name: ico2/script/src/st22a,              type: sbss, vram: 0x0063c5ac}
-      - {                 name: ico2/script/src/st24a,              type: sbss, vram: 0x0063c5b0}
-      - {                 name: ico2/script/src/st47a,              type: sbss, vram: 0x0063c5b4}
-      - {                 name: ico2/script/src/stageSEProc,        type: sbss, vram: 0x0063c5b8}
+      - {                 name: script/src/deja,               type: sbss, vram: 0x0063c4dc}
+      - {                 name: script/src/e3,                 type: sbss, vram: 0x0063c4e0}
+      - {                 name: script/src/op,                 type: sbss, vram: 0x0063c4e8}
+      - {                 name: script/src/st00a,              type: sbss, vram: 0x0063c4f8}
+      - {                 name: script/src/st01b,              type: sbss, vram: 0x0063c4fc}
+      - {                 name: script/src/st02a,              type: sbss, vram: 0x0063c504}
+      - {                 name: script/src/st04a,              type: sbss, vram: 0x0063c508}
+      - {                 name: script/src/st04c,              type: sbss, vram: 0x0063c510}
+      - {                 name: script/src/st04e,              type: sbss, vram: 0x0063c514}
+      - {                 name: script/src/st04l,              type: sbss, vram: 0x0063c51c}
+      - {                 name: script/src/st04r,              type: sbss, vram: 0x0063c538}
+      - {                 name: script/src/st05e,              type: sbss, vram: 0x0063c550}
+      - {                 name: script/src/st06a,              type: sbss, vram: 0x0063c558}
+      - {                 name: script/src/st07a,              type: sbss, vram: 0x0063c560}
+      - {                 name: script/src/st08a,              type: sbss, vram: 0x0063c564}
+      - {                 name: script/src/st08b,              type: sbss, vram: 0x0063c56c}
+      - {                 name: script/src/st09a,              type: sbss, vram: 0x0063c570}
+      - {                 name: script/src/st10r,              type: sbss, vram: 0x0063c574}
+      - {                 name: script/src/st13a,              type: sbss, vram: 0x0063c578}
+      - {                 name: script/src/st13b,              type: sbss, vram: 0x0063c57c}
+      - {                 name: script/src/st13c,              type: sbss, vram: 0x0063c590}
+      - {                 name: script/src/st17a,              type: sbss, vram: 0x0063c598}
+      - {                 name: script/src/st18a,              type: sbss, vram: 0x0063c59c}
+      - {                 name: script/src/st19a,              type: sbss, vram: 0x0063c5a4}
+      - {                 name: script/src/st20a,              type: sbss, vram: 0x0063c5a8}
+      - {                 name: script/src/st22a,              type: sbss, vram: 0x0063c5ac}
+      - {                 name: script/src/st24a,              type: sbss, vram: 0x0063c5b0}
+      - {                 name: script/src/st47a,              type: sbss, vram: 0x0063c5b4}
+      - {                 name: script/src/stageSEProc,        type: sbss, vram: 0x0063c5b8}
 
-      - {                 name: ico2/ito/mpeg/mv_disp,              type: sbss, vram: 0x0063c5c4}
+      - {                 name: ito/mpeg/mv_disp,              type: sbss, vram: 0x0063c5c4}
 
       - {                 name: sdk/lib/libgcc/libgcc2,             type: sbss, vram: 0x0063c5c8}
       - {                 name: sdk/lib/libc/signalr,               type: sbss, vram: 0x0063c5d8}
@@ -1536,99 +1527,99 @@ segments:
       - {start: 0x53d5d4, name: sdk/lib/libkernl/thread,            type: bss, vram: 0x0063c750}
       - {                 name: sdk/lib/libkernl/kprintf,           type: bss, vram: 0x0063cf60}
 
-      - {                 name: ico2/common/src/main,               type: bss, vram: 0x0063d010}
+      - {                 name: common/src/main,               type: bss, vram: 0x0063d010}
 
-      - {                 name: ico2/sugipon/src/delayFreeManager,  type: bss, vram: 0x00667340}
-      - {                 name: ico2/sugipon/src/geometryManager,   type: bss, vram: 0x00668540}
-      - {                 name: ico2/sugipon/src/quaternion,        type: bss, vram: 0x00668640}
-      - {                 name: ico2/sugipon/src/tableSin,          type: bss, vram: 0x00669a40}
+      - {                 name: sugipon/src/delayFreeManager,  type: bss, vram: 0x00667340}
+      - {                 name: sugipon/src/geometryManager,   type: bss, vram: 0x00668540}
+      - {                 name: sugipon/src/quaternion,        type: bss, vram: 0x00668640}
+      - {                 name: sugipon/src/tableSin,          type: bss, vram: 0x00669a40}
 
-      - {                 name: ico2/seki/src/GsBase,               type: bss, vram: 0x0067ba60}
-      - {                 name: ico2/seki/src/Light,                type: bss, vram: 0x0067bce0}
-      - {                 name: ico2/seki/src/MicroCode,            type: bss, vram: 0x0067bfd0}
-      - {                 name: ico2/seki/src/Packet,               type: bss, vram: 0x0067c010}
-      - {                 name: ico2/seki/src/Shadow,               type: bss, vram: 0x0067c070}
-      - {                 name: ico2/seki/src/StageAnimation,       type: bss, vram: 0x0067d098}
-      - {                 name: ico2/seki/src/Texture,              type: bss, vram: 0x0068af88}
-      - {                 name: ico2/seki/src/ZFog,                 type: bss, vram: 0x006af590}
+      - {                 name: seki/src/GsBase,               type: bss, vram: 0x0067ba60}
+      - {                 name: seki/src/Light,                type: bss, vram: 0x0067bce0}
+      - {                 name: seki/src/MicroCode,            type: bss, vram: 0x0067bfd0}
+      - {                 name: seki/src/Packet,               type: bss, vram: 0x0067c010}
+      - {                 name: seki/src/Shadow,               type: bss, vram: 0x0067c070}
+      - {                 name: seki/src/StageAnimation,       type: bss, vram: 0x0067d098}
+      - {                 name: seki/src/Texture,              type: bss, vram: 0x0068af88}
+      - {                 name: seki/src/ZFog,                 type: bss, vram: 0x006af590}
 
-      - {                 name: ico2/fumi/ios/cdvd,                 type: bss, vram: 0x006af9c0}
-      - {                 name: ico2/fumi/ios/ios,                  type: bss, vram: 0x006bc860}
-      - {                 name: ico2/fumi/ios/mcard,                type: bss, vram: 0x006bc8c0}
-      - {                 name: ico2/fumi/ios/memory,               type: bss, vram: 0x006bc918}
-      - {                 name: ico2/fumi/ios/message,              type: bss, vram: 0x006bc938}
-      - {                 name: ico2/fumi/ios/pad,                  type: bss, vram: 0x006bcd38}
-      - {                 name: ico2/fumi/ios/thread,               type: bss, vram: 0x006bcee0}
+      - {                 name: fumi/ios/cdvd,                 type: bss, vram: 0x006af9c0}
+      - {                 name: fumi/ios/ios,                  type: bss, vram: 0x006bc860}
+      - {                 name: fumi/ios/mcard,                type: bss, vram: 0x006bc8c0}
+      - {                 name: fumi/ios/memory,               type: bss, vram: 0x006bc918}
+      - {                 name: fumi/ios/message,              type: bss, vram: 0x006bc938}
+      - {                 name: fumi/ios/pad,                  type: bss, vram: 0x006bcd38}
+      - {                 name: fumi/ios/thread,               type: .bss, vram: 0x006bcee0}
 
-      - {                 name: ico2/fumi/isys/gobj,                type: bss, vram: 0x006bf380}
+      - {                 name: fumi/isys/gobj,                type: bss, vram: 0x006bf380}
 
-      - {                 name: ico2/fumi/sound/adpcm_init,         type: bss, vram: 0x006bf498}
-      - {                 name: ico2/fumi/sound/s_init,             type: bss, vram: 0x006bf560}
+      - {                 name: fumi/sound/adpcm_init,         type: bss, vram: 0x006bf498}
+      - {                 name: fumi/sound/s_init,             type: bss, vram: 0x006bf560}
 
-      - {                 name: ico2/fumi/src/act-game,             type: bss, vram: 0x006c0600}
-      - {                 name: ico2/fumi/src/act-parallel-control, type: bss, vram: 0x006c0928}
-      - {                 name: ico2/fumi/src/boyact,               type: bss, vram: 0x006c0a80}
-      - {                 name: ico2/fumi/src/commonact,            type: bss, vram: 0x006c0ba0}
-      - {                 name: ico2/fumi/src/fieldCollision,       type: bss, vram: 0x006c0bc0}
-      - {                 name: ico2/fumi/src/girl_act,             type: bss, vram: 0x006c1180}
-      - {                 name: ico2/fumi/src/jimaku,               type: bss, vram: 0x006c1e80}
-      - {                 name: ico2/fumi/src/way_sys,              type: bss, vram: 0x006e50a8}
+      - {                 name: fumi/src/act-game,             type: bss, vram: 0x006c0600}
+      - {                 name: fumi/src/act-parallel-control, type: bss, vram: 0x006c0928}
+      - {                 name: fumi/src/boyact,               type: bss, vram: 0x006c0a80}
+      - {                 name: fumi/src/commonact,            type: bss, vram: 0x006c0ba0}
+      - {                 name: fumi/src/fieldCollision,       type: bss, vram: 0x006c0bc0}
+      - {                 name: fumi/src/girl_act,             type: bss, vram: 0x006c1180}
+      - {                 name: fumi/src/jimaku,               type: bss, vram: 0x006c1e80}
+      - {                 name: fumi/src/way_sys,              type: bss, vram: 0x006e50a8}
 
-      - {                 name: ico2/script/src/script,             type: bss, vram: 0x006e5940}
+      - {                 name: script/src/script,             type: bss, vram: 0x006e5940}
 
-      - {                 name: ico2/omori/src/camera-editor,       type: bss, vram: 0x006e5990}
-      - {                 name: ico2/omori/src/camera-ico2,         type: bss, vram: 0x006e6190}
-      - {                 name: ico2/omori/src/camera-root,         type: bss, vram: 0x006e6690}
-      - {                 name: ico2/omori/src/ebrain,              type: bss, vram: 0x006e6750}
-      - {                 name: ico2/omori/src/enemy-control,       type: bss, vram: 0x006e6bd0}
-      - {                 name: ico2/omori/src/fightSound,          type: bss, vram: 0x006e6d60}
-      - {                 name: ico2/omori/src/generator,           type: bss, vram: 0x006e6d80}
-      - {                 name: ico2/omori/src/hand-camera,         type: bss, vram: 0x006e9990}
-      - {                 name: ico2/omori/src/lws_kyomi,           type: bss, vram: 0x006e99b0}
+      - {                 name: omori/src/camera-editor,       type: bss, vram: 0x006e5990}
+      - {                 name: omori/src/camera-ico2,         type: bss, vram: 0x006e6190}
+      - {                 name: omori/src/camera-root,         type: bss, vram: 0x006e6690}
+      - {                 name: omori/src/ebrain,              type: bss, vram: 0x006e6750}
+      - {                 name: omori/src/enemy-control,       type: bss, vram: 0x006e6bd0}
+      - {                 name: omori/src/fightSound,          type: bss, vram: 0x006e6d60}
+      - {                 name: omori/src/generator,           type: bss, vram: 0x006e6d80}
+      - {                 name: omori/src/hand-camera,         type: bss, vram: 0x006e9990}
+      - {                 name: omori/src/lws_kyomi,           type: bss, vram: 0x006e99b0}
 
-      - {                 name: ico2/ito/src/itou_boss,             type: bss, vram: 0x006e9a30}
-      - {                 name: ico2/ito/src/lightning,             type: bss, vram: 0x006ea7c0}
-      - {                 name: ico2/ito/src/queen,                 type: bss, vram: 0x006ea7f0}
-      - {                 name: ico2/ito/src/stage_orient,          type: bss, vram: 0x006ea800}
+      - {                 name: ito/src/itou_boss,             type: bss, vram: 0x006e9a30}
+      - {                 name: ito/src/lightning,             type: bss, vram: 0x006ea7c0}
+      - {                 name: ito/src/queen,                 type: bss, vram: 0x006ea7f0}
+      - {                 name: ito/src/stage_orient,          type: bss, vram: 0x006ea800}
 
-      - {                 name: ico2/ito/mpeg/mv_main,              type: bss, vram: 0x006ea900}
+      - {                 name: ito/mpeg/mv_main,              type: bss, vram: 0x006ea900}
 
-      - {                 name: ico2/common/src/StageManager,       type: bss, vram: 0x006fac80}
-      - {                 name: ico2/common/src/backStage,          type: bss, vram: 0x006facf0}
-      - {                 name: ico2/common/src/charFileManager,    type: bss, vram: 0x006fad00}
-      - {                 name: ico2/common/src/debug,              type: bss, vram: 0x00704680}
-      - {                 name: ico2/common/src/debug_exception,    type: bss, vram: 0x0070fa80}
-      - {                 name: ico2/common/src/icoMisc,            type: bss, vram: 0x0071ca90}
-      - {                 name: ico2/common/src/kanban,             type: bss, vram: 0x0071cb10}
-      - {                 name: ico2/common/src/kanbanBoot,         type: bss, vram: 0x0071cf00}
-      - {                 name: ico2/common/src/layout_action,      type: bss, vram: 0x0071d900}
-      - {                 name: ico2/common/src/sceneManager,       type: bss, vram: 0x0071d960}
-      - {                 name: ico2/common/src/staffroll,          type: bss, vram: 0x0071d980}
+      - {                 name: common/src/StageManager,       type: bss, vram: 0x006fac80}
+      - {                 name: common/src/backStage,          type: bss, vram: 0x006facf0}
+      - {                 name: common/src/charFileManager,    type: bss, vram: 0x006fad00}
+      - {                 name: common/src/debug,              type: bss, vram: 0x00704680}
+      - {                 name: common/src/debug_exception,    type: bss, vram: 0x0070fa80}
+      - {                 name: common/src/icoMisc,            type: bss, vram: 0x0071ca90}
+      - {                 name: common/src/kanban,             type: bss, vram: 0x0071cb10}
+      - {                 name: common/src/kanbanBoot,         type: bss, vram: 0x0071cf00}
+      - {                 name: common/src/layout_action,      type: bss, vram: 0x0071d900}
+      - {                 name: common/src/sceneManager,       type: bss, vram: 0x0071d960}
+      - {                 name: common/src/staffroll,          type: bss, vram: 0x0071d980}
 
-      - {                 name: ico2/sugipon/src/act_a_p_1,         type: bss, vram: 0x0071ec40}
-      - {                 name: ico2/sugipon/src/darkVolume,        type: bss, vram: 0x0071ecd0}
-      - {                 name: ico2/sugipon/src/effectTool,        type: bss, vram: 0x00720070}
-      - {                 name: ico2/sugipon/src/motionManager,     type: bss, vram: 0x00720180}
-      - {                 name: ico2/sugipon/src/particleEffect,    type: bss, vram: 0x00720220}
-      - {                 name: ico2/sugipon/src/spiderGroupManager, type: bss, vram: 0x00723ae0}
-      - {                 name: ico2/sugipon/src/stageMultiBgaManager, type: bss, vram: 0x007240a0}
-      - {                 name: ico2/sugipon/src/staticBlur,        type: bss, vram: 0x00724a78}
-      - {                 name: ico2/sugipon/src/streamMotionManager, type: bss, vram: 0x00724aa8}
-      - {                 name: ico2/sugipon/src/waterDot,          type: bss, vram: 0x00724bc0}
-      - {                 name: ico2/sugipon/src/windField,         type: bss, vram: 0x00724be0}
+      - {                 name: sugipon/src/act_a_p_1,         type: bss, vram: 0x0071ec40}
+      - {                 name: sugipon/src/darkVolume,        type: bss, vram: 0x0071ecd0}
+      - {                 name: sugipon/src/effectTool,        type: bss, vram: 0x00720070}
+      - {                 name: sugipon/src/motionManager,     type: bss, vram: 0x00720180}
+      - {                 name: sugipon/src/particleEffect,    type: bss, vram: 0x00720220}
+      - {                 name: sugipon/src/spiderGroupManager, type: bss, vram: 0x00723ae0}
+      - {                 name: sugipon/src/stageMultiBgaManager, type: bss, vram: 0x007240a0}
+      - {                 name: sugipon/src/staticBlur,        type: bss, vram: 0x00724a78}
+      - {                 name: sugipon/src/streamMotionManager, type: bss, vram: 0x00724aa8}
+      - {                 name: sugipon/src/waterDot,          type: bss, vram: 0x00724bc0}
+      - {                 name: sugipon/src/windField,         type: bss, vram: 0x00724be0}
 
-      - {                 name: ico2/seki/src/BgAnimation,          type: bss, vram: 0x007281f0}
-      - {                 name: ico2/seki/src/DisplayList,          type: bss, vram: 0x00728310}
-      - {                 name: ico2/seki/src/EnemyInit,            type: bss, vram: 0x007285a0}
+      - {                 name: seki/src/BgAnimation,          type: bss, vram: 0x007281f0}
+      - {                 name: seki/src/DisplayList,          type: bss, vram: 0x00728310}
+      - {                 name: seki/src/EnemyInit,            type: bss, vram: 0x007285a0}
 
-      - {                 name: ico2/fumi/src/way_kidnap,           type: bss, vram: 0x00728610}
-      - {                 name: ico2/fumi/src/way_tool,             type: bss, vram: 0x00729b60}
+      - {                 name: fumi/src/way_kidnap,           type: bss, vram: 0x00728610}
+      - {                 name: fumi/src/way_tool,             type: bss, vram: 0x00729b60}
 
-      - {                 name: ico2/omori/src/access,              type: bss, vram: 0x00729e30}
+      - {                 name: omori/src/access,              type: bss, vram: 0x00729e30}
 
-      - {                 name: ico2/ito/mpeg/mv_disp,              type: bss, vram: 0x0072a040}
+      - {                 name: ito/mpeg/mv_disp,              type: bss, vram: 0x0072a040}
 
-      - {                 name: ico2/common/src/GobjProc,           type: bss, vram: 0x0072a2c0}
+      - {                 name: common/src/GobjProc,           type: bss, vram: 0x0072a2c0}
 
       - {                 name: sdk/lib/libkernl/tty,               type: bss, vram: 0x0072a600}
       - {                 name: sdk/lib/libkernl/sifrpc,            type: bss, vram: 0x0072aa00}

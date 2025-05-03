@@ -5785,7 +5785,16 @@ fadeColor.g = 0x63BCB1;
 fadeColor.b = 0x63BCB2;
 fadeColor.a = 0x63BCB3;
 target.432                      = 0x004d9d58; // type:s8
+ios_partition_root              = 0x0063A428; // type:u32
+n_thread                        = 0x0063A5F0; // type:u32
+__assert_cond_0                 = 0x0063A5F8; // type:char*
 
 // .bss / .sbss
 uidle_time.103                  = 0x0063C100; // type:u32
+iosThreadDestroyMgrMsgBuf       = 0x0063C1A0;
 D_0063C5D8                      = 0x0063C5D8; // type:u32
+
+thread_table                    = 0x006BCEE0;
+iosThreadDestroyMgrMsgQ         = 0x006BD2E0;
+iosThreadDestroyMgrThread       = 0x006BD310;
+iosThreadDestroyMgrStack        = 0x006BD380; // type:u8
