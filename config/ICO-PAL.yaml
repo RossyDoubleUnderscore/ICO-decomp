@@ -84,8 +84,8 @@ segments:
     subalign: 4
     subsegments:
       # .text
-      - [0x001000, asm,     sdk/lib/crt0]
-      - [0x001100, asm,     sdk/lib/klib]
+      - [0x001000, asm,     sdk/lib/libkernl/crt0]
+      - [0x001100, asm,     sdk/lib/libkernl/klib]
       #################
       # SDK Libraries #
       #################
@@ -342,7 +342,7 @@ segments:
       - [0x15bb20, asm,     common/src/PObj]
       - [0x15c578, asm,     common/src/vobj]
       #################
-      # more SDK libs #                   # good up to here
+      # more SDK libs #
       #################
       - [0x15c680, asm,     sdk/lib/libgraph/graph001]
       - [0x15c7a0, asm,     sdk/lib/libgraph/graph002]
@@ -360,7 +360,7 @@ segments:
       - [0x15d808, asm,     sdk/lib/libgraph/graph016]
       - [0x15d948, asm,     sdk/lib/libgraph/graph017]
       - [0x15dac8, asm,     sdk/lib/libgraph/graph018]
-      - [0x15e158, asm,     sdk/lib/libgraph/graph019]
+      - [0x15e158, asm,     sdk/lib/libgraph/graph020]  #graph020 in SDK 3.0, graph019 in SDK 2.4
       - [0x15e198, asm,     sdk/lib/libgraph/graph021]
       - [0x15e220, asm,     sdk/lib/libgraph/graph029]
       - [0x15e240, asm,     sdk/lib/libgraph/graph005]
@@ -392,16 +392,15 @@ segments:
       - [0x165AE8, asm,     sdk/lib/libkernl/tlbfunc]
       - [0x166040, asm,     sdk/lib/libkernl/tlbtrap]
       - [0x1663A0, asm,     sdk/lib/libkernl/sifcmd]
-      - [0x166AE8, asm,     sdk/lib/libkernl/cdvd000]
-      - [0x167E58, asm,     sdk/lib/libkernl/cdvd036]
-      - [0x167F20, asm,     sdk/lib/libkernl/cdvd005]
-      - [0x168100, asm,     sdk/lib/libkernl/cdvd006]
-      - [0x168258, asm,     sdk/lib/libkernl/cdvd014]
-      - [0x1682F0, asm,     sdk/lib/libkernl/cdvd015]
-      - [0x168388, asm,     sdk/lib/libkernl/cdvd017]
-      - [0x168440, asm,     sdk/lib/libkernl/cdvd018]
-      - [0x1684F8, asm,     sdk/lib/libkernl/cdvd039]
-      - [0x1685F0, asm,     sdk/lib/libkernl/cdvd047]
+      - [0x166AE8, asm,     sdk/lib/libkernl/eecdvd]
+      - [0x167F20, asm,     sdk/lib/libkernl/eecdvd]
+      - [0x168100, asm,     sdk/lib/libkernl/eecdvd]
+      - [0x168258, asm,     sdk/lib/libkernl/eecdvd]
+      - [0x1682F0, asm,     sdk/lib/libkernl/eecdvd]
+      - [0x168388, asm,     sdk/lib/libkernl/eecdvd]
+      - [0x168440, asm,     sdk/lib/libkernl/eecdvd]
+      - [0x1684F8, asm,     sdk/lib/libkernl/eecdvd]
+      - [0x1685F0, asm,     sdk/lib/libkernl/eecdvd]
 
       - [0x168AD0, asm,     sdk/lib/libpad/libpad]
 
@@ -482,7 +481,7 @@ segments:
       - [0x17F5E0, asm,     sdk/lib/libc/assert]
       - [0x17F618, asm,     sdk/lib/libc/atoi]
       - [0x17F640, asm,     sdk/lib/libc/errno]
-      - [0x17F650, asm,     sdk/lib/libc/fiprintf]
+      - [0x17F650, asm,     sdk/lib/libc/fprintf]
       - [0x17F684, asm,     sdk/lib/libc/memcmp]
       - [0x17F718, asm,     sdk/lib/libc/memcpy]
       - [0x17F7C8, asm,     sdk/lib/libc/memset]
@@ -500,9 +499,9 @@ segments:
       - [0x180D20, asm,     sdk/lib/libc/strrchr]
       - [0x180D70, asm,     sdk/lib/libc/strstr]
       - [0x180DE0, asm,     sdk/lib/libc/strtok]
-      - [0x180E08, asm,     sdk/lib/libc/strtok_r]
       - [0x180EA8, asm,     sdk/lib/libc/strtol]
-      - [0x181118, asm,     sdk/lib/libc/vfprintf]
+      - [0x181118, asm,     sdk/lib/libc/vfiprintf]
+      - [0x181E60, asm,     sdk/lib/libc/vfprintf]
       - [0x183780, asm,     sdk/lib/libc/vfscanf]
       - [0x184390, asm,     sdk/lib/libc/vsprintf]
       - [0x1843E8, asm,     sdk/lib/libc/wsetup]
@@ -512,12 +511,12 @@ segments:
       - [0x185920, asm,     sdk/lib/libc/fflush]
       - [0x185A28, asm,     sdk/lib/libc/findfp]
       - [0x185C80, asm,     sdk/lib/libc/fread]
-      - [0x185DA0, asm,     sdk/lib/libc/mallocr_1] # _free_r(), _malloc_trim_r()
+      - [0x185DA0, asm,     sdk/lib/libc/freer]
       - [0x186230, asm,     sdk/lib/libc/fvwrite]
       - [0x186608, asm,     sdk/lib/libc/fwalk]
       - [0x1866A0, asm,     sdk/lib/libc/locale]
       - [0x186790, asm,     sdk/lib/libc/makebuf]
-      - [0x1868E0, asm,     sdk/lib/libc/mallocr_2] # malloc_extend_top(), _malloc_r()
+      - [0x1868E0, asm,     sdk/lib/libc/mallocr]
       - [0x1872B0, asm,     sdk/lib/libc/mbtowc_r]
       - [0x1872EC, asm,     sdk/lib/libc/memchr]
       - [0x1873CC, asm,     sdk/lib/libc/memmove]
@@ -534,16 +533,16 @@ segments:
       - [0x189C10, asm,     sdk/lib/libc/strtoul]
       - [0x189E68, asm,     sdk/lib/libc/ungetc]
       - [0x18A0E0, asm,     sdk/lib/libc/writer]
-      - [0x18A140, asm,     sdk/lib/libc/mallocr_3] # _calloc_r()
+      - [0x18A140, asm,     sdk/lib/libc/callocr]
       - [0x18A200, asm,     sdk/lib/libc/closer]
       - [0x18A258, asm,     sdk/lib/libc/fstatr]
       - [0x18A2B8, asm,     sdk/lib/libc/lseekr]
       - [0x18A318, asm,     sdk/lib/libc/readr]
-      - [0x18A378, asm,     sdk/lib/libc/mallocr_4] # _realloc_r()
+      - [0x18A378, asm,     sdk/lib/libc/reallocr]
 
       - [0x18a8e8, asm,     sdk/lib/libkernl/cache]
 
-      - [0x18ab68, asm,     sdk/lib/libgcc/__fixdfdi]
+      - [0x18ab68, asm,     sdk/lib/libgcc/_fixdfdi]
 
       # .vutext
       - [0x18abd0, databin, vutext]
@@ -566,6 +565,7 @@ segments:
       - [0x191810, data,    seki/src/GsBase]
       - [0x1918B8, data,    seki/src/Light]
       - [0x1918E0, data,    seki/src/Matrix]
+
       - [0x191B20, data,    seki/src/MicroCode]
       - [0x191B40, data,    seki/src/Shadow]
       - [0x191B58, data,    seki/src/Texture]
@@ -604,21 +604,21 @@ segments:
       - [0x1A8920, data,    ito/mpeg/mv_main]
 
         # ?
-      - [0x1A89B8, data,    src/access]
-      - [0x1A8DC8, data,    src/act-data-tbl]
-      - [0x1A8E08, data,    src/act-intrlist]
-      - [0x1AE010, data,    src/camera-set]
-      - [0x1AEAF0, data,    src/game-param]
-      - [0x1AEBA0, data,    src/lws_kyomi-tmp]
-      - [0x1AED60, data,    src/motion-orient]
-      - [0x1BD4C0, data,    src/node-fix-ofs]
-      - [0x1BD6E0, data,    src/obj-action]
-      - [0x1C2270, data,    src/obj-kind-data]
-      - [0x1C3DC8, data,    src/obj-layout]
-      - [0x2099C0, data,    src/parallel-motion-tbl]
-      - [0x20D4E0, data,    src/sekind]
-      - [0x20DFF8, data,    src/tex-property]
-      - [0x219EB8, data,    src/weapon-def]
+      - [0x1A89B8, data,    sheet/src/accessary]
+      - [0x1A8DC8, data,    sheet/src/act-data-tbl]
+      - [0x1A8E08, data,    sheet/src/act-intrlist]
+      - [0x1AE010, data,    sheet/src/camera-set]
+      - [0x1AEAF0, data,    sheet/src/game-param]
+      - [0x1AEBA0, data,    sheet/src/lws_kyomi]
+      - [0x1AED60, data,    sheet/src/motion-orient]
+      - [0x1BD4C0, data,    sheet/src/node-fix-ofs]
+      - [0x1BD6E0, data,    sheet/src/obj-action]
+      - [0x1C2270, data,    sheet/src/obj-kind-data]
+      - [0x1C3DC8, data,    sheet/src/obj-layout]
+      - [0x2099C0, data,    sheet/src/parallel-motion-tbl]
+      - [0x20D4E0, data,    sheet/src/sekind]
+      - [0x20DFF8, data,    sheet/src/tex-property]
+      - [0x219EB8, data,    sheet/src/weapon-def]
 
       - [0x21A020, data,    common/src/DObj]
       - [0x21AA00, data,    common/src/StageManager]
@@ -630,9 +630,7 @@ segments:
       - [0x3E4B40, data,    common/src/layout_action]
       - [0x3E55C0, data,    common/src/sceneManager]
       - [0x3E5600, data,    common/src/staffroll]
-
-        # ?
-      - [0x3E5610, data,    src/staffroll_dat]
+      - [0x3E5610, data,    common/src/staffroll_dat]
 
       - [0x3E6520, data,    sugipon/src/a_p_1]
       - [0x3E6A30, data,    sugipon/src/act_a_p_1]
@@ -721,14 +719,14 @@ segments:
       - [0x3FC890, data,    script/src/st99a]
 
       # .csv compiled tables
-      - [0x3FC970, data,    src/item-kind-def]
-      - [0x3FCA50, data,    src/mirror-motion-def]
-      - [0x3FCA80, data,    src/model-path]
-      - [0x4349C0, data,    src/prog-se-link]
-      - [0x434FC0, data,    src/mot-origin]
-      - [0x434FE8, data,    src/texture-layout]
-      - [0x437070, data,    src/way-point]
-      - [0x44B040, data,    src/weapon-fumble-def]
+      - [0x3FC970, data,    sheet/src/item-kind-def]
+      - [0x3FCA50, data,    sheet/src/mirror-motion-def]
+      - [0x3FCA80, data,    sheet/src/model-path]
+      - [0x4349C0, data,    sheet/src/prog-se-link]
+      - [0x434FC0, data,    sheet/src/mot-origin]
+      - [0x434FE8, data,    sheet/src/texture-layout]
+      - [0x437070, data,    sheet/src/way-point]
+      - [0x44B040, data,    sheet/src/weapon-fumble-def]
 
       - [0x44B240, data,    common/src/vobj]
 
@@ -750,8 +748,7 @@ segments:
       - [0x44B490, data,    sdk/lib/libkernl/tlbfunc]
       - [0x44B508, data,    sdk/lib/libkernl/sifcmd]
 
-      - [0x44B540, data,    sdk/lib/libcdvd/cdvd000]
-      - [0x44CFB0, data,    sdk/lib/libcdvd/cdvd047]
+      - [0x44B540, data,    sdk/lib/libcdvd/eecdvd]
 
       - [0x44CFB8, data,    sdk/lib/libpad/libpad]
 
@@ -774,7 +771,7 @@ segments:
 
       - [0x44DBC0, data,    sdk/lib/libc/impure]
       - [0x44DEB0, data,    sdk/lib/libc/locale]
-      - [0x44DEB8, data,    sdk/lib/libc/mallocr_1]
+      - [0x44DEB8, data,    sdk/lib/libc/freer]
       - [0x44e320, pad]
 
       # .rodata
@@ -826,10 +823,10 @@ segments:
       - [0x4533A8, rodata,  fumi/sound/soundManager]
 
       - [0x4533F0, rodata,  fumi/src/act-game]
-      - [0x4536f0, rodata,  fumi/src/act-parallel-control]
+      - [0x4536C8, rodata,  fumi/src/act-parallel-control]
       - [0x453710, rodata,  fumi/src/act-wish]
       - [0x453730, rodata,  fumi/src/boyact]
-      - [0x453CB8, rodata,  fumi/src/commonact]
+      - [0x453CA0, rodata,  fumi/src/commonact]
       - [0x454320, rodata,  fumi/src/enemy_act]
       - [0x454750, rodata,  fumi/src/fieldCollision]
       - [0x454990, rodata,  fumi/src/girl_act]
@@ -1052,12 +1049,7 @@ segments:
       - [0x537718, rodata,  sdk/lib/libkernl/eeloadfile]
       - [0x537720, rodata,  sdk/lib/libkernl/iopreset]
       - [0x537750, rodata,  sdk/lib/libkernl/tlbfunc]
-      - [0x5377C0, rodata,  sdk/lib/libkernl/cdvd000]
-      - [0x537990, rodata,  sdk/lib/libkernl/cdvd005]
-      - [0x5379B8, rodata,  sdk/lib/libkernl/cdvd006]
-      - [0x5379C8, rodata,  sdk/lib/libkernl/cdvd017]
-      - [0x5379D8, rodata,  sdk/lib/libkernl/cdvd039]
-      - [0x537A18, rodata,  sdk/lib/libkernl/cdvd047]
+      - [0x5377C0, rodata,  sdk/lib/libkernl/eecdvd] # combined all cdvd to match SDK 2.0's version based on .elf's contents
 
       - [0x537B38, rodata,  sdk/lib/libpad/libpad]
 
@@ -1096,7 +1088,8 @@ segments:
 
       - [0x538E38, rodata,  sdk/lib/libc/assert]
       - [0x538f70, rodata,  sdk/lib/libc/impure]
-      - [0x538F80, rodata,  sdk/lib/libc/vfprintf]
+      - [0x538F80, rodata,  sdk/lib/libc/vfiprintf]
+      - [0x539170, rodata,  sdk/lib/libc/vfprintf]
       - [0x539380, rodata,  sdk/lib/libc/vfscanf]
       - [0x5397f0, rodata,  sdk/lib/libc/dtoa]
       - [0x539848, rodata,  sdk/lib/libc/locale]
@@ -1287,7 +1280,6 @@ segments:
       - [0x53B6C0, sdata,   fumi/src/boyact]
       - [0x53B710, sdata,   fumi/src/commonact]
       - [0x53B798, sdata,   fumi/src/enemy_act]
-      - [0x53B800, sdata,   fumi/src/act]
       - [0x53B808, sdata,   fumi/src/fieldCollision]
       - [0x53B868, sdata,   fumi/src/fuzio]
       - [0x53B880, sdata,   fumi/src/girl_act]
@@ -1333,9 +1325,7 @@ segments:
       - [0x53C600, sdata,   common/src/layout_texture]
       - [0x53C640, sdata,   common/src/sceneManager]
       - [0x53C650, sdata,   common/src/staffroll]
-
-      # ?
-      - [0x53C674, sdata,   src/staffroll_dat]
+      - [0x53C674, sdata,   common/src/staffroll_dat]
 
       - [0x53C678, sdata,   sugipon/src/a_p_1]
       - [0x53C6C8, sdata,   sugipon/src/act_a_p_1]
@@ -1361,7 +1351,7 @@ segments:
       - [0x53CAA8, sdata,   sugipon/src/rope]
       - [0x53CAB0, sdata,   sugipon/src/rotObject]
       - [0x53CAC0, sdata,   sugipon/src/spider]
-      - [0x53CAC4, sdata,   sugipon/src/spiderGroupManager]
+      - [0x53CAE0, sdata,   sugipon/src/spiderGroupManager]
       - [0x53CB04, sdata,   sugipon/src/stageMultiBgaManager]
       - [0x53CB08, sdata,   sugipon/src/staticBlur]
       - [0x53CBF0, sdata,   sugipon/src/streamMotionManager]
@@ -1405,6 +1395,7 @@ segments:
       - [0x53CFC0, sdata,   script/src/st13b]
       - [0x53CFFC, sdata,   script/src/st13c]
       - [0x53D018, sdata,   script/src/st17a]
+      - [0x53D01C, sdata,   script/src/st17b]
       - [0x53D020, sdata,   script/src/st19a]
       - [0x53D030, sdata,   script/src/st20a]
       - [0x53D048, sdata,   script/src/st22a]
@@ -1421,7 +1412,7 @@ segments:
 
       # .sbss
       #- {start: 0x53d0f8, name: sbssbin, type: sbss, vram: 0x0063c100, size: 0x4dc}
-      - {start: 0x53d0f8, name: sdk/lib/crt0,                       type: sbss, vram: 0x0063c100}
+      - {start: 0x53d0f8, name: common/src/main,         type: sbss, vram: 0x0063c100}
       - {                 name: sugipon/src/motionManager2,    type: sbss, vram: 0x0063c10c}
       - {                 name: seki/src/GsBase,               type: sbss, vram: 0x0063c118}
       - {                 name: seki/src/Light,                type: sbss, vram: 0x0063c12c}
@@ -1430,12 +1421,14 @@ segments:
       - {                 name: seki/src/StageAnimation,       type: sbss, vram: 0x0063c158}
       - {                 name: seki/src/Texture,              type: sbss, vram: 0x0063c160}
 
+      - {                 name: fumi/ios/cdvd,                 type: sbss, vram: 0x0063c168}
       - {                 name: fumi/ios/mcdata,               type: sbss, vram: 0x0063c18c}
       - {                 name: fumi/ios/memory,               type: sbss, vram: 0x0063c190}
       - {                 name: fumi/ios/pad,                  type: sbss, vram: 0x0063c198}
       - {                 name: fumi/ios/thread,               type: .sbss, vram: 0x0063c1a0}
 
       - {                 name: fumi/isys/gobj,                type: sbss, vram: 0x0063c1a8}
+      - {                 name: fumi/isys/gobj_process,        type: sbss, vram: 0x0063c1b0}
 
       - {                 name: fumi/sound/adpcm_init,         type: sbss, vram: 0x0063c1b8}
       - {                 name: fumi/sound/s_init,             type: sbss, vram: 0x0063c1d0}
@@ -1468,6 +1461,7 @@ segments:
       - {                 name: common/src/StageManager,       type: sbss, vram: 0x0063c348}
       - {                 name: common/src/backStage,          type: sbss, vram: 0x0063c350}
       - {                 name: common/src/debug,              type: sbss, vram: 0x0063c378}
+      - {                 name: common/src/debug_menu,         type: sbss, vram: 0x0063c388}
       - {                 name: common/src/icoMisc,            type: sbss, vram: 0x0063c394}
       - {                 name: common/src/kanban,             type: sbss, vram: 0x0063c398}
       - {                 name: common/src/kanbanBoot,         type: sbss, vram: 0x0063c3a0}
@@ -1520,12 +1514,13 @@ segments:
       - {                 name: ito/mpeg/mv_disp,              type: sbss, vram: 0x0063c5c4}
 
       - {                 name: sdk/lib/libgcc/libgcc2,             type: sbss, vram: 0x0063c5c8}
-      - {                 name: sdk/lib/libc/signalr,               type: sbss, vram: 0x0063c5d8}
+      - {                 name: sdk/lib/libc/reent,               type: sbss, vram: 0x0063c5d8}
 
       # .bss
       #- {start: 0x53d5d4, name: bssbin, type: bss, vram: 0x0063c600}
       - {start: 0x53d5d4, name: sdk/lib/libkernl/thread,            type: bss, vram: 0x0063c750}
       - {                 name: sdk/lib/libkernl/kprintf,           type: bss, vram: 0x0063cf60}
+      - {                 name: sdk/lib/libkernl/deci2,           type: bss, vram: 0x0063cfe0}
 
       - {                 name: common/src/main,               type: bss, vram: 0x0063d010}
 
@@ -1622,27 +1617,27 @@ segments:
       - {                 name: common/src/GobjProc,           type: bss, vram: 0x0072a2c0}
 
       - {                 name: sdk/lib/libkernl/tty,               type: bss, vram: 0x0072a600}
-      - {                 name: sdk/lib/libkernl/sifrpc,            type: bss, vram: 0x0072aa00}
+      - {                 name: sdk/lib/libkernl/sifrpc,            type: bss, vram: 0x0072a9c0}
       - {                 name: sdk/lib/libkernl/filestub,          type: bss, vram: 0x0072c200}
       - {                 name: sdk/lib/libkernl/iopheap,           type: bss, vram: 0x0072d580}
       - {                 name: sdk/lib/libkernl/eeloadfile,        type: bss, vram: 0x0072d780}
       - {                 name: sdk/lib/libkernl/iopreset,          type: bss, vram: 0x0072d9c0}
-      - {                 name: sdk/lib/libkernl/tlbtrap,           type: bss, vram: 0x0072ea50}
+      - {                 name: sdk/lib/libkernl/tlbtrap,           type: bss, vram: 0x0072da50}
       - {                 name: sdk/lib/libkernl/sifcmd,            type: bss, vram: 0x0072ec80}
-      - {                 name: sdk/lib/libkernl/cdvd000,           type: bss, vram: 0x0072ef00}
+      - {                 name: sdk/lib/libkernl/eecdvd,           type: bss, vram: 0x0072ef00}
 
       - {                 name: sdk/lib/libpad/libpad,              type: bss, vram: 0x0072f200}
 
       - {                 name: sdk/lib/libmc/libmc,                type: bss, vram: 0x0072f5c0}
 
-      - {                 name: sdk/lib/libmpeg/mpc,                type: bss, vram: 0x00730bc0}
-      - {                 name: sdk/lib/libmpeg/init,               type: bss, vram: 0x00730dc0}
+      - {                 name: sdk/lib/libmpeg/init,                type: bss, vram: 0x00730bc0}
       - {                 name: sdk/lib/libmpeg/csc,                type: bss, vram: 0x007315d0}
 
       - {                 name: sdk/lib/libsndn2/sound,             type: bss, vram: 0x00731600}
 
       - {                 name: sdk/lib/libgcc/libgcc2,             type: bss, vram: 0x00736168}
-      - {                 name: sdk/lib/libgcc/dp-bit,              type: bss, vram: 0x00736170}
+      - {                 name: sdk/lib/libgcc/_thenan_df,              type: bss, vram: 0x00736170}
+      - {                 name: sdk/lib/libgcc/_thenan_sf,              type: bss, vram: 0x00736188}
 
   - [0x53d100, databin, elf/reginfo]        # .reginfo
   - [0x53d13c, databin, elf/dvp]            # .DVP sections
