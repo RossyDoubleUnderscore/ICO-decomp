@@ -80,24 +80,27 @@ segments:
     type: code
     start: 0x1000
     vram: 0x100000
-    bss_size: 0xfa074 # .bss + .sbss
+    bss_size: 0xfa074 # .bss + .sbss (0x123f00 size if including padding)
     subalign: 4
     subsegments:
       # .text
-      - [0x001000, asm,     sdk/lib/libkernl/crt0]
-      - [0x001100, asm,     sdk/lib/libkernl/klib]
       #################
       # SDK Libraries #
       #################
+      
       # libkernl.a
+      - [0x001000, asm,     sdk/lib/libkernl/crt0]
+      - [0x001100, asm,     sdk/lib/libkernl/klib]
       - [0x001990, asm,     sdk/lib/libkernl/initsys]
       - [0x001a08, asm,     sdk/lib/libkernl/intr]
       - [0x001d68, asm,     sdk/lib/libkernl/thread]
       - [0x0020c8, asm,     sdk/lib/libkernl/kprintf]
       - [0x002a40, asm,     sdk/lib/libkernl/diei]
       - [0x002aa0, asm,     sdk/lib/libkernl/deci2]
+
       #################
-      # ico2000.a
+      #   ico2000.a   #
+      #################
       - [0x002c80, asm,     common/src/main]
 
       - [0x0035a8, asm,     sugipon/src/delayFreeManager]
@@ -134,7 +137,9 @@ segments:
       - [0x03d4a8, asm,     fumi/ios/message]
       - [0x03daf0, asm,     fumi/ios/pad]
       - [0x03ef68, asm,     fumi/ios/shockdriver]
-      - [0x040528, c,       fumi/ios/thread]
+      - [0x040528, c,     fumi/ios/thread]
+      #- [0x040528, asm,     fumi/ios/thread]     <-- uncomment, then comment previous
+      #                                           if wanting to start fresh
 
       - [0x041170, asm,     fumi/isys/gobj]
       - [0x042198, asm,     fumi/isys/gobj_dl]
@@ -360,7 +365,7 @@ segments:
       - [0x15d808, asm,     sdk/lib/libgraph/graph016]
       - [0x15d948, asm,     sdk/lib/libgraph/graph017]
       - [0x15dac8, asm,     sdk/lib/libgraph/graph018]
-      - [0x15e158, asm,     sdk/lib/libgraph/graph020]  #graph020 in SDK 3.0, graph019 in SDK 2.4
+      - [0x15e158, asm,     sdk/lib/libgraph/graph020]
       - [0x15e198, asm,     sdk/lib/libgraph/graph021]
       - [0x15e220, asm,     sdk/lib/libgraph/graph029]
       - [0x15e240, asm,     sdk/lib/libgraph/graph005]
@@ -812,6 +817,7 @@ segments:
       - [0x452af0, rodata,  fumi/ios/pad]
       - [0x452D98, rodata,  fumi/ios/shockdriver]
       - [0x452db0, .rodata, fumi/ios/thread]
+      #- [0x452db0, rodata, fumi/ios/thread] <-- uncomment and comment previous if wanting fresh start
 
       - [0x452f30, rodata,  fumi/isys/gobj]
       - [0x452F78, rodata,  fumi/isys/gobj_dl]
@@ -1412,7 +1418,7 @@ segments:
 
       # .sbss
       #- {start: 0x53d0f8, name: sbssbin, type: sbss, vram: 0x0063c100, size: 0x4dc}
-      - {start: 0x53d0f8, name: common/src/main,         type: sbss, vram: 0x0063c100}
+      - {start: 0x53d100, name: common/src/main,         type: sbss, vram: 0x0063c100}
       - {                 name: sugipon/src/motionManager2,    type: sbss, vram: 0x0063c10c}
       - {                 name: seki/src/GsBase,               type: sbss, vram: 0x0063c118}
       - {                 name: seki/src/Light,                type: sbss, vram: 0x0063c12c}
@@ -1515,10 +1521,12 @@ segments:
 
       - {                 name: sdk/lib/libgcc/libgcc2,             type: sbss, vram: 0x0063c5c8}
       - {                 name: sdk/lib/libc/reent,               type: sbss, vram: 0x0063c5d8}
+      # asm/data/sdk/lib/libc/reent.sbss.s is currently 0x28 bytes instead of just 0x4.
+      # it's adding the post-.sbss padding into reent.
 
       # .bss
-      #- {start: 0x53d5d4, name: bssbin, type: bss, vram: 0x0063c600}
-      - {start: 0x53d5d4, name: sdk/lib/libkernl/thread,            type: bss, vram: 0x0063c750}
+      - {start: 0x53d124, name: sdk/lib/libkernl/crt0,      type: bss, vram: 0x0063c600}
+      - {                 name: sdk/lib/libkernl/thread,            type: bss, vram: 0x0063c750}
       - {                 name: sdk/lib/libkernl/kprintf,           type: bss, vram: 0x0063cf60}
       - {                 name: sdk/lib/libkernl/deci2,           type: bss, vram: 0x0063cfe0}
 
@@ -1639,7 +1647,7 @@ segments:
       - {                 name: sdk/lib/libgcc/_thenan_df,              type: bss, vram: 0x00736170}
       - {                 name: sdk/lib/libgcc/_thenan_sf,              type: bss, vram: 0x00736188}
 
-  - [0x53d100, databin, elf/reginfo]        # .reginfo
+  - [0x53d124, databin, elf/reginfo]        # .reginfo
   - [0x53d13c, databin, elf/dvp]            # .DVP sections
   - [0x54235a, databin, elf/shstrtab]       # .shstrtab
   - [0x542568, databin, elf/sectionheaders] # ELF section headers
